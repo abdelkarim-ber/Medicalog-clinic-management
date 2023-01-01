@@ -1,0 +1,15 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<resources>
+  <color name="midnight">#141f45</color>
+  <color name="light_midnight">#404671</color>
+  <color name="dark_midnight">#00001f</color>
+  <color name="blue_sky">#3ab1ea</color>
+  <color name="light_blue_sky">#7ae3ff</color>
+  <color name="dark_blue_sky">#0082b7</color>
+  <color name="green">#31CB00</color>
+  <color name="cerulean">#00AFB9</color>
+  <color name="red">#FF3C38</color>
+  <color name="sunrise_orange">#F07167</color>
+  <color name="white">#ffffff</color>
+  <color name="black">#000000</color>
+</resources>
