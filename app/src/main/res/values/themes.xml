@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.ClinicManagement" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark_midnight</item>
-        <item name="colorPrimaryVariant">@color/midnight</item>
+        <item name="colorPrimary">@color/midnight</item>
+        <item name="colorPrimaryDark">@color/dark_midnight</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue_sky</item>
         <item name="colorSecondaryVariant">@color/light_blue_sky</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/Widget.clinicManagement.Toolbar</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MdcTypographyStyles.Headline1</item>
