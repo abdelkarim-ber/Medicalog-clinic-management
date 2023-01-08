@@ -13,6 +13,14 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/Widget.clinicManagement.Toolbar</item>
+        <item name="cardViewStyle">@style/Widget.clinicManagement.CardView</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.clinicManagement.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.clinicManagement.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.clinicManagement.LargeComponent</item>
+        <item name="textInputStyle">@style/Widget.clinicManagement.TextInputLayout.OutlinedBox</item>
+        <item name="android:editTextColor">?attr/colorPrimaryDark</item>
+
+
         <item name="textAppearanceHeadline1">@style/TextAppearance.MdcTypographyStyles.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MdcTypographyStyles.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.MdcTypographyStyles.Headline3</item>

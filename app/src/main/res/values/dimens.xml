@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="opacity_colorPrimary">0.7</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="size_icon">24dp</dimen>
+    <dimen name="size_expenditures_icon">40dp</dimen>
+    <dimen name="size_corner_40dp">40dp</dimen>
+    <dimen name="size_corner_16dp">16dp</dimen>
+    <dimen name="size_corner_8dp">8dp</dimen>
+    <dimen name="size_corner_24dp">24dp</dimen>
+    <dimen name="elevation_cards">3dp</dimen>
+    <dimen name="height_appbar_56dp">56dp</dimen>
 
 </resources>
