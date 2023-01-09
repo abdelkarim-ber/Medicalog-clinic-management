@@ -10,6 +10,8 @@
     <dimen name="size_corner_8dp">8dp</dimen>
     <dimen name="size_corner_24dp">24dp</dimen>
     <dimen name="elevation_cards">3dp</dimen>
-    <dimen name="height_appbar_56dp">56dp</dimen>
-
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="height_blue_container">400dp</dimen>
+    <dimen name="height_statistics_card">100dp</dimen>
 </resources>

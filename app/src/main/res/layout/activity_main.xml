@@ -21,29 +21,197 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/height_appbar_56dp">
+        android:layout_marginTop="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            >
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView"
+            <View
+                android:id="@+id/card_container"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:backgroundTint="@color/dark_midnight"
+                android:layout_height="@dimen/height_blue_container"
+                android:background="@drawable/shape_card_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.clinicManagement.bigCards">
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:text="May, 2022"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/light_blue_sky"
+                app:layout_constraintBottom_toTopOf="@+id/text_income"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/card_container"
+                tools:text="May, 2022" />
 
+            <TextView
+                android:id="@+id/text_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="2040.00 DH"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/text_spending_percentage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_date"
+                tools:text="2040.00 DH" />
+
+            <TextView
+                android:id="@+id/text_spending_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:text="you spend 50% of your income"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/blue_sky"
+                app:layout_constraintBottom_toTopOf="@+id/card_net_income"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_income"
+                tools:text="you spend 50% of your income"
+
+                />
+
+
+            <View
+                android:id="@+id/card_net_income"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_statistics_card"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:background="@drawable/shape_card"
+                app:layout_constraintBottom_toTopOf="@+id/card_chart"
+                app:layout_constraintEnd_toStartOf="@id/card_expenditure"
+                app:layout_constraintStart_toStartOf="@id/card_container"
+                app:layout_constraintTop_toBottomOf="@+id/text_spending_percentage" />
+
+            <TextView
+                android:id="@+id/title_net_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/net_income"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/color_primary_70"
+                app:layout_constraintStart_toStartOf="@+id/card_net_income"
+                app:layout_constraintTop_toTopOf="@+id/card_net_income" />
+
+            <TextView
+                android:id="@+id/text_net_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:text="2000.00 DH"
+
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintStart_toStartOf="@+id/card_net_income"
+                app:layout_constraintTop_toBottomOf="@+id/title_net_income" />
+
+            <TextView
+                android:id="@+id/text_diff_net_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:text="+15%"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/green"
+                app:layout_constraintBottom_toBottomOf="@+id/card_net_income"
+                app:layout_constraintEnd_toEndOf="@+id/card_net_income"
+                app:layout_constraintStart_toEndOf="@+id/text_net_income" />
+
+            <ImageView
+                android:id="@+id/image_arrow_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:background="@drawable/ic_arrowcircle_down"
+                app:layout_constraintEnd_toEndOf="@+id/card_net_income"
+                app:layout_constraintTop_toTopOf="@+id/card_net_income" />
+
+
+            <View
+                android:id="@+id/card_expenditure"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_statistics_card"
+                android:background="@drawable/shape_card"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_net_income"
+                app:layout_constraintEnd_toEndOf="@id/card_container"
+                app:layout_constraintStart_toEndOf="@id/card_net_income"
+                app:layout_constraintTop_toTopOf="@+id/card_net_income" />
+
+            <TextView
+                android:id="@+id/title_expenditure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/expenditure"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/color_primary_70"
+                app:layout_constraintStart_toStartOf="@+id/card_expenditure"
+                app:layout_constraintTop_toTopOf="@+id/card_expenditure" />
+
+            <TextView
+                android:id="@+id/text_expenditure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:text="2000.00 DH"
+
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimaryDark"
+                app:layout_constraintStart_toStartOf="@+id/card_expenditure"
+                app:layout_constraintTop_toBottomOf="@+id/title_expenditure" />
+
+            <TextView
+                android:id="@+id/text_diff_expenditure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:text="+15%"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/card_expenditure"
+                app:layout_constraintEnd_toEndOf="@+id/card_expenditure"
+                app:layout_constraintStart_toEndOf="@+id/text_expenditure" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:background="@drawable/ic_arrowcircle_up"
+                app:layout_constraintEnd_toEndOf="@+id/card_expenditure"
+                app:layout_constraintTop_toTopOf="@+id/card_expenditure" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_chart"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
 </merge>
