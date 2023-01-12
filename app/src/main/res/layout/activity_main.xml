@@ -199,16 +199,26 @@
                 android:background="@drawable/ic_arrowcircle_up"
                 app:layout_constraintEnd_toEndOf="@+id/card_expenditure"
                 app:layout_constraintTop_toTopOf="@+id/card_expenditure" />
-            <com.google.android.material.card.MaterialCardView
+            <View
                 android:id="@+id/card_chart"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
+                android:background="@drawable/shape_card"
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_container" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/card_chart"
+                app:layout_constraintEnd_toEndOf="@+id/card_chart"
+                app:layout_constraintStart_toStartOf="@+id/card_chart"
+                app:layout_constraintTop_toTopOf="@+id/card_chart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
