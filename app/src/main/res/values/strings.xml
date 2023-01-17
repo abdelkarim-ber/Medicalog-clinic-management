@@ -3,4 +3,6 @@
     <string name="statistics">Statistics</string>
     <string name="net_income">Net Income</string>
     <string name="expenditure">Expenditure</string>
+    <string name="title_chart_expenditure_dh">Expenditure (DH)</string>
+    <string name="title_chart_net_income_dh">Net Income (DH)</string>
 </resources>

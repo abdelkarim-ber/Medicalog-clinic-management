@@ -126,13 +126,13 @@
                 android:layout_marginBottom="@dimen/margin_16dp"
                 android:text="+15%"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:textColor="@color/green"
+                android:textColor="@color/cerulean"
                 app:layout_constraintBottom_toBottomOf="@+id/card_net_income"
                 app:layout_constraintEnd_toEndOf="@+id/card_net_income"
                 app:layout_constraintStart_toEndOf="@+id/text_net_income" />
 
             <ImageView
-                android:id="@+id/image_arrow_circle"
+                android:id="@+id/image_arrow_circle_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
@@ -185,13 +185,13 @@
                 android:layout_marginBottom="@dimen/margin_16dp"
                 android:text="+15%"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:textColor="@color/red"
+                android:textColor="@color/sunrise_orange"
                 app:layout_constraintBottom_toBottomOf="@+id/card_expenditure"
                 app:layout_constraintEnd_toEndOf="@+id/card_expenditure"
                 app:layout_constraintStart_toEndOf="@+id/text_expenditure" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image_arrow_circle_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
@@ -202,8 +202,8 @@
             <View
                 android:id="@+id/card_chart"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:background="@drawable/shape_card"
+                android:layout_height="@dimen/height_chart_card"
+                android:background="@drawable/shape_card_chart"
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_container"
@@ -211,14 +211,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_container" />
 
-            <com.github.mikephil.charting.charts.BarChart
+            <TextView
+                android:id="@+id/text_chart_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_primary_70"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:text="@string/title_chart_expenditure_dh"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintBottom_toTopOf="@+id/chart"
+                app:layout_constraintStart_toStartOf="@+id/card_chart"
+                app:layout_constraintTop_toTopOf="@+id/card_chart"
+                />
+
+            <ImageView
+                android:id="@+id/image_arrow_circle"
+                android:layout_width="@dimen/size_icon_chart"
+                android:layout_height="@dimen/size_icon_chart"
+                android:background="@drawable/ic_arrowcircle_up"
+                android:layout_marginStart="@dimen/margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
+                app:layout_constraintStart_toEndOf="@+id/text_chart_title"
+                app:layout_constraintTop_toTopOf="@+id/text_chart_title" />
+
+            <Button
+                android:id="@+id/button_switch"
+                android:layout_width="@dimen/size_icon_chart"
+                android:layout_height="@dimen/size_icon_chart"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:background="@drawable/ic_switch_left"
+                app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
+                app:layout_constraintEnd_toEndOf="@+id/card_chart"
+                app:layout_constraintTop_toTopOf="@+id/text_chart_title"
+                />
+            <com.example.android.clinicmanagement.barChart.RoundedBarChart
                 android:id="@+id/chart"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/card_chart"
+                app:layout_constraintTop_toBottomOf="@+id/text_chart_title"
                 app:layout_constraintEnd_toEndOf="@+id/card_chart"
-                app:layout_constraintStart_toStartOf="@+id/card_chart"
-                app:layout_constraintTop_toTopOf="@+id/card_chart" />
+                app:layout_constraintStart_toStartOf="@+id/card_chart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

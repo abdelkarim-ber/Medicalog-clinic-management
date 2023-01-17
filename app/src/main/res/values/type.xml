@@ -115,7 +115,7 @@
     <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="startIconTint">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/color_primary_70</item>
-        <item name="boxStrokeColor">@color/states_text_input_layout</item>
+        <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
     </style>
 
 
