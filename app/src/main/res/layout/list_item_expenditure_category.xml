@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/width_expenditures_card"
+    android:layout_height="@dimen/height_expenditures_card"
+    android:layout_marginEnd="@dimen/margin_16dp"
+    android:layout_marginBottom="@dimen/margin_16dp"
+    app:strokeColor="@color/dark_midnight"
+    app:strokeWidth="@dimen/width_stroke_card"
+    app:cardBackgroundColor="@color/white"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <View
+            android:id="@+id/circle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@drawable/shape_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_icon"
+            android:scaleType="fitCenter"
+            android:layout_width="@dimen/size_expenditures_icon"
+            android:layout_height="@dimen/size_expenditures_icon"
+            android:src="@drawable/ic_expenditure_home_repair"
+            app:layout_constraintBottom_toBottomOf="@+id/circle"
+            app:layout_constraintEnd_toEndOf="@+id/circle"
+            app:layout_constraintStart_toStartOf="@+id/circle"
+            app:layout_constraintTop_toTopOf="@+id/circle" />
+
+        <TextView
+            android:id="@+id/text_expenditure_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/light_midnight"
+            app:layout_constraintEnd_toEndOf="@+id/circle"
+            app:layout_constraintStart_toStartOf="@+id/circle"
+            app:layout_constraintTop_toBottomOf="@+id/circle"
+            tools:text="Tax" />
+
+        <TextView
+            android:id="@+id/text_expenditure_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/text_expenditure_category"
+            app:layout_constraintStart_toStartOf="@+id/text_expenditure_category"
+            app:layout_constraintTop_toBottomOf="@+id/text_expenditure_category"
+            tools:text="2000 DH" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+</layout>

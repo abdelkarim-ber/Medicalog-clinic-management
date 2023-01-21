@@ -6,6 +6,6 @@
         />
     <solid android:color="@color/white" />
     <stroke
-        android:width="2dp"
+        android:width="@dimen/width_stroke_card"
         android:color="@color/dark_midnight" />
 </shape>

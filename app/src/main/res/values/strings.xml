@@ -5,6 +5,13 @@
     <string name="expenditure">Expenditure</string>
     <string name="title_chart_expenditure_dh">Expenditure (DH)</string>
     <string name="title_chart_net_income_dh">Net Income (DH)</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="expenditures_by_categories">Expenditures by categories</string>
+    <string name="utilities">Utilities</string>
+    <string name="rent">Rent</string>
+    <string name="repair">Repair</string>
+    <string name="insurance">Insurance</string>
+    <string name="wages">Wages</string>
+    <string name="tax">Tax</string>
+    <string name="supplies">Supplies</string>
+    <string name="divers">Divers</string>
 </resources>

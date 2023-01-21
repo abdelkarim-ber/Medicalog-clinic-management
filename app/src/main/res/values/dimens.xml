@@ -19,4 +19,7 @@
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="height_blue_container">400dp</dimen>
     <dimen name="height_statistics_card">100dp</dimen>
+    <dimen name="height_expenditures_card">165dp</dimen>
+    <dimen name="width_expenditures_card">140dp</dimen>
+    <dimen name="width_stroke_card">2dp</dimen>
 </resources>
