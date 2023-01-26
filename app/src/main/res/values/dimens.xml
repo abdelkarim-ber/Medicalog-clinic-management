@@ -22,4 +22,6 @@
     <dimen name="height_expenditures_card">165dp</dimen>
     <dimen name="width_expenditures_card">140dp</dimen>
     <dimen name="width_stroke_card">2dp</dimen>
+    <dimen name="width_button_min">140dp</dimen>
+    <item name="opacity_colorSecondaryVariant_20" type="dimen" format="float">0.2</item>
 </resources>

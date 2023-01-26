@@ -18,6 +18,7 @@
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.clinicManagement.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.clinicManagement.LargeComponent</item>
         <item name="textInputStyle">@style/Widget.clinicManagement.TextInputLayout.OutlinedBox</item>
+        <item name="materialButtonStyle">@style/Widget.clinicManagement.Button</item>
         <item name="android:editTextColor">?attr/colorPrimaryDark</item>
 
 

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/statisticsFragment">
+    app:startDestination="@id/expendituresFragment">
 
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.android.clinicmanagement.statistics.StatisticsFragment"
         android:label="StatisticsFragment" />
+    <fragment
+        android:id="@+id/expendituresFragment"
+        android:name="com.example.android.clinicmanagement.expenditures.ExpendituresFragment"
+        android:label="fragment_expenditures"
+        tools:layout="@layout/fragment_expenditures" />
 </navigation>
