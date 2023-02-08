@@ -30,8 +30,8 @@
         <ImageView
             android:id="@+id/image_icon"
             android:scaleType="fitCenter"
-            android:layout_width="@dimen/size_expenditures_icon"
-            android:layout_height="@dimen/size_expenditures_icon"
+            android:layout_width="@dimen/size_image_40dp"
+            android:layout_height="@dimen/size_image_40dp"
             android:src="@drawable/ic_expenditure_home_repair"
             app:layout_constraintBottom_toBottomOf="@+id/circle"
             app:layout_constraintEnd_toEndOf="@+id/circle"

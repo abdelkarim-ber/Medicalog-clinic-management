@@ -1,4 +1,4 @@
-package com.example.android.clinicmanagement
+package com.example.android.clinicmanagement.expenditures
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.ListItemExpenditureCategorySelectionBinding
 
 class ExpenditureCategoryAdapter : RecyclerView.Adapter<ExpenditureCategoryAdapter.ViewHolder>() {

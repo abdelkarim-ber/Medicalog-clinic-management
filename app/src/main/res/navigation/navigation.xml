@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/expendituresFragment">
+    app:startDestination="@id/patientsFragment">
 
     <fragment
         android:id="@+id/statisticsFragment"
@@ -14,4 +14,9 @@
         android:name="com.example.android.clinicmanagement.expenditures.ExpendituresFragment"
         android:label="fragment_expenditures"
         tools:layout="@layout/fragment_expenditures" />
+    <fragment
+        android:id="@+id/patientsFragment"
+        android:name="com.example.android.clinicmanagement.patient.PatientsFragment"
+        android:label="fragment_patients"
+        tools:layout="@layout/fragment_patients" />
 </navigation>

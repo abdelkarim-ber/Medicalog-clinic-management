@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.android.clinicmanagement.ExpenditureCategoryAdapter
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentExpendituresBinding
-import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding
 
 
 class ExpendituresFragment : Fragment() {

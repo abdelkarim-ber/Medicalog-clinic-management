@@ -124,6 +124,13 @@
         <item name="boxBackgroundColor">@color/color_secondary_variant_20</item>
     </style>
 
+    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark">
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxBackgroundColor">@color/light_midnight</item>
+    </style>
+    <style name="Widget.clinicManagement.Layout.RoundedCorner" parent="">
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+    </style>
 
 
 

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.example.android.clinicmanagement.Expenditure
-import com.example.android.clinicmanagement.ExpenditureAdapter
+import com.example.android.clinicmanagement.expenditures.Expenditure
+import com.example.android.clinicmanagement.expenditures.ExpenditureAdapter
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.barChart.RoundedBarChartStyle
 import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding

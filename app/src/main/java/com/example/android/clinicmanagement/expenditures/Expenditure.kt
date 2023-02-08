@@ -1,4 +1,4 @@
-package com.example.android.clinicmanagement
+package com.example.android.clinicmanagement.expenditures
 
 data class Expenditure(
     val category:String,

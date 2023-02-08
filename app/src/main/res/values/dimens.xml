@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="opacity_colorPrimary_70">0.7</dimen>
-    <dimen name="opacity_colorPrimary_10">0.1</dimen>
+    <item name="opacity_70" type="dimen" format="float">0.7</item>
+    <item name="opacity_10" type="dimen" format="float">0.1</item>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="size_icon">24dp</dimen>
+    <dimen name="height_divider">0.5dp</dimen>
     <dimen name="size_icon_chart">32dp</dimen>
     <dimen name="height_chart_card">300dp</dimen>
-    <dimen name="size_expenditures_icon">40dp</dimen>
+    <dimen name="size_image_40dp">40dp</dimen>
     <dimen name="size_corner_40dp">40dp</dimen>
     <dimen name="size_corner_16dp">16dp</dimen>
     <dimen name="size_corner_8dp">8dp</dimen>
@@ -23,5 +24,7 @@
     <dimen name="width_expenditures_card">140dp</dimen>
     <dimen name="width_stroke_card">2dp</dimen>
     <dimen name="width_button_min">140dp</dimen>
-    <item name="opacity_colorSecondaryVariant_20" type="dimen" format="float">0.2</item>
+    <dimen name="height_front_layer_title">48dp</dimen>
+    <dimen name="size_selection_card">90dp</dimen>
+    <item name="opacity_20" type="dimen" format="float">0.2</item>
 </resources>

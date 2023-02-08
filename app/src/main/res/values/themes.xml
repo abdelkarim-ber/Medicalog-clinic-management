@@ -36,4 +36,13 @@
         <item name="textAppearanceCaption">@style/TextAppearance.MdcTypographyStyles.Caption</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MdcTypographyStyles.Overline</item>
     </style>
+    <style name="ThemeOverlay.ClinicManagement.Midnight" parent="">
+        <item name="android:editTextColor">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+    </style>
+    <style name="ThemeOverlay.ClinicManagement.BlueSky" parent="">
+        <item name="colorPrimary">@color/blue_sky</item>
+        <item name="colorControlHighlight">@color/blue_sky</item>
+    </style>
+
 </resources>
