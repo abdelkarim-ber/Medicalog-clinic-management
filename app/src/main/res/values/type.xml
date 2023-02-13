@@ -83,6 +83,7 @@
     </style>
     <style name="Widget.clinicManagement.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">@dimen/elevation_cards</item>
+        <item name="rippleColor">@color/color_secondary_variant_40</item>
     </style>
     <style name="ShapeAppearance.clinicManagement.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="shapeCornerFamily">rounded</item>

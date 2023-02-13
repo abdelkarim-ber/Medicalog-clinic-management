@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            tools:context=".patient.PatientsFragment">
+            tools:context=".patientsList.PatientsFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/field_container"
@@ -52,7 +52,7 @@
                 <View
                     android:id="@+id/field_divider1"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/height_divider"
+                    android:layout_height="@dimen/size_thickness_divider"
                     android:layout_marginStart="@dimen/margin_32dp"
                     android:layout_marginTop="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_32dp"
@@ -86,7 +86,7 @@
                 <View
                     android:id="@+id/field_divider2"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/height_divider"
+                    android:layout_height="@dimen/size_thickness_divider"
                     android:layout_marginStart="@dimen/margin_32dp"
                     android:layout_marginTop="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_32dp"
@@ -120,7 +120,7 @@
                 <View
                     android:id="@+id/field_divider3"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/height_divider"
+                    android:layout_height="@dimen/size_thickness_divider"
                     android:layout_marginStart="@dimen/margin_32dp"
                     android:layout_marginTop="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_32dp"
@@ -193,7 +193,7 @@
                     <View
                         android:id="@+id/backdrop_title_divider"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/height_divider"
+                        android:layout_height="@dimen/size_thickness_divider"
                         android:layout_gravity="center|bottom"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:layout_marginEnd="@dimen/margin_16dp"

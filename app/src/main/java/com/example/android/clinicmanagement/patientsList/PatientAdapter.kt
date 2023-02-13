@@ -1,6 +1,5 @@
-package com.example.android.clinicmanagement.patient
+package com.example.android.clinicmanagement.patientsList
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,10 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
-import com.example.android.clinicmanagement.databinding.ListItemExpenditureCategoryBinding
 import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
-import com.example.android.clinicmanagement.expenditures.Expenditure
-import com.example.android.clinicmanagement.expenditures.ExpenditureAdapter
 
 class PatientAdapter : RecyclerView.Adapter<PatientAdapter.ViewHolder>() {
     var data = listOf<Patient>(

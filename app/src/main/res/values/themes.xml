@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/Widget.clinicManagement.Toolbar</item>
-        <item name="cardViewStyle">@style/Widget.clinicManagement.CardView</item>
+        <item name="materialCardViewStyle">@style/Widget.clinicManagement.CardView</item>
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.clinicManagement.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.clinicManagement.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.clinicManagement.LargeComponent</item>

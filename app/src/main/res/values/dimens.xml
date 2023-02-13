@@ -7,10 +7,11 @@
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="size_icon">24dp</dimen>
-    <dimen name="height_divider">0.5dp</dimen>
+    <dimen name="size_thickness_divider">0.5dp</dimen>
     <dimen name="size_icon_chart">32dp</dimen>
     <dimen name="height_chart_card">300dp</dimen>
     <dimen name="size_image_40dp">40dp</dimen>
+    <dimen name="size_image_profile">110dp</dimen>
     <dimen name="size_corner_40dp">40dp</dimen>
     <dimen name="size_corner_16dp">16dp</dimen>
     <dimen name="size_corner_8dp">8dp</dimen>
@@ -26,5 +27,10 @@
     <dimen name="width_button_min">140dp</dimen>
     <dimen name="height_front_layer_title">48dp</dimen>
     <dimen name="size_selection_card">90dp</dimen>
+    <dimen name="height_small_blue_container">260dp</dimen>
+    <dimen name="size_image_bg_50dp">50dp</dimen>
+    <dimen name="size_profile_card">108dp</dimen>
+    <dimen name="size_image_25dp">25dp</dimen>
     <item name="opacity_20" type="dimen" format="float">0.2</item>
+    <item name="opacity_40" type="dimen" format="float">0.4</item>
 </resources>

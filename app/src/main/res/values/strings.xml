@@ -24,6 +24,25 @@
     <string name="patients">Patients</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last name</string>
-    <string name="consultation_date">Consultation date</string>
+
     <string name="filter">filter</string>
+    <string name="profile">Profile</string>
+    <string name="done_sessions">Done sessions</string>
+    <string name="amount_payed">Amount payed</string>
+    <string name="quotation">quotation</string>
+    <string name="invoice">invoice</string>
+    <string name="patient_details">Patient details</string>
+
+    <string name="age">Age</string>
+    <string name="phone_number">Phone number</string>
+    <string name="consultation_date">Consultation date</string>
+    <string name="doctor">Doctor</string>
+    <string name="diagnostic">Diagnostic</string>
+    <string name="number_of_sessions">Number of sessions</string>
+    <string name="frequency">Frequency</string>
+    <string name="session_price">Session price</string>
+    <string name="total">Total</string>
+    <string name="total_in_letters">Total in letters</string>
+    <string name="social_coverage">Social coverage</string>
+
 </resources>

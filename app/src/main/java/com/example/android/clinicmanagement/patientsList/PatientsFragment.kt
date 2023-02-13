@@ -1,10 +1,9 @@
-package com.example.android.clinicmanagement.patient
+package com.example.android.clinicmanagement.patientsList
 
 import android.os.Bundle
 
 import android.view.*
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 
 import androidx.fragment.app.Fragment
 
