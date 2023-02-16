@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/patientHistoryFragment">
+    app:startDestination="@id/receiptFragment">
 
     <fragment
         android:id="@+id/statisticsFragment"
@@ -28,4 +28,8 @@
         android:id="@+id/patientHistoryFragment"
         android:name="com.example.android.clinicmanagement.patientHistory.PatientHistoryFragment"
         android:label="PatientHistoryFragment" />
+    <fragment
+        android:id="@+id/receiptFragment"
+        android:name="com.example.android.clinicmanagement.receipt.ReceiptFragment"
+        android:label="ReceiptFragment" />
 </navigation>

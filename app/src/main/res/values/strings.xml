@@ -29,8 +29,8 @@
     <string name="profile">Profile</string>
     <string name="done_sessions">Done sessions</string>
     <string name="amount_payed">Amount payed</string>
-    <string name="quotation">quotation</string>
-    <string name="invoice">invoice</string>
+    <string name="quotation">Quotation</string>
+    <string name="invoice">Invoice</string>
     <string name="patient_details">Patient details</string>
 
     <string name="age">Age</string>
@@ -44,8 +44,13 @@
     <string name="total">Total</string>
     <string name="total_in_letters">Total in letters</string>
     <string name="social_coverage">Social coverage</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="history">History</string>
+    <string name="number">N° :</string>
+    <string name="full_name">Full name</string>
+    <string name="date">Date</string>
+    <string name="share">share</string>
+    <string name="print">print</string>
+    <string name="receipt">Receipt</string>
 
 </resources>

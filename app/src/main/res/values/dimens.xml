@@ -31,6 +31,7 @@
     <dimen name="size_image_bg_50dp">50dp</dimen>
     <dimen name="size_profile_card">108dp</dimen>
     <dimen name="size_image_25dp">25dp</dimen>
+    <dimen name="height_receipt">500dp</dimen>
     <item name="opacity_20" type="dimen" format="float">0.2</item>
     <item name="opacity_40" type="dimen" format="float">0.4</item>
 </resources>
