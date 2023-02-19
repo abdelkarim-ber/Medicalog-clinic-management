@@ -99,7 +99,7 @@
                         android:layout_marginTop="@dimen/margin_8dp"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:layout_marginEnd="@dimen/margin_16dp"
-                        app:suffixText="@string/dh"
+                        app:suffixText="@string/moroccan_currency"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/text_title_amount"

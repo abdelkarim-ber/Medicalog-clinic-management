@@ -1,17 +1,11 @@
 package com.example.android.clinicmanagement.patientProfile
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.ListItemPatientInfosBinding
-import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
-import com.example.android.clinicmanagement.patientsList.PatientAdapter
 
 class PatientInfoAdapter : RecyclerView.Adapter<PatientInfoAdapter.ViewHolder>() {
 
@@ -21,7 +15,7 @@ class PatientInfoAdapter : RecyclerView.Adapter<PatientInfoAdapter.ViewHolder>()
         R.string.consultation_date,
         R.string.doctor,
         R.string.diagnostic,
-        R.string.number_of_sessions,
+        R.string.session_count,
         R.string.frequency,
         R.string.session_price,
         R.string.total,

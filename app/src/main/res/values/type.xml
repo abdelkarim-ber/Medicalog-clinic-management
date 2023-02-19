@@ -128,6 +128,13 @@
         <item name="startIconTint">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/color_primary_70</item>
         <item name="suffixTextColor">?attr/colorPrimary</item>
+        <item name="prefixTextColor">?attr/colorPrimary</item>
+        <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
+        <item name="counterTextColor">@color/black</item>
+    </style>
+    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="endIconTint">?attr/colorPrimary</item>
+        <item name="android:textColorHint">@color/color_primary_70</item>
         <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
     </style>
 

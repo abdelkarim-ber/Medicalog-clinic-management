@@ -20,7 +20,8 @@
     <string name="amount">Amount</string>
     <string name="add_amount">Add amount</string>
     <string name="save">save</string>
-    <string name="dh">DH</string>
+    <string name="moroccan_currency">DH</string>
+    <string name="moroccan_currency_plural">dhs</string>
     <string name="patients">Patients</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last name</string>
@@ -38,7 +39,7 @@
     <string name="consultation_date">Consultation date</string>
     <string name="doctor">Doctor</string>
     <string name="diagnostic">Diagnostic</string>
-    <string name="number_of_sessions">Number of sessions</string>
+    <string name="session_count">Session count</string>
     <string name="frequency">Frequency</string>
     <string name="session_price">Session price</string>
     <string name="total">Total</string>
@@ -52,5 +53,9 @@
     <string name="share">share</string>
     <string name="print">print</string>
     <string name="receipt">Receipt</string>
+    <string name="gender">Gender</string>
+    <string name="doctor_fullName">Doctor full name</string>
+    <string name="doctor_short">Dr.</string>
+    <string name="sessions">sessions</string>
 
 </resources>
