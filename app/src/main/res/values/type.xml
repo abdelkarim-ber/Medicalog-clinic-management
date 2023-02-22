@@ -1,157 +1,86 @@
 <resources>
 
-    <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="TextAppearance.clinicManagement.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/comfortaa_regular</item>
         <item name="android:fontFamily">@font/comfortaa_regular</item>
         <item name="android:textSize">93sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+    <style name="TextAppearance.clinicManagement.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="fontFamily">@font/comfortaa_regular</item>
         <item name="android:fontFamily">@font/comfortaa_regular</item>
         <item name="android:textSize">58sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="TextAppearance.clinicManagement.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="fontFamily">@font/comfortaa_regular</item>
         <item name="android:fontFamily">@font/comfortaa_regular</item>
         <item name="android:textSize">46sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+    <style name="TextAppearance.clinicManagement.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/comfortaa_regular</item>
         <item name="android:fontFamily">@font/comfortaa_regular</item>
         <item name="android:textSize">33sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextAppearance.clinicManagement.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/comfortaa_regular</item>
         <item name="android:fontFamily">@font/comfortaa_regular</item>
         <item name="android:textSize">23sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.clinicManagement.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/comfortaa_medium</item>
         <item name="android:fontFamily">@font/comfortaa_medium</item>
         <item name="android:textSize">19sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="TextAppearance.clinicManagement.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="fontFamily">@font/comfortaa_regular</item>
         <item name="android:fontFamily">@font/comfortaa_regular</item>
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+    <style name="TextAppearance.clinicManagement.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="fontFamily">@font/comfortaa_medium</item>
         <item name="android:fontFamily">@font/comfortaa_medium</item>
         <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TextAppearance.clinicManagement.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/raleway_regular</item>
         <item name="android:fontFamily">@font/raleway_regular</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="TextAppearance.clinicManagement.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/raleway_regular</item>
         <item name="android:fontFamily">@font/raleway_regular</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.MaterialComponents.Button">
+    <style name="TextAppearance.clinicManagement.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/raleway_medium</item>
         <item name="android:fontFamily">@font/raleway_medium</item>
+        <item name="textAllCaps">true</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="TextAppearance.clinicManagement.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/raleway_regular</item>
         <item name="android:fontFamily">@font/raleway_regular</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.MaterialComponents.Overline">
+    <style name="TextAppearance.clinicManagement.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <item name="fontFamily">@font/raleway_regular</item>
         <item name="android:fontFamily">@font/raleway_regular</item>
         <item name="android:textSize">10sp</item>
     </style>
 
-    <style name="Widget.clinicManagement.Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="titleTextColor">@color/white</item>
-        <item name="android:background">?attr/colorPrimaryDark</item>
+    <style name="TextAppearance.clinicManagement.BottomNavigation" parent="TextAppearance.clinicManagement.Caption">
+        <item name="android:textAllCaps">true</item>
     </style>
-
-    <style name="Widget.clinicManagement.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardElevation">@dimen/elevation_cards</item>
-        <item name="rippleColor">@color/color_secondary_variant_40</item>
-    </style>
-
-    <style name="ShapeAppearance.clinicManagement.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="shapeCornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/size_corner_8dp</item>
-    </style>
-
-    <style name="ShapeAppearance.clinicManagement.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="shapeCornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/size_corner_16dp</item>
-    </style>
-
-    <style name="ShapeAppearance.clinicManagement.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
-        <item name="shapeCornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/size_corner_24dp</item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.clinicManagement.bigCards" parent="">
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeBottomRight">@dimen/size_corner_40dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/size_corner_40dp</item>
-    </style>
-
-    <style name="Widget.clinicManagement.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="strokeColor">?attr/colorPrimary</item>
-        <item name="strokeWidth">1dp</item>
-        <item name="textAllCaps">true</item>
-        <item name="android:minWidth">@dimen/width_button_min</item>
-        <item name="iconGravity">textStart</item>
-    </style>
-
-    <style name="Widget.clinicManagement.Button" parent="Widget.MaterialComponents.Button">
-        <item name="iconGravity">textStart</item>
-        <item name="textAllCaps">true</item>
-        <item name="android:minWidth">@dimen/width_button_min</item>
-    </style>
-
-    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="startIconTint">?attr/colorPrimary</item>
-        <item name="android:textColorHint">@color/color_primary_70</item>
-        <item name="suffixTextColor">?attr/colorPrimary</item>
-        <item name="prefixTextColor">?attr/colorPrimary</item>
-        <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
-        <item name="counterTextColor">@color/black</item>
-    </style>
-    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="endIconTint">?attr/colorPrimary</item>
-        <item name="android:textColorHint">@color/color_primary_70</item>
-        <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
-    </style>
-
-    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet">
-        <item name="boxStrokeColor">?attr/colorSecondary</item>
-        <item name="hintTextColor">?attr/colorSecondary</item>
-        <item name="boxBackgroundColor">@color/color_secondary_variant_20</item>
-    </style>
-
-    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark">
-        <item name="hintTextColor">@color/white</item>
-        <item name="boxBackgroundColor">@color/light_midnight</item>
-    </style>
-
-    <style name="Widget.clinicManagement.Layout.RoundedCorner" parent="">
-        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
-    </style>
-
 
 </resources>

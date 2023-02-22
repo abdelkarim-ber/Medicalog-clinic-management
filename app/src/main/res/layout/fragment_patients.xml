@@ -14,7 +14,14 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
             app:menu="@menu/filter_menu"
-            app:title="@string/patients" />
+             >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/img_logo_main"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"

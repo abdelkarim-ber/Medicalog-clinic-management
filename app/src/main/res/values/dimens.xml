@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <item name="opacity_70" type="dimen" format="float">0.7</item>
     <item name="opacity_10" type="dimen" format="float">0.1</item>
     <dimen name="margin_8dp">8dp</dimen>
@@ -34,4 +34,6 @@
     <dimen name="height_receipt">500dp</dimen>
     <item name="opacity_20" type="dimen" format="float">0.2</item>
     <item name="opacity_40" type="dimen" format="float">0.4</item>
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
+    <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
 </resources>

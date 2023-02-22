@@ -14,32 +14,54 @@
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/Widget.clinicManagement.Toolbar</item>
         <item name="materialCardViewStyle">@style/Widget.clinicManagement.CardView</item>
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.clinicManagement.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.clinicManagement.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.clinicManagement.LargeComponent</item>
-        <item name="textInputStyle">@style/Widget.clinicManagement.TextInputLayout.OutlinedBox</item>
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.clinicManagement.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.clinicManagement.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.clinicManagement.LargeComponent
+        </item>
+        <item name="textInputStyle">@style/Widget.clinicManagement.TextInputLayout.OutlinedBox
+        </item>
         <item name="materialButtonStyle">@style/Widget.clinicManagement.Button</item>
         <item name="android:editTextColor">?attr/colorPrimaryDark</item>
 
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.clinicManagement.Headline1
+        </item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.clinicManagement.Headline2
+        </item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.clinicManagement.Headline3
+        </item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.clinicManagement.Headline4
+        </item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.clinicManagement.Headline5
+        </item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.clinicManagement.Headline6
+        </item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.clinicManagement.Subtitle1
+        </item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.clinicManagement.Subtitle2
+        </item>
+        <item name="textAppearanceBody1">@style/TextAppearance.clinicManagement.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.clinicManagement.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.clinicManagement.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.clinicManagement.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.clinicManagement.Overline
+        </item>
 
-        <item name="textAppearanceHeadline1">@style/TextAppearance.MdcTypographyStyles.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.MdcTypographyStyles.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.MdcTypographyStyles.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.MdcTypographyStyles.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.MdcTypographyStyles.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.MdcTypographyStyles.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.MdcTypographyStyles.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.MdcTypographyStyles.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.MdcTypographyStyles.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.MdcTypographyStyles.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.MdcTypographyStyles.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.MdcTypographyStyles.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.MdcTypographyStyles.Overline</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.clinicManagement.BottomNavigationView</item>
+
     </style>
+
     <style name="ThemeOverlay.ClinicManagement.Midnight" parent="">
         <item name="android:editTextColor">@color/white</item>
         <item name="colorPrimary">@color/white</item>
     </style>
+
     <style name="ThemeOverlay.ClinicManagement.BlueSky" parent="">
         <item name="colorPrimary">@color/blue_sky</item>
         <item name="colorControlHighlight">@color/blue_sky</item>

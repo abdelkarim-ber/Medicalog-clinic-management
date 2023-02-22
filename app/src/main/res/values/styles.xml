@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.clinicManagement.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">@color/white</item>
+        <item name="android:background">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.clinicManagement.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">@dimen/elevation_cards</item>
+        <item name="rippleColor">@color/color_secondary_variant_40</item>
+    </style>
+
+    <style name="ShapeAppearance.clinicManagement.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="shapeCornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/size_corner_8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.clinicManagement.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="shapeCornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/size_corner_16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.clinicManagement.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="shapeCornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/size_corner_24dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.clinicManagement.bigCards" parent="">
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">@dimen/size_corner_40dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/size_corner_40dp</item>
+    </style>
+
+    <style name="Widget.clinicManagement.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:minWidth">@dimen/width_button_min</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="Widget.clinicManagement.Button" parent="Widget.MaterialComponents.Button">
+        <item name="iconGravity">textStart</item>
+        <item name="android:minWidth">@dimen/width_button_min</item>
+    </style>
+
+    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="startIconTint">?attr/colorPrimary</item>
+        <item name="android:textColorHint">@color/color_primary_70</item>
+        <item name="suffixTextColor">?attr/colorPrimary</item>
+        <item name="prefixTextColor">?attr/colorPrimary</item>
+        <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
+        <item name="counterTextColor">@color/black</item>
+    </style>
+    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="endIconTint">?attr/colorPrimary</item>
+        <item name="android:textColorHint">@color/color_primary_70</item>
+        <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
+    </style>
+
+    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet">
+        <item name="boxStrokeColor">?attr/colorSecondary</item>
+        <item name="hintTextColor">?attr/colorSecondary</item>
+        <item name="boxBackgroundColor">@color/color_secondary_variant_20</item>
+    </style>
+
+    <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark">
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxBackgroundColor">@color/light_midnight</item>
+    </style>
+
+
+    <style name="Widget.clinicManagement.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="labelVisibilityMode">selected</item>
+        <item name="itemBackground">@color/dark_midnight</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.clinicManagement.BottomNavigation</item>
+    </style>
+
+</resources>

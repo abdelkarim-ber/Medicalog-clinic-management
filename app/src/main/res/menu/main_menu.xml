@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/statistics"
+        android:title="@string/statistics"
+        android:icon="@drawable/selector_icon_chart"/>
+
+    <item
+        android:id="@+id/patients"
+        android:title="@string/patients"
+        android:icon="@drawable/selector_icon_user"/>
+</menu>

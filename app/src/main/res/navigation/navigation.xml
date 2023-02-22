@@ -3,37 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/patientFormFragment">
+    app:startDestination="@id/statistics">
 
     <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.example.android.clinicmanagement.statistics.StatisticsFragment"
-        android:label="StatisticsFragment" />
-    <fragment
-        android:id="@+id/expendituresFragment"
+        android:id="@+id/expenditures"
         android:name="com.example.android.clinicmanagement.expenditures.ExpendituresFragment"
         android:label="fragment_expenditures"
         tools:layout="@layout/fragment_expenditures" />
     <fragment
-        android:id="@+id/patientsFragment"
+        android:id="@+id/patients"
         android:name="com.example.android.clinicmanagement.patientsList.PatientsFragment"
         android:label="fragment_patients"
         tools:layout="@layout/fragment_patients" />
     <fragment
-        android:id="@+id/patientProfileFragment"
+        android:id="@+id/patientProfile"
         android:name="com.example.android.clinicmanagement.patientProfile.PatientProfileFragment"
         android:label="fragment_patient_profile"
         tools:layout="@layout/fragment_patient_profile" />
     <fragment
-        android:id="@+id/patientHistoryFragment"
-        android:name="com.example.android.clinicmanagement.patientHistory.PatientHistoryFragment"
-        android:label="PatientHistoryFragment" />
-    <fragment
-        android:id="@+id/receiptFragment"
-        android:name="com.example.android.clinicmanagement.receipt.ReceiptFragment"
-        android:label="ReceiptFragment" />
-    <fragment
-        android:id="@+id/patientFormFragment"
+        android:id="@+id/patientForm"
         android:name="com.example.android.clinicmanagement.PatientForm.PatientFormFragment"
-        android:label="PatientFormFragment" />
+        android:label="PatientFormFragment"
+        tools:layout="@layout/fragment_patient_form"
+        />
+    <fragment
+        android:id="@+id/patientHistory"
+        android:name="com.example.android.clinicmanagement.patientHistory.PatientHistoryFragment"
+        android:label="PatientHistoryFragment"
+        tools:layout="@layout/fragment_patient_history"
+        />
+    <fragment
+        android:id="@+id/receipt"
+        android:name="com.example.android.clinicmanagement.receipt.ReceiptFragment"
+        android:label="ReceiptFragment"
+        tools:layout="@layout/fragment_receipt"
+        />
+    <fragment
+        android:id="@+id/statistics"
+        android:name="com.example.android.clinicmanagement.statistics.StatisticsFragment"
+        android:label="StatisticsFragment"
+        tools:layout="@layout/fragment_statistics"
+        />
 </navigation>

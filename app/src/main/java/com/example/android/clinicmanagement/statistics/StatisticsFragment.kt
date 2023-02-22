@@ -40,7 +40,7 @@ class StatisticsFragment : Fragment() {
         val roundedBarChartStyle = RoundedBarChartStyle(requireContext())
         roundedBarChartStyle.showChart(chart, entries, R.color.sunrise_orange)
 
-        // TODO: the activity main is the main entry to the app change that
+
         val button = binding.buttonSwitch
         val image = binding.imageArrowCircle
         val textChart = binding.textChartTitle
