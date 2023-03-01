@@ -9,11 +9,9 @@
         tools:context=".patientProfile.PatientProfileFragment">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/app_bar"
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:focusableInTouchMode="true"
-            android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:title="Form" />
 

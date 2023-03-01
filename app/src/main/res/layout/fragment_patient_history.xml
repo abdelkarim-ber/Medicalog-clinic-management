@@ -11,8 +11,6 @@
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:focusableInTouchMode="true"
-        android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

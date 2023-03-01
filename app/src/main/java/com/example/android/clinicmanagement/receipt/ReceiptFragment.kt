@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientHistoryBinding
 import com.example.android.clinicmanagement.databinding.FragmentReceiptBinding
@@ -20,7 +21,9 @@ class ReceiptFragment : Fragment() {
         val binding: FragmentReceiptBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_receipt, container, false
         )
-
+        binding.toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
         // Inflate the layout for this fragment
         return binding.root
     }

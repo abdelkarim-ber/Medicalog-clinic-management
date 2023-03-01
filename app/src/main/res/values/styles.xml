@@ -73,9 +73,10 @@
 
     <style name="Widget.clinicManagement.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="labelVisibilityMode">selected</item>
-        <item name="itemBackground">@color/dark_midnight</item>
-        <item name="itemIconTint">@color/white</item>
-        <item name="itemTextColor">@color/white</item>
+        <item name="itemBackground">@color/grey</item>
+        <item name="elevation">0dp</item>
+        <item name="itemIconTint">@color/midnight</item>
+        <item name="itemTextColor">@color/midnight</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.clinicManagement.BottomNavigation</item>
     </style>
 

@@ -1,15 +1,11 @@
 package com.example.android.clinicmanagement.patientHistory
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.ListItemPatientHistoryBinding
-import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
-import com.example.android.clinicmanagement.patientsList.PatientAdapter
 
 class PatientHistoryAdapter  : RecyclerView.Adapter<PatientHistoryAdapter.ViewHolder>() {
     var data = listOf(

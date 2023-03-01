@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.patientProfile.PatientProfileViewModel" />
+        <variable
+            name="patientId"
+            type="Long" />
+    </data>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,11 +16,9 @@
     tools:context=".patientProfile.PatientProfileFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/app_bar"
+        android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:focusableInTouchMode="true"
-        android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
         app:menu="@menu/profile_menu"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/profile" />
@@ -129,6 +135,7 @@
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{()->viewModel.onReceiptQuotationClicked(patientId)}"
                 app:layout_constraintBottom_toTopOf="@id/title_patient_details"
                 app:layout_constraintEnd_toStartOf="@+id/cards_divider"
                 app:layout_constraintStart_toStartOf="parent"
@@ -198,6 +205,7 @@
                 android:layout_height="@dimen/size_profile_card"
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:clickable="true"
+                android:onClick="@{()->viewModel.onReceiptInvoiceClicked(patientId)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cards_divider"
                 app:layout_constraintTop_toBottomOf="@id/blue_container"

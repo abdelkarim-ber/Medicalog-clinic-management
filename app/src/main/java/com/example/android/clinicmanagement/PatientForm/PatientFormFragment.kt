@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientFormBinding
 import com.example.android.clinicmanagement.databinding.FragmentReceiptBinding
@@ -26,6 +27,9 @@ class PatientFormFragment : Fragment() {
         val items = listOf("Male", "Female")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_gender, items)
         (binding.layoutGender.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        binding.toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         // Inflate the layout for this fragment
         return binding.root

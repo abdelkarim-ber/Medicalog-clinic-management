@@ -12,12 +12,12 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
             app:menu="@menu/filter_menu"
              >
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/img_logo_main"/>
 

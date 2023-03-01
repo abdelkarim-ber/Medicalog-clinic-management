@@ -14,34 +14,74 @@
         android:id="@+id/patients"
         android:name="com.example.android.clinicmanagement.patientsList.PatientsFragment"
         android:label="fragment_patients"
-        tools:layout="@layout/fragment_patients" />
+        tools:layout="@layout/fragment_patients" >
+        <action
+            android:id="@+id/action_patients_to_patientProfile"
+            app:destination="@id/patientProfile" />
+        <action
+            android:id="@+id/action_patients_to_patientForm"
+            app:destination="@id/patientForm" />
+    </fragment>
     <fragment
         android:id="@+id/patientProfile"
         android:name="com.example.android.clinicmanagement.patientProfile.PatientProfileFragment"
         android:label="fragment_patient_profile"
-        tools:layout="@layout/fragment_patient_profile" />
+        tools:layout="@layout/fragment_patient_profile" >
+        <action
+            android:id="@+id/action_patientProfile_to_patientHistory"
+            app:destination="@id/patientHistory" />
+        <action
+            android:id="@+id/action_patientProfile_to_receipt"
+            app:destination="@id/receipt" />
+        <action
+            android:id="@+id/action_patientProfile_to_patientForm"
+            app:destination="@id/patientForm" />
+        <argument
+            android:name="patientKey"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/patientForm"
         android:name="com.example.android.clinicmanagement.PatientForm.PatientFormFragment"
         android:label="PatientFormFragment"
         tools:layout="@layout/fragment_patient_form"
-        />
+        >
+        <argument
+            android:name="patientKey"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
     <fragment
         android:id="@+id/patientHistory"
         android:name="com.example.android.clinicmanagement.patientHistory.PatientHistoryFragment"
         android:label="PatientHistoryFragment"
         tools:layout="@layout/fragment_patient_history"
-        />
+        >
+        <argument
+            android:name="patientKey"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/receipt"
         android:name="com.example.android.clinicmanagement.receipt.ReceiptFragment"
         android:label="ReceiptFragment"
         tools:layout="@layout/fragment_receipt"
-        />
+        >
+        <argument
+            android:name="receiptType"
+            app:argType="integer" />
+        <argument
+            android:name="patientKey"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/statistics"
         android:name="com.example.android.clinicmanagement.statistics.StatisticsFragment"
         android:label="StatisticsFragment"
         tools:layout="@layout/fragment_statistics"
-        />
+        >
+        <action
+            android:id="@+id/action_statistics_to_expenditures"
+            app:destination="@id/expenditures" />
+    </fragment>
 </navigation>

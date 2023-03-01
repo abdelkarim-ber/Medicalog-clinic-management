@@ -2,6 +2,7 @@ package com.example.android.clinicmanagement.patientsList
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
 
-class PatientAdapter : RecyclerView.Adapter<PatientAdapter.ViewHolder>() {
+class PatientsAdapter(val patientListener:PatientListener) : RecyclerView.Adapter<PatientsAdapter.ViewHolder>() {
     var data = listOf<Patient>(
         Patient("Karim Sadiki", 40, "m", "In progress", 4500),
         Patient("Khadija Mrzouki", 20, "f", "Done", 8000),
@@ -29,14 +30,17 @@ class PatientAdapter : RecyclerView.Adapter<PatientAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data.get(position), patientListener)
     }
 
 
     class ViewHolder private constructor(val binding: ListItemPatientsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Patient) {
+        fun bind(data: Patient, patientListener:PatientListener) {
             data.apply {
+                binding.layout.setOnClickListener{
+                    patientListener.onClick(it,545454)
+                }
                 binding.imgAvatarPatient.setImageResource(
                     when {
                         age <= 10 && gender == "m" -> R.drawable.avatar_patient_boy
@@ -48,6 +52,7 @@ class PatientAdapter : RecyclerView.Adapter<PatientAdapter.ViewHolder>() {
                         else -> throw Exception("")
                     }
                 )
+                binding.number = bindingAdapterPosition
                 binding.textPatientFullName.text = fullName
                 binding.textPatientStatus.text = status
                 binding.textPatientStatus.setTextColor( when (status) {
@@ -81,5 +86,9 @@ class PatientAdapter : RecyclerView.Adapter<PatientAdapter.ViewHolder>() {
         val status: String,
         val amount: Int
     )
+
+    fun interface PatientListener{
+        fun onClick(view: View, patientId:Long)
+    }
 
 }

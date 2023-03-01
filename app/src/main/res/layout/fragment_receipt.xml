@@ -9,12 +9,10 @@
         tools:context=".patientProfile.PatientProfileFragment">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/app_bar"
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:focusableInTouchMode="true"
             app:title="@string/receipt"
-            android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
             app:navigationIcon="@drawable/ic_arrow_back" />
 
         <androidx.core.widget.NestedScrollView

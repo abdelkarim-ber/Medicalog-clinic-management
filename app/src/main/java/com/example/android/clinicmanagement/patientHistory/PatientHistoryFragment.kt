@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientHistoryBinding
 import com.example.android.clinicmanagement.databinding.FragmentPatientProfileBinding
@@ -22,6 +23,10 @@ class PatientHistoryFragment : Fragment() {
             inflater, R.layout.fragment_patient_history, container, false
         )
         binding.listPatientHistory.adapter = PatientHistoryAdapter()
+        binding.toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
         return binding.root
     }
 

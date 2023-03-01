@@ -15,7 +15,7 @@
     <string name="supplies">Supplies</string>
     <string name="divers">Divers</string>
     <string name="years_old_abbreviation">y.o</string>
-    <string name="title_range">Age range %1$d y.o - %2$d y.o </string>
+    <string name="title_range">Age range  y.o - %2$d y.o </string>
     <string name="select_category">Select a category :</string>
     <string name="amount">Amount</string>
     <string name="add_amount">Add amount</string>
@@ -25,6 +25,8 @@
     <string name="patients">Patients</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last name</string>
+    <string name="patient_profile_transition_name">patient profile</string>
+    <string name="patients_list_item_transition_name">patient item :%1$d</string>
 
     <string name="filter">filter</string>
     <string name="profile">Profile</string>

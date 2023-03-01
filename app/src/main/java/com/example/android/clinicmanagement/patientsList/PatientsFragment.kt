@@ -1,5 +1,6 @@
 package com.example.android.clinicmanagement.patientsList
 
+import android.icu.util.UniversalTimeScale.toLong
 import android.os.Bundle
 
 import android.view.*
@@ -8,6 +9,10 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 
 import com.example.android.clinicmanagement.R
 
@@ -42,7 +47,31 @@ class PatientsFragment : Fragment() {
         bottomSheetBehavior.isDraggable = false
         enableFilterWidgets(false)
 
-        binding.listPatients.adapter = PatientAdapter()
+        val viewModelFactory = PatientsViewModelFactory()
+
+        val patientsViewModel =
+            ViewModelProvider(
+                this, viewModelFactory
+            ).get(PatientsViewModel::class.java)
+
+        binding.listPatients.adapter = PatientsAdapter { view,id ->
+            patientsViewModel.onPatientClicked(view,id)
+        }
+
+        patientsViewModel.navigateToPatientProfile.observe(
+            viewLifecycleOwner)
+            { info ->
+                //info parameter consist of view that's clicked and patient id
+                info?.let {
+                    this.findNavController()
+                        .navigate(PatientsFragmentDirections.actionPatientsToPatientProfile(info.second))
+                    patientsViewModel.onPatientProfileNavigated()
+                }
+
+            }
+
+
+
 
         return binding.root
     }
