@@ -13,6 +13,8 @@ import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.barChart.RoundedBarChartStyle
 import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding
 import com.github.mikephil.charting.data.BarEntry
+import com.google.android.material.transition.MaterialFade
+import com.google.android.material.transition.MaterialFadeThrough
 
 
 class StatisticsFragment : Fragment() {

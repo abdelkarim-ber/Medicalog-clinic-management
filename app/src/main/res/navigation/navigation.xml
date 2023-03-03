@@ -17,7 +17,11 @@
         tools:layout="@layout/fragment_patients" >
         <action
             android:id="@+id/action_patients_to_patientProfile"
-            app:destination="@id/patientProfile" />
+            app:destination="@id/patientProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_patients_to_patientForm"
             app:destination="@id/patientForm" />
@@ -29,13 +33,23 @@
         tools:layout="@layout/fragment_patient_profile" >
         <action
             android:id="@+id/action_patientProfile_to_patientHistory"
-            app:destination="@id/patientHistory" />
+            app:destination="@id/patientHistory"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_patientProfile_to_receipt"
-            app:destination="@id/receipt" />
+            app:destination="@id/receipt"
+            app:enterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_top" />
         <action
             android:id="@+id/action_patientProfile_to_patientForm"
-            app:destination="@id/patientForm" />
+            app:destination="@id/patientForm"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <argument
             android:name="patientKey"
             app:argType="long" />
