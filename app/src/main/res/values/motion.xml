@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Motion-->
+
+    <integer name="clinicmanagement_motion_duration_large">500</integer>
+    <integer name="clinicmanagement_motion_duration_medium">300</integer>
+    <integer name="clinicmanagement_motion_duration_small">200</integer>
+
+</resources>

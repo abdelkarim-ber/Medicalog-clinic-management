@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <item name="opacity_70" type="dimen" format="float">0.7</item>
-    <item name="opacity_10" type="dimen" format="float">0.1</item>
+    <item name="opacity_70" format="float" type="dimen">0.7</item>
+    <item name="opacity_10" format="float" type="dimen">0.1</item>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_72dp">72dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="size_icon">24dp</dimen>
@@ -27,13 +28,13 @@
     <dimen name="width_button_min">140dp</dimen>
     <dimen name="height_front_layer_title">48dp</dimen>
     <dimen name="size_selection_card">90dp</dimen>
-    <dimen name="height_small_blue_container">260dp</dimen>
+    <dimen name="height_small_blue_container">316dp</dimen>
     <dimen name="size_image_bg_50dp">50dp</dimen>
     <dimen name="size_profile_card">108dp</dimen>
     <dimen name="size_image_25dp">25dp</dimen>
     <dimen name="height_receipt">500dp</dimen>
-    <item name="opacity_20" type="dimen" format="float">0.2</item>
-    <item name="opacity_40" type="dimen" format="float">0.4</item>
+    <item name="opacity_20" format="float" type="dimen">0.2</item>
+    <item name="opacity_40" format="float" type="dimen">0.4</item>
     <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
 </resources>

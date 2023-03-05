@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.android.clinicmanagement.patientProfile.PatientProfileViewModel" />
+
         <variable
             name="patientId"
             type="Long" />
     </data>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".patientProfile.PatientProfileFragment">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:menu="@menu/profile_menu"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/profile" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:transitionName="@string/patient_profile_transition_name">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,17 +27,48 @@
             <View
                 android:id="@+id/blue_container"
                 android:layout_width="match_parent"
+                android:focusableInTouchMode="true"
                 android:layout_height="@dimen/height_small_blue_container"
                 android:background="@drawable/shape_card_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/icon_navigation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/icon_history"
+                android:onClick="@{()->viewModel.onPatientHistoryClicked(patientId)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_history"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/icon_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp"
+                android:onClick="@{()->viewModel.onPatientInfoUpdateClicked(patientId)}"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintEnd_toStartOf="@id/icon_history"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/img_avatar_patient"
                 android:layout_width="@dimen/size_image_profile"
                 android:layout_height="@dimen/size_image_profile"
-                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_72dp"
                 android:src="@drawable/avatar_patient_boy"
                 app:layout_constraintEnd_toEndOf="@id/blue_container"
                 app:layout_constraintStart_toStartOf="@id/blue_container"
@@ -174,14 +196,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/quotation"
                         android:textAllCaps="true"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="@color/light_midnight"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/quotation_image_bg"
                         app:layout_constraintStart_toStartOf="@+id/quotation_image_bg"
-                        app:layout_constraintTop_toBottomOf="@+id/quotation_image_bg"
-                        android:text="@string/quotation" />
+                        app:layout_constraintTop_toBottomOf="@+id/quotation_image_bg" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -205,11 +227,11 @@
                 android:layout_height="@dimen/size_profile_card"
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:onClick="@{()->viewModel.onReceiptInvoiceClicked(patientId)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cards_divider"
-                app:layout_constraintTop_toBottomOf="@id/blue_container"
-                android:focusable="true">
+                app:layout_constraintTop_toBottomOf="@id/blue_container">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -244,14 +266,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/invoice"
                         android:textAllCaps="true"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="@color/light_midnight"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/invoice_image_bg"
                         app:layout_constraintStart_toStartOf="@+id/invoice_image_bg"
-                        app:layout_constraintTop_toBottomOf="@+id/invoice_image_bg"
-                        android:text="@string/invoice" />
+                        app:layout_constraintTop_toBottomOf="@+id/invoice_image_bg" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -262,29 +284,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
-                android:textColor="@color/light_blue_sky"
+                android:background="@color/dark_midnight"
                 android:paddingStart="@dimen/padding_16dp"
                 android:paddingTop="@dimen/padding_8dp"
                 android:paddingBottom="@dimen/padding_8dp"
-                android:background="@color/dark_midnight"
+                android:text="@string/patient_details"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/light_blue_sky"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/quotation_card"
-                android:text="@string/patient_details" />
+                app:layout_constraintTop_toBottomOf="@id/quotation_card" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_patient_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/title_patient_details"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_patient_details" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-
-</FrameLayout>
 </layout>

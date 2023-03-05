@@ -17,11 +17,7 @@
         tools:layout="@layout/fragment_patients" >
         <action
             android:id="@+id/action_patients_to_patientProfile"
-            app:destination="@id/patientProfile"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/patientProfile" />
         <action
             android:id="@+id/action_patients_to_patientForm"
             app:destination="@id/patientForm" />

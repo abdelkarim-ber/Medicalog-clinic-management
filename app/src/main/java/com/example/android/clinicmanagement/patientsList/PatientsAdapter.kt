@@ -12,13 +12,13 @@ import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
 
 class PatientsAdapter(val patientListener:PatientListener) : RecyclerView.Adapter<PatientsAdapter.ViewHolder>() {
     var data = listOf<Patient>(
-        Patient("Karim Sadiki", 40, "m", "In progress", 4500),
-        Patient("Khadija Mrzouki", 20, "f", "Done", 8000),
-        Patient("Aatif khelfi", 60, "m", "In progress", 100),
-        Patient("Saad Mnsouri", 20, "m", "Done", 3000),
-        Patient("Samira Jamili", 30, "f", "In progress", 600),
-        Patient("Aamir Chakiri ", 10, "m", "Done", 7800),
-        Patient("Leyla Aabidi ", 30, "f", "In progress", 6000),
+        Patient(1,"Karim Sadiki", 40, "m", "In progress", 4500),
+        Patient(2,"Khadija Mrzouki", 20, "f", "Done", 8000),
+        Patient(3,"Aatif khelfi", 60, "m", "In progress", 100),
+        Patient(4,"Saad Mnsouri", 20, "m", "Done", 3000),
+        Patient(5,"Samira Jamili", 30, "f", "In progress", 600),
+        Patient(6,"Aamir Chakiri ", 10, "m", "Done", 7800),
+        Patient(7,"Leyla Aabidi ", 30, "f", "In progress", 6000),
     )
 
 
@@ -52,7 +52,7 @@ class PatientsAdapter(val patientListener:PatientListener) : RecyclerView.Adapte
                         else -> throw Exception("")
                     }
                 )
-                binding.number = bindingAdapterPosition
+                binding.number = id
                 binding.textPatientFullName.text = fullName
                 binding.textPatientStatus.text = status
                 binding.textPatientStatus.setTextColor( when (status) {
@@ -80,6 +80,7 @@ class PatientsAdapter(val patientListener:PatientListener) : RecyclerView.Adapte
     }
 
     data class Patient(
+        val id:Int,
         val fullName: String,
         val age: Int,
         val gender: String,

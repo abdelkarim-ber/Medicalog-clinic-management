@@ -5,6 +5,7 @@ import android.os.Bundle
 
 import android.view.*
 import android.widget.FrameLayout
+import androidx.core.view.doOnPreDraw
 
 import androidx.fragment.app.Fragment
 
@@ -18,6 +19,7 @@ import com.example.android.clinicmanagement.R
 
 import com.example.android.clinicmanagement.databinding.FragmentPatientsBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.transition.MaterialElevationScale
 
 import kotlin.math.roundToInt
 
@@ -63,8 +65,17 @@ class PatientsFragment : Fragment() {
             { info ->
                 //info parameter consist of view that's clicked and patient id
                 info?.let {
+                    exitTransition = MaterialElevationScale(false).apply {
+                        duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    }
+                    reenterTransition = MaterialElevationScale(true).apply {
+                        duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    }
+                    val patientProfileTransitionName = getString(R.string.patient_profile_transition_name)
+                    val extras = FragmentNavigatorExtras(info.first to patientProfileTransitionName)
+
                     this.findNavController()
-                        .navigate(PatientsFragmentDirections.actionPatientsToPatientProfile(info.second))
+                        .navigate(PatientsFragmentDirections.actionPatientsToPatientProfile(info.second),extras)
                     patientsViewModel.onPatientProfileNavigated()
                 }
 
@@ -77,6 +88,8 @@ class PatientsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
         binding.appBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.filter -> setBottomSheetVisibility(it)

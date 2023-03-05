@@ -11,7 +11,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layout"
     android:clickable="true"
-    android:transitionName="@{@string/patients_list_item_transition_name(number)"
+    android:background="?selectableItemBackground"
+    android:transitionName="@{@string/patients_list_item_transition_name(number)}"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true">

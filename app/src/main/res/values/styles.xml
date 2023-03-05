@@ -43,6 +43,7 @@
     <style name="Widget.clinicManagement.Button" parent="Widget.MaterialComponents.Button">
         <item name="iconGravity">textStart</item>
         <item name="android:minWidth">@dimen/width_button_min</item>
+        <item name="rippleColor">@color/blue_sky</item>
     </style>
 
     <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
