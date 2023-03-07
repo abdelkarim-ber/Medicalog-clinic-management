@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -30,10 +32,9 @@ class PatientProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            // Scope the transition to a view in the hierarchy so we know it will be added under
-            // the bottom app bar but over the elevation scale of the exiting HomeFragment.
             drawingViewId = R.id.nav_host_fragment
-            duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_large).toLong()
+            interpolator = FastOutLinearInInterpolator()
+            duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(ContextCompat.getColor(requireContext(),R.color.white))
         }

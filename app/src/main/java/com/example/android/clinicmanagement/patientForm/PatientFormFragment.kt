@@ -1,4 +1,4 @@
-package com.example.android.clinicmanagement.PatientForm
+package com.example.android.clinicmanagement.patientForm
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,14 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientFormBinding
-import com.example.android.clinicmanagement.databinding.FragmentReceiptBinding
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.transition.MaterialArcMotion
+import com.google.android.material.transition.MaterialContainerTransform
 
 
 class PatientFormFragment : Fragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            setAllContainerColors(ContextCompat.getColor(requireContext(),R.color.white))
+            setPathMotion(MaterialArcMotion())
+            duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+            interpolator = FastOutSlowInInterpolator()
+            fadeMode = MaterialContainerTransform.FADE_MODE_IN
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,5 +50,8 @@ class PatientFormFragment : Fragment() {
         return binding.root
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+    }
 }

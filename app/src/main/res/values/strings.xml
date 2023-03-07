@@ -27,6 +27,8 @@
     <string name="last_name">Last name</string>
     <string name="patient_profile_transition_name">patient profile</string>
     <string name="patients_list_item_transition_name">patient item :%1$d</string>
+    <string name="new_patient_form_transition_name">patient form</string>
+    <string name="fab_add_patient_transition_name">add patient fab</string>
 
     <string name="filter">filter</string>
     <string name="profile">Profile</string>

@@ -1,6 +1,5 @@
 package com.example.android.clinicmanagement.patientsList
 
-import android.icu.util.UniversalTimeScale.toLong
 import android.os.Bundle
 
 import android.view.*
@@ -10,7 +9,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -59,6 +57,29 @@ class PatientsFragment : Fragment() {
         binding.listPatients.adapter = PatientsAdapter { view,id ->
             patientsViewModel.onPatientClicked(view,id)
         }
+
+        binding.viewModel = patientsViewModel
+
+        patientsViewModel.navigateToNewPatient.observe(viewLifecycleOwner){
+            fabInfo ->
+            val fabView = fabInfo.first
+            val fabClicked = fabInfo.second
+            if (fabClicked && fabView != null){
+                exitTransition = MaterialElevationScale(false).apply {
+                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                }
+                reenterTransition = MaterialElevationScale(true).apply {
+                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                }
+                val newPatientFormTransitionName = getString(R.string.new_patient_form_transition_name)
+                val extras = FragmentNavigatorExtras(fabView to newPatientFormTransitionName)
+
+                this.findNavController().navigate(PatientsFragmentDirections.actionPatientsToPatientForm(),extras)
+                patientsViewModel.onNewPatientNavigated()
+            }
+        }
+
+
 
         patientsViewModel.navigateToPatientProfile.observe(
             viewLifecycleOwner)

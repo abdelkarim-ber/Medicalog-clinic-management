@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.android.clinicmanagement.databinding.ActivityMainBinding
+import com.example.android.clinicmanagement.utilities.hide
+import com.example.android.clinicmanagement.utilities.show
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,8 +28,8 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launchWhenResumed {
                 navController.addOnDestinationChangedListener { _, destination, _ ->
                     when (destination.id) {
-                        R.id.patients, R.id.statistics-> bottomNavigation.visibility = View.VISIBLE
-                        else -> bottomNavigation.visibility = View.GONE
+                        R.id.patients, R.id.statistics-> bottomNavigation.show()
+                        else -> bottomNavigation.hide()
                     }
                 }
             }

@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.patientsList.PatientsViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -208,6 +214,7 @@
                         android:alpha="@dimen/opacity_20"
                         android:background="@color/black" />
 
+
                 </FrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -218,6 +225,17 @@
                     android:layout_marginTop="@dimen/height_front_layer_title"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:onClick="@{(view) -> viewModel.onAddNewPatientClicked(view) }"
+                    android:backgroundTint="@color/light_blue_sky"
+                    android:transitionName="@string/fab_add_patient_transition_name"
+                    android:src="@drawable/ic_user_add"
+                    app:tint="@color/midnight"
+                    android:layout_margin="16dp" />
             </FrameLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

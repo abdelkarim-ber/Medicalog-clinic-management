@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/patientForm"
-        android:name="com.example.android.clinicmanagement.PatientForm.PatientFormFragment"
+        android:name="com.example.android.clinicmanagement.patientForm.PatientFormFragment"
         android:label="PatientFormFragment"
         tools:layout="@layout/fragment_patient_form"
         >

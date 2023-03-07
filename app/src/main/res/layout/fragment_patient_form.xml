@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:transitionName="@string/new_patient_form_transition_name"
         tools:context=".patientProfile.PatientProfileFragment">
 
         <androidx.appcompat.widget.Toolbar
@@ -25,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/padding_16dp"
-                tools:context=".PatientForm.PatientFormFragment">
+                tools:context=".patientForm.PatientFormFragment">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_first_name"
