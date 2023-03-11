@@ -48,6 +48,7 @@
 
     <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="startIconTint">?attr/colorPrimary</item>
+        <item name="endIconTint">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/color_primary_70</item>
         <item name="suffixTextColor">?attr/colorPrimary</item>
         <item name="prefixTextColor">?attr/colorPrimary</item>
@@ -62,7 +63,7 @@
 
     <style name="Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet">
         <item name="boxStrokeColor">?attr/colorSecondary</item>
-        <item name="hintTextColor">?attr/colorSecondary</item>
+        <item name="suffixTextAppearance">?attr/textAppearanceHeadline6</item>
         <item name="boxBackgroundColor">@color/color_secondary_variant_20</item>
     </style>
 

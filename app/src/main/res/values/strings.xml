@@ -29,6 +29,8 @@
     <string name="patients_list_item_transition_name">patient item :%1$d</string>
     <string name="new_patient_form_transition_name">patient form</string>
     <string name="fab_add_patient_transition_name">add patient fab</string>
+    <string name="new_session_transition_name">new session</string>
+    <string name="fab_add_session_transition_name">add session fab</string>
 
     <string name="filter">filter</string>
     <string name="profile">Profile</string>
@@ -61,5 +63,14 @@
     <string name="doctor_fullName">Doctor full name</string>
     <string name="doctor_short">Dr.</string>
     <string name="sessions">sessions</string>
+    <string name="time">Time</string>
+    <string name="hour">Hour</string>
+    <string name="minutes">Minutes</string>
+    <string name="add_session">Add session</string>
+    <string name="hint_session_date">Click the icon to select</string>
+    <string name="hint_session_amount">Enter amount</string>
+    <string name="hint_session_time">Click the icon to select</string>
+    <string name="session_time_selection_title">Select Session time</string>
+    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
 </resources>

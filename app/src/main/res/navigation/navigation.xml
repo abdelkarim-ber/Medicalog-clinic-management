@@ -49,6 +49,9 @@
         <argument
             android:name="patientKey"
             app:argType="long" />
+        <action
+            android:id="@+id/action_patientProfile_to_newSessionFragment"
+            app:destination="@id/newSessionFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientForm"
@@ -93,5 +96,15 @@
         <action
             android:id="@+id/action_statistics_to_expenditures"
             app:destination="@id/expenditures" />
+    </fragment>
+    <fragment
+        android:id="@+id/newSessionFragment"
+        android:name="com.example.android.clinicmanagement.session.NewSessionFragment"
+        android:label="NewSessionFragment"
+        tools:layout="@layout/fragment_new_session"
+        >
+        <argument
+            android:name="patientKey"
+            app:argType="long" />
     </fragment>
 </navigation>

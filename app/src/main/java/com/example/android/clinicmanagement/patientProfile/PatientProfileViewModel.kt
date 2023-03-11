@@ -1,5 +1,6 @@
 package com.example.android.clinicmanagement.patientProfile
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,5 +50,19 @@ companion object{
     fun onReceiptNavigated() {
         _navigateToReceipt.value = null
     }
+
+
+    private val _navigateToAddNewSession = MutableLiveData<Pair<View,Long>?>()
+    val navigateToAddNewSession: LiveData<Pair<View,Long>?>
+        get() = _navigateToAddNewSession
+
+    fun onAddNewSessionClicked(view:View,id: Long) {
+        _navigateToAddNewSession.value = view to id
+    }
+
+    fun onAddNewSessionNavigated() {
+        _navigateToAddNewSession.value = null
+    }
+
 
 }

@@ -15,13 +15,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientProfileBinding
+import com.example.android.clinicmanagement.patientsList.PatientsFragmentDirections
 import com.example.android.clinicmanagement.patientsList.PatientsViewModel
 import com.example.android.clinicmanagement.patientsList.PatientsViewModelFactory
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 
 
 class PatientProfileFragment : Fragment() {
@@ -34,9 +37,10 @@ class PatientProfileFragment : Fragment() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             drawingViewId = R.id.nav_host_fragment
             interpolator = FastOutLinearInInterpolator()
-            duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+            duration =
+                resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
             scrimColor = Color.TRANSPARENT
-            setAllContainerColors(ContextCompat.getColor(requireContext(),R.color.white))
+            setAllContainerColors(ContextCompat.getColor(requireContext(), R.color.white))
         }
     }
 
@@ -58,26 +62,61 @@ class PatientProfileFragment : Fragment() {
 
         patientProfileViewModel.navigateToPatientInfoUpdate.observe(viewLifecycleOwner) { patientId ->
             patientId?.let {
-                findNavController().navigate(PatientProfileFragmentDirections.actionPatientProfileToPatientForm(patientId) )
+                findNavController().navigate(
+                    PatientProfileFragmentDirections.actionPatientProfileToPatientForm(
+                        patientId
+                    )
+                )
                 patientProfileViewModel.onPatientInfoUpdateNavigated()
             }
         }
         patientProfileViewModel.navigateToPatientHistory.observe(viewLifecycleOwner) { patientId ->
             patientId?.let {
-                findNavController().navigate(PatientProfileFragmentDirections.actionPatientProfileToPatientHistory(patientId) )
+                findNavController().navigate(
+                    PatientProfileFragmentDirections.actionPatientProfileToPatientHistory(
+                        patientId
+                    )
+                )
                 patientProfileViewModel.onPatientHistoryNavigated()
             }
         }
         patientProfileViewModel.navigateToReceipt.observe(viewLifecycleOwner) { receiptInfo ->
             receiptInfo?.let {
-                findNavController().navigate(PatientProfileFragmentDirections.actionPatientProfileToReceipt(receiptInfo.first,receiptInfo.second) )
+                findNavController().navigate(
+                    PatientProfileFragmentDirections.actionPatientProfileToReceipt(
+                        receiptInfo.first,
+                        receiptInfo.second
+                    )
+                )
                 patientProfileViewModel.onReceiptNavigated()
             }
         }
+        patientProfileViewModel.navigateToAddNewSession.observe(viewLifecycleOwner) { fabInfo ->
+            fabInfo?.let {
+                val fabView = fabInfo.first
+                val patientId = fabInfo.second
 
-        binding.apply{
+                exitTransition = MaterialElevationScale(false).apply {
+                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                }
+                reenterTransition = MaterialElevationScale(true).apply {
+                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                }
+                val newSessionTransitionName = getString(R.string.new_session_transition_name)
+                val extras = FragmentNavigatorExtras(fabView to newSessionTransitionName)
+
+                this.findNavController().navigate(
+                    PatientProfileFragmentDirections.actionPatientProfileToNewSessionFragment(patientId),
+                    extras
+                )
+                patientProfileViewModel.onAddNewSessionNavigated()
+            }
+        }
+
+
+        binding.apply {
             listPatientInfo.adapter = PatientInfoAdapter()
-          iconNavigation.setOnClickListener{findNavController().navigateUp()}
+            iconNavigation.setOnClickListener { findNavController().navigateUp() }
             viewModel = patientProfileViewModel
             patientId = args.patientKey
         }

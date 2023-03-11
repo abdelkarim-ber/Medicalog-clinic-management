@@ -67,25 +67,32 @@ fun BottomNavigationView.show() {
 fun BottomNavigationView.hide() {
     if (visibility == View.GONE) return
 
-    val drawable = BitmapDrawable(context.resources, drawToBitmap())
-    val parent = parent as ViewGroup
-    drawable.setBounds(left, top, right, bottom)
-    parent.overlay.add(drawable)
-    visibility = View.GONE
-    ValueAnimator.ofInt(top, parent.height).apply {
-        startDelay = 100L
-        duration = 200L
-        interpolator = AnimationUtils.loadInterpolator(
-            context,
-            android.R.interpolator.fast_out_linear_in
-        )
-        addUpdateListener {
-            val newTop = it.animatedValue as Int
-            drawable.setBounds(left, newTop, right, newTop + height)
+    if (isLaidOut) {
+        val drawable = BitmapDrawable(context.resources, drawToBitmap())
+
+        val parent = parent as ViewGroup
+        drawable.setBounds(left, top, right, bottom)
+        parent.overlay.add(drawable)
+        visibility = View.GONE
+        ValueAnimator.ofInt(top, parent.height).apply {
+            startDelay = 100L
+            duration = 200L
+            interpolator = AnimationUtils.loadInterpolator(
+                context,
+                android.R.interpolator.fast_out_linear_in
+            )
+            addUpdateListener {
+                val newTop = it.animatedValue as Int
+                drawable.setBounds(left, newTop, right, newTop + height)
+            }
+            doOnEnd {
+                parent.overlay.remove(drawable)
+            }
+            start()
         }
-        doOnEnd {
-            parent.overlay.remove(drawable)
-        }
-        start()
+    } else {
+        visibility = View.GONE
     }
+
+
 }
