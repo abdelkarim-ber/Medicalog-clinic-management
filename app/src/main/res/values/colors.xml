@@ -13,4 +13,6 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="grey">#F5F5F5</color>
+    <color name="dark_grey">#686C7D</color>
+    <color name="bluish_white">#F2FBFF</color>
 </resources>

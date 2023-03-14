@@ -5,5 +5,5 @@
         android:toXDelta="0%"
         android:fromYDelta="-100%"
         android:toYDelta="0%"
-        android:duration="@android:integer/config_longAnimTime" />
+        android:duration="@integer/clinicmanagement_motion_duration_large" />
 </set>

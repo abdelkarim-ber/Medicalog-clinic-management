@@ -72,5 +72,7 @@
     <string name="hint_session_time">Click the icon to select</string>
     <string name="session_time_selection_title">Select Session time</string>
     <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="expenditures_of">Expenditures Of :</string>
+    <string name="hint_expenditure_amount">Enter amount here</string>
 
 </resources>

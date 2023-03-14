@@ -12,6 +12,7 @@
     <dimen name="size_icon_chart">32dp</dimen>
     <dimen name="height_chart_card">300dp</dimen>
     <dimen name="size_image_40dp">40dp</dimen>
+    <dimen name="size_app_bar_logo_mark">50dp</dimen>
     <dimen name="size_image_profile">110dp</dimen>
     <dimen name="size_corner_40dp">40dp</dimen>
     <dimen name="size_corner_16dp">16dp</dimen>

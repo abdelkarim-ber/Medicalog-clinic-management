@@ -30,28 +30,30 @@
         <action
             android:id="@+id/action_patientProfile_to_patientHistory"
             app:destination="@id/patientHistory"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_patientProfile_to_receipt"
             app:destination="@id/receipt"
             app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
             app:popExitAnim="@anim/slide_out_top" />
         <action
             android:id="@+id/action_patientProfile_to_patientForm"
             app:destination="@id/patientForm"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="patientKey"
             app:argType="long" />
         <action
-            android:id="@+id/action_patientProfile_to_newSessionFragment"
-            app:destination="@id/newSessionFragment" />
+            android:id="@+id/action_patientProfile_to_newSession"
+            app:destination="@id/newSession" />
     </fragment>
     <fragment
         android:id="@+id/patientForm"
@@ -95,14 +97,17 @@
         >
         <action
             android:id="@+id/action_statistics_to_expenditures"
-            app:destination="@id/expenditures" />
+            app:destination="@id/expenditures"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/newSessionFragment"
+        android:id="@+id/newSession"
         android:name="com.example.android.clinicmanagement.session.NewSessionFragment"
-        android:label="NewSessionFragment"
         tools:layout="@layout/fragment_new_session"
-        >
+        android:label="NewSessionFragment" >
         <argument
             android:name="patientKey"
             app:argType="long" />

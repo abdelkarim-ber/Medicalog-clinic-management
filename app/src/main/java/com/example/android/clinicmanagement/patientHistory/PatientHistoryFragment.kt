@@ -15,19 +15,25 @@ import com.example.android.clinicmanagement.patientProfile.PatientInfoAdapter
 
 class PatientHistoryFragment : Fragment() {
 
+lateinit var binding: FragmentPatientHistoryBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentPatientHistoryBinding = DataBindingUtil.inflate(
+
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_patient_history, container, false
         )
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.listPatientHistory.adapter = PatientHistoryAdapter()
         binding.toolBar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-
-        return binding.root
     }
-
 }

@@ -50,6 +50,9 @@ class NewSessionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 

@@ -2,6 +2,7 @@ package com.example.android.clinicmanagement.expenditures
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.ListItemExpenditureCategorySelectionBinding
+import com.example.android.clinicmanagement.expenditures.ExpenditureCategoryAdapter.ViewHolder.Companion.previousItemPosition
 
 class ExpenditureCategoryAdapter : RecyclerView.Adapter<ExpenditureCategoryAdapter.ViewHolder>() {
 
@@ -59,12 +61,17 @@ class ExpenditureCategoryAdapter : RecyclerView.Adapter<ExpenditureCategoryAdapt
                     it.backgroundTintList = ColorStateList.valueOf(color)
                 }
 
+                Log.v("recyclerview","previousitemposition $previousItemPosition ")
                 previousItemPosition?.let {
                     val viewHolder = recyclerView?.findViewHolderForAdapterPosition(it)
                     viewHolder?.itemView?.findViewById<View>(R.id.cardView)?.backgroundTintList = null
+                    Log.v("recyclerview","recyclerview ${if(recyclerView == null) "null" else "not null"}")
+                    Log.v("recyclerview","viewHolder ${if(viewHolder == null) "null" else "not null"}")
+                    Log.v("recyclerview","viewHolder.itemView ${if(viewHolder?.itemView == null) "null" else "not null"}")
                 }
                 selectedItem = data
                 previousItemPosition = bindingAdapterPosition
+
             }
         }
 
@@ -93,6 +100,12 @@ class ExpenditureCategoryAdapter : RecyclerView.Adapter<ExpenditureCategoryAdapt
                 )
 
                 return ViewHolder(binding)
+            }
+            fun clean(){
+                selectionColor= null
+                recyclerView= null
+                previousItemPosition = null
+                selectedItem = null
             }
         }
 

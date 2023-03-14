@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <alpha
-        android:duration="@android:integer/config_longAnimTime"
+        android:duration="@integer/clinicmanagement_motion_duration_large"
         android:fromAlpha="0.0"
         android:toAlpha="1.0" />
 </set>

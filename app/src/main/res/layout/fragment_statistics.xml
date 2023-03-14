@@ -3,28 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true"
+            app:liftOnScrollTargetViewId="@id/scroll"
+            app:elevation="0dp">
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/app_bar"
+                android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:menu="@menu/statistics_menu"
                 >
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/size_app_bar_logo_mark"
+                    android:layout_height="@dimen/size_app_bar_logo_mark"
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/img_logo_main"/>
             </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize">
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -239,12 +250,14 @@
                     app:layout_constraintStart_toEndOf="@+id/text_chart_title"
                     app:layout_constraintTop_toTopOf="@+id/text_chart_title" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/button_switch"
-                    android:layout_width="@dimen/size_icon_chart"
-                    android:layout_height="@dimen/size_icon_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_16dp"
-                    android:background="@drawable/ic_switch_left"
+                    android:padding="@dimen/padding_8dp"
+                    android:src="@drawable/ic_switch_left"
+                    android:background="?attr/actionBarItemBackground"
                     app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
                     app:layout_constraintEnd_toEndOf="@+id/card_chart"
                     app:layout_constraintTop_toTopOf="@+id/text_chart_title" />
@@ -282,6 +295,7 @@
                     android:paddingStart="@dimen/padding_16dp"
                     android:clipToPadding="false"
                     android:layout_marginTop="@dimen/margin_16dp"
+                    tools:listitem="@layout/list_item_expenditure_category"
                     app:layout_constraintTop_toBottomOf="@id/text_expenditure_title"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -289,5 +303,5 @@
         </androidx.core.widget.NestedScrollView>
 
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

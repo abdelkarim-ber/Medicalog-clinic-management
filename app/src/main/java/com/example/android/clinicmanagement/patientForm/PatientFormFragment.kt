@@ -20,6 +20,9 @@ import com.google.android.material.transition.MaterialContainerTransform
 
 
 class PatientFormFragment : Fragment() {
+
+    lateinit var binding: FragmentPatientFormBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
@@ -35,9 +38,19 @@ class PatientFormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentPatientFormBinding = DataBindingUtil.inflate(
+
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_patient_form, container, false
         )
+        // Inflate the layout for this fragment
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
 
         val items = listOf("Male", "Female")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_gender, items)
@@ -46,12 +59,5 @@ class PatientFormFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        // Inflate the layout for this fragment
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 }

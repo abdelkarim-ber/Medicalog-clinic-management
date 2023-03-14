@@ -14,18 +14,25 @@ import com.example.android.clinicmanagement.patientHistory.PatientHistoryAdapter
 
 class ReceiptFragment : Fragment() {
 
+lateinit var binding: FragmentReceiptBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentReceiptBinding = DataBindingUtil.inflate(
+
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_receipt, container, false
         )
-        binding.toolBar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
         // Inflate the layout for this fragment
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.toolBar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.android.clinicmanagement.patientsList.PatientsViewModel" />
@@ -12,21 +13,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionGroup="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:transitionGroup="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/filter_menu"
-             >
+            app:menu="@menu/filter_menu">
+
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_app_bar_logo_mark"
+                android:layout_height="@dimen/size_app_bar_logo_mark"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/img_logo_main"/>
+                app:srcCompat="@drawable/img_logo_main" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -36,144 +37,151 @@
             android:layout_weight="1"
             tools:context=".patientsList.PatientsFragment">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/field_container"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/dark_midnight"
-                android:theme="@style/ThemeOverlay.ClinicManagement.Midnight">
+                >
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_layout_first_name"
-                    style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_32dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:hint="@string/first_name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:startIconDrawable="@drawable/ic_user_filled">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_field_first_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <View
-                    android:id="@+id/field_divider1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_thickness_divider"
-                    android:layout_marginStart="@dimen/margin_32dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_32dp"
-                    android:alpha="@dimen/opacity_20"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="@id/text_layout_first_name"
-                    app:layout_constraintStart_toStartOf="@id/text_layout_first_name"
-                    app:layout_constraintTop_toBottomOf="@id/text_layout_first_name" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_layout_last_name"
-                    style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:hint="@string/last_name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/field_divider1"
-                    app:startIconDrawable="@drawable/ic_user_filled">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_field_last_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <View
-                    android:id="@+id/field_divider2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_thickness_divider"
-                    android:layout_marginStart="@dimen/margin_32dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_32dp"
-                    android:alpha="@dimen/opacity_20"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="@id/text_layout_last_name"
-                    app:layout_constraintStart_toStartOf="@id/text_layout_last_name"
-                    app:layout_constraintTop_toBottomOf="@id/text_layout_last_name" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_layout_date"
-                    style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:hint="@string/consultation_date"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/field_divider2"
-                    app:startIconDrawable="@drawable/ic_calendar">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_field_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <View
-                    android:id="@+id/field_divider3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/size_thickness_divider"
-                    android:layout_marginStart="@dimen/margin_32dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_32dp"
-                    android:alpha="@dimen/opacity_20"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="@id/text_layout_date"
-                    app:layout_constraintStart_toStartOf="@id/text_layout_date"
-                    app:layout_constraintTop_toBottomOf="@id/text_layout_date" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_range"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:text="@{@string/title_range(@intArray/initial_range_slider_values[0], @intArray/initial_range_slider_values[1])}"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/field_divider3"
-                    tools:text="Age range 20 y.o - 70 y.o" />
-
-                <com.google.android.material.slider.RangeSlider
-                    android:id="@+id/rangeSlider"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/field_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:stepSize="10.0"
-                    android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
-                    android:valueFrom="0.0"
-                    android:valueTo="100.0"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_range"
-                    app:values="@array/initial_range_slider_values" />
+                    android:layout_height="match_parent"
+                    android:paddingBottom="70dp"
+                    android:theme="@style/ThemeOverlay.ClinicManagement.Midnight">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_layout_first_name"
+                        style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_32dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:hint="@string/first_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@drawable/ic_user_filled">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/text_field_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:id="@+id/field_divider1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_32dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_32dp"
+                        android:alpha="@dimen/opacity_20"
+                        android:background="@color/white"
+                        app:layout_constraintEnd_toEndOf="@id/text_layout_first_name"
+                        app:layout_constraintStart_toStartOf="@id/text_layout_first_name"
+                        app:layout_constraintTop_toBottomOf="@id/text_layout_first_name" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_layout_last_name"
+                        style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:hint="@string/last_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/field_divider1"
+                        app:startIconDrawable="@drawable/ic_user_filled">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/text_field_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:id="@+id/field_divider2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_32dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_32dp"
+                        android:alpha="@dimen/opacity_20"
+                        android:background="@color/white"
+                        app:layout_constraintEnd_toEndOf="@id/text_layout_last_name"
+                        app:layout_constraintStart_toStartOf="@id/text_layout_last_name"
+                        app:layout_constraintTop_toBottomOf="@id/text_layout_last_name" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_layout_date"
+                        style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.Dark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:hint="@string/consultation_date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/field_divider2"
+                        app:startIconDrawable="@drawable/ic_calendar">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/text_field_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:id="@+id/field_divider3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_32dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_32dp"
+                        android:alpha="@dimen/opacity_20"
+                        android:background="@color/white"
+                        app:layout_constraintEnd_toEndOf="@id/text_layout_date"
+                        app:layout_constraintStart_toStartOf="@id/text_layout_date"
+                        app:layout_constraintTop_toBottomOf="@id/text_layout_date" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_range"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:text="@{@string/title_range(@intArray/initial_range_slider_values[0], @intArray/initial_range_slider_values[1])}"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/field_divider3"
+                        tools:text="Age range 20 y.o - 70 y.o" />
+
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/rangeSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:stepSize="10.0"
+                        android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
+                        android:valueFrom="0.0"
+                        android:valueTo="100.0"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_range"
+                        app:values="@array/initial_range_slider_values" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
 
             <FrameLayout
                 android:id="@+id/bottom_sheet_layout"
@@ -221,8 +229,8 @@
                     android:id="@+id/list_patients"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/height_front_layer_title"
+                    android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -230,12 +238,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
-                    android:onClick="@{(view) -> viewModel.onAddNewPatientClicked(view) }"
+                    android:layout_margin="16dp"
                     android:backgroundTint="@color/light_blue_sky"
-                    android:transitionName="@string/fab_add_patient_transition_name"
+                    android:onClick="@{(view) -> viewModel.onAddNewPatientClicked(view) }"
                     android:src="@drawable/ic_user_add"
-                    app:tint="@color/midnight"
-                    android:layout_margin="16dp" />
+                    android:transitionName="@string/fab_add_patient_transition_name"
+                    app:tint="@color/midnight" />
             </FrameLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

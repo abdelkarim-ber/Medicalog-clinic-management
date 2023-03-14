@@ -33,6 +33,16 @@ class PatientsFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_patients, container, false
         )
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         binding.rangeSlider.setLabelFormatter { value ->
             "${value.roundToInt()} ${getString(R.string.years_old_abbreviation)}"
         }
@@ -46,6 +56,14 @@ class PatientsFragment : Fragment() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.isDraggable = false
         enableFilterWidgets(false)
+
+        binding.appBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.filter -> setBottomSheetVisibility(it)
+            }
+            // Handle the menu selection
+            true
+        }
 
         val viewModelFactory = PatientsViewModelFactory()
 
@@ -61,7 +79,7 @@ class PatientsFragment : Fragment() {
         binding.viewModel = patientsViewModel
 
         patientsViewModel.navigateToNewPatient.observe(viewLifecycleOwner){
-            fabInfo ->
+                fabInfo ->
             val fabView = fabInfo.first
             val fabClicked = fabInfo.second
             if (fabClicked && fabView != null){
@@ -83,41 +101,29 @@ class PatientsFragment : Fragment() {
 
         patientsViewModel.navigateToPatientProfile.observe(
             viewLifecycleOwner)
-            { info ->
-                //info parameter consist of view that's clicked and patient id
-                info?.let {
-                    exitTransition = MaterialElevationScale(false).apply {
-                        duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
-                    }
-                    reenterTransition = MaterialElevationScale(true).apply {
-                        duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
-                    }
-                    val patientProfileTransitionName = getString(R.string.patient_profile_transition_name)
-                    val extras = FragmentNavigatorExtras(info.first to patientProfileTransitionName)
-
-                    this.findNavController()
-                        .navigate(PatientsFragmentDirections.actionPatientsToPatientProfile(info.second),extras)
-                    patientsViewModel.onPatientProfileNavigated()
+        { info ->
+            //info parameter consist of view that's clicked and patient id
+            info?.let {
+                exitTransition = MaterialElevationScale(false).apply {
+                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
                 }
+                reenterTransition = MaterialElevationScale(true).apply {
+                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                }
+                val patientProfileTransitionName = getString(R.string.patient_profile_transition_name)
+                val extras = FragmentNavigatorExtras(info.first to patientProfileTransitionName)
 
+                this.findNavController()
+                    .navigate(PatientsFragmentDirections.actionPatientsToPatientProfile(info.second),extras)
+                patientsViewModel.onPatientProfileNavigated()
             }
 
-
-
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
-        binding.appBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.filter -> setBottomSheetVisibility(it)
-            }
-            // Handle the menu selection
-            true
         }
+
+
+
+
+
     }
 
     private fun setBottomSheetVisibility(menuItem: MenuItem) {

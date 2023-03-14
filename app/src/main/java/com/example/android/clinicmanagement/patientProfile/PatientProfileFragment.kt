@@ -32,6 +32,7 @@ class PatientProfileFragment : Fragment() {
     val args: PatientProfileFragmentArgs by navArgs()
     lateinit var binding: FragmentPatientProfileBinding
     lateinit var patientProfileViewModel: PatientProfileViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
@@ -48,6 +49,20 @@ class PatientProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = DataBindingUtil.inflate<FragmentPatientProfileBinding?>(
+            inflater, R.layout.fragment_patient_profile, container, false
+        )
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         val viewModelFactory = PatientProfileViewModelFactory()
 
         patientProfileViewModel =
@@ -56,12 +71,10 @@ class PatientProfileFragment : Fragment() {
             ).get(PatientProfileViewModel::class.java)
 
 
-        binding = DataBindingUtil.inflate<FragmentPatientProfileBinding?>(
-            inflater, R.layout.fragment_patient_profile, container, false
-        )
 
         patientProfileViewModel.navigateToPatientInfoUpdate.observe(viewLifecycleOwner) { patientId ->
             patientId?.let {
+                resetTransition()
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToPatientForm(
                         patientId
@@ -72,6 +85,7 @@ class PatientProfileFragment : Fragment() {
         }
         patientProfileViewModel.navigateToPatientHistory.observe(viewLifecycleOwner) { patientId ->
             patientId?.let {
+                resetTransition()
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToPatientHistory(
                         patientId
@@ -82,6 +96,7 @@ class PatientProfileFragment : Fragment() {
         }
         patientProfileViewModel.navigateToReceipt.observe(viewLifecycleOwner) { receiptInfo ->
             receiptInfo?.let {
+                resetTransition()
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToReceipt(
                         receiptInfo.first,
@@ -97,16 +112,20 @@ class PatientProfileFragment : Fragment() {
                 val patientId = fabInfo.second
 
                 exitTransition = MaterialElevationScale(false).apply {
-                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    duration =
+                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
+                            .toLong()
                 }
                 reenterTransition = MaterialElevationScale(true).apply {
-                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    duration =
+                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
+                            .toLong()
                 }
                 val newSessionTransitionName = getString(R.string.new_session_transition_name)
                 val extras = FragmentNavigatorExtras(fabView to newSessionTransitionName)
 
                 this.findNavController().navigate(
-                    PatientProfileFragmentDirections.actionPatientProfileToNewSessionFragment(patientId),
+                    PatientProfileFragmentDirections.actionPatientProfileToNewSession(patientId),
                     extras
                 )
                 patientProfileViewModel.onAddNewSessionNavigated()
@@ -122,12 +141,12 @@ class PatientProfileFragment : Fragment() {
         }
 
 
-
-        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
+    private fun resetTransition() {
+        //reset to transitions set in navigation graph
+        if (exitTransition != null || reenterTransition != null)
+            exitTransition = null
+            reenterTransition = null
     }
 }

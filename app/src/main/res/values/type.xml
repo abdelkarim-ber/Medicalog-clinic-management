@@ -80,7 +80,7 @@
     </style>
 
     <style name="TextAppearance.clinicManagement.BottomNavigation" parent="TextAppearance.clinicManagement.Caption">
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
 </resources>
