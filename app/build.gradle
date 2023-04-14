@@ -2,16 +2,17 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.devtools.ksp'
 }
 
 android {
     namespace 'com.example.android.clinicmanagement'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.android.clinicmanagement"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -25,19 +26,23 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled = true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
-        dataBinding  true
+    buildFeatures {
+        dataBinding true
     }
 }
 
 dependencies {
+    //MPAndroid Chart library
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     implementation "androidx.core:core-ktx:$version_core"
     implementation "androidx.appcompat:appcompat:$version_appcompat"
     implementation "androidx.fragment:fragment-ktx:$version_fragment"
@@ -46,9 +51,24 @@ dependencies {
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+
+    implementation "androidx.room:room-runtime:$version_room"
+    annotationProcessor "androidx.room:room-compiler:$version_room"
+
+    //Kotlin Symbol Processing (KSP)
+    ksp "androidx.room:room-compiler:$version_room"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$version_room"
+
+    //Paging 3 Integration
+    implementation "androidx.room:room-paging:$version_room"
+
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
 }

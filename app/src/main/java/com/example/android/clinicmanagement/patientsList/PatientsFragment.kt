@@ -4,6 +4,7 @@ import android.os.Bundle
 
 import android.view.*
 import android.widget.FrameLayout
+import androidx.core.util.Pair
 import androidx.core.view.doOnPreDraw
 
 import androidx.fragment.app.Fragment
@@ -17,7 +18,10 @@ import com.example.android.clinicmanagement.R
 
 import com.example.android.clinicmanagement.databinding.FragmentPatientsBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.transition.MaterialElevationScale
+import java.text.SimpleDateFormat
+import java.util.*
 
 import kotlin.math.roundToInt
 
@@ -56,6 +60,30 @@ class PatientsFragment : Fragment() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.isDraggable = false
         enableFilterWidgets(false)
+
+        val dateRangePicker =
+            MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText("Select dates")
+                .setSelection(Pair(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
+                .build()
+
+
+        binding.textLayoutDate.setStartIconOnClickListener {
+            // Respond to end icon presses
+            dateRangePicker.show(childFragmentManager,"tag")
+
+        }
+
+        dateRangePicker.addOnPositiveButtonClickListener {
+
+            var formatter = SimpleDateFormat("yyyy-mm-dd", Locale.getDefault() )
+            val date1 = Date(it.first)
+            val date2 = Date(it.second)
+            var formattedDate = "${formatter.format(date1)} to ${formatter.format(date2)}"
+            binding.textFieldDate.setText(formattedDate)
+
+        }
+
 
         binding.appBar.setOnMenuItemClickListener {
             when (it.itemId) {

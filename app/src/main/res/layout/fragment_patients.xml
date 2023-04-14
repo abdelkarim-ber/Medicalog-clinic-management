@@ -66,6 +66,9 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_field_first_name"
+                            android:saveEnabled="false"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +102,9 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_field_last_name"
+                            android:saveEnabled="false"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
 
@@ -133,6 +139,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_field_date"
+                            android:saveEnabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
 
@@ -172,6 +179,7 @@
                         android:layout_marginTop="@dimen/margin_16dp"
                         android:layout_marginEnd="@dimen/margin_16dp"
                         android:stepSize="10.0"
+                        android:saveEnabled="false"
                         android:theme="@style/ThemeOverlay.ClinicManagement.BlueSky"
                         android:valueFrom="0.0"
                         android:valueTo="100.0"

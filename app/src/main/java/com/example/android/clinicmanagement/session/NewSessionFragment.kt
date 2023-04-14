@@ -1,6 +1,7 @@
 package com.example.android.clinicmanagement.session
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,10 @@ import com.google.android.material.timepicker.TimeFormat
 import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import java.text.SimpleDateFormat
+import java.time.*
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.logging.SimpleFormatter
 
 
@@ -87,7 +90,7 @@ class NewSessionFragment : Fragment() {
 
         }
         binding.textLayoutDate.setEndIconOnClickListener {
-            // Respond to end icon presses
+//            // Respond to end icon presses
             datePicker.show(childFragmentManager,"tag")
 
         }
