@@ -8,7 +8,7 @@ import com.example.android.clinicmanagement.data.dao.*
 import com.example.android.clinicmanagement.data.models.*
 
 @Database(
-    entities = [Patient::class, Session::class, Expenditure::class, Quotation::class, Invoice::class],
+    entities = [Patient::class, Session::class, Expenditure::class, QuotationTrack::class, InvoiceTrack::class],
     version = 1,
     exportSchema = false
 )

@@ -5,17 +5,18 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.android.clinicmanagement.data.models.Patient
 import com.example.android.clinicmanagement.data.models.PatientStatus
 
 //Here we select invoice_number to know the status of patient: In progress or done
 const val GET_PATIENTS_WITH_STATUS =
-    "SELECT first_name,last_name,invoice_number FROM patient_table AS p " +
-            "LEFT JOIN invoice_table AS i ON p.id = i.patient_id "
+    "SELECT id,first_name,last_name,invoice_number FROM patient_table AS p " +
+            "LEFT JOIN invoice_track_table AS i ON p.id = i.patient_id "
 
 const val COUNT_PATIENTS_WITH_STATUS =
     "SELECT count(*) FROM patient_table AS p " +
-            "LEFT JOIN invoice_table AS i ON p.id = i.patient_id "
+            "LEFT JOIN invoice_track_table AS i ON p.id = i.patient_id "
 
 @Dao
 interface PatientDao {
@@ -25,11 +26,20 @@ interface PatientDao {
     @Delete
     suspend fun delete(patient: Patient)
 
+    @Update
+    suspend fun update(patient: Patient)
+
+    @Query(
+        "SELECT * FROM patient_table" +
+                " WHERE id = :patientId"
+    )
+    suspend fun loadPatientWithId(patientId:Long): Patient
+
     @Query(
         GET_PATIENTS_WITH_STATUS +
                 " ORDER BY consultation_date_seconds DESC"
     )
-    fun loadPatientsStatus(): PagingSource<Int, PatientStatus>
+    fun loadAllPatientsStatus(): PagingSource<Int, PatientStatus>
 
     @Query(
         GET_PATIENTS_WITH_STATUS +

@@ -75,8 +75,7 @@ class PatientsFragment : Fragment() {
         }
 
         dateRangePicker.addOnPositiveButtonClickListener {
-
-            var formatter = SimpleDateFormat("yyyy-mm-dd", Locale.getDefault() )
+            var formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault() )
             val date1 = Date(it.first)
             val date2 = Date(it.second)
             var formattedDate = "${formatter.format(date1)} to ${formatter.format(date2)}"

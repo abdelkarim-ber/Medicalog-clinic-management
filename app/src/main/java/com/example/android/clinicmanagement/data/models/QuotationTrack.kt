@@ -4,17 +4,16 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "session_table")
-data class Session(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0L,
-
+@Entity(tableName = "quotation_track_table")
+data class QuotationTrack (
     @ColumnInfo(name = "date_in_seconds")
-    val dateInSeconds: Long ,
+    @PrimaryKey
+    val dateInSeconds: Long = System.currentTimeMillis() / 1000,
 
-    @ColumnInfo(name = "amount_payed")
-    val amountPayed: Int,
+    @ColumnInfo(name = "quotation_number")
+    val quoteNumber: Int,
 
     @ColumnInfo(name = "patient_id")
     val patientId: Long
 )
+

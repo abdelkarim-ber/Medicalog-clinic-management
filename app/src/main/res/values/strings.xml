@@ -36,8 +36,8 @@
     <string name="profile">Profile</string>
     <string name="done_sessions">Done sessions</string>
     <string name="amount_payed">Amount payed</string>
-    <string name="quotation">Quotation</string>
-    <string name="invoice">Invoice</string>
+    <string name="quotationTrack">Quotation</string>
+    <string name="invoiceTrack">Invoice</string>
     <string name="patient_details">Patient details</string>
 
     <string name="age">Age</string>

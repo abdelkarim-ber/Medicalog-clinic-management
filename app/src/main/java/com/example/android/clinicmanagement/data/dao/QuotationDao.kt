@@ -5,32 +5,40 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.android.clinicmanagement.data.models.Quotation
+import com.example.android.clinicmanagement.data.models.QuotationTrack
 
 @Dao
 interface QuotationDao {
 
     @Insert
-    suspend fun insert(quotation: Quotation)
+    suspend fun insert(quotationTrack: QuotationTrack)
 
     @Delete
-    suspend fun delete(quotation: Quotation)
+    suspend fun delete(quotationTrack: QuotationTrack)
 
-    @Query("SELECT * FROM quotation_table "+
-            "WHERE patient_id = :patientId "
+    @Query(
+        "SELECT max(quotation_number)+1 FROM quotation_track_table " +
+                "WHERE strftime('%Y', date_in_seconds, 'unixepoch') = strftime('%Y', 'now')"
     )
-    suspend fun getQuotationWithPatientId(patientId:Int): Quotation?
+    suspend fun generateQuotationTrackNumber(): Int?
 
-    @Query("SELECT max(quotation_number)+1 FROM quotation_table "+
-            "WHERE strftime('%Y', date_in_seconds, 'unixepoch') = strftime('%Y', 'now')"
+    suspend fun generateQuotationTrackNumberForCurrentYear() = generateQuotationTrackNumber() ?: 1
+
+    @Query(
+        "SELECT date_in_seconds,quotation_number,first_name,last_name, (session_count*session_price) AS total, session_count " +
+                "FROM quotation_track_table AS Q " +
+                "JOIN patient_table AS P ON Q.patient_id = P.id " +
+                "WHERE Q.patient_id = :patientId "
     )
-    suspend fun generateQuotationNumber():Int?
+    suspend fun getQuotationWithPatientId(patientId: Long): Quotation
 
-    @Query("SELECT count(*) > 0 FROM quotation_table "+
-            "WHERE patient_id = :patientId "
+    @Query(
+        "SELECT count(*) > 0 FROM quotation_track_table " +
+                "WHERE patient_id = :patientId "
     )
-    suspend fun searchForPatientWithId(patientId:Int):Int
+    suspend fun searchForPatientWithId(patientId: Long): Int
 
-    suspend fun patientExistsWithId(patientId:Int) = searchForPatientWithId(patientId) == 1
+    suspend fun patientExistsWithId(patientId: Long) = searchForPatientWithId(patientId) == 1
 
 
 }

@@ -1,18 +1,22 @@
 package com.example.android.clinicmanagement.data.models
 
 import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "invoice_table")
-data class Invoice (
+data class Invoice(
+
     @ColumnInfo(name = "date_in_seconds")
-    @PrimaryKey
-    val dateInSeconds: Long = System.currentTimeMillis() / 1000,
+    val dateInSeconds: Long ,
 
     @ColumnInfo(name = "invoice_number")
     val invNumber: Int,
 
-    @ColumnInfo(name = "patient_id")
-    val patientId: Long
+    @ColumnInfo(name = "first_name")
+    val firstName: String,
+
+    @ColumnInfo(name = "last_name")
+    val lastName: String,
+
+    val total:Int,
+
+    val doneSessions:Int
 )
