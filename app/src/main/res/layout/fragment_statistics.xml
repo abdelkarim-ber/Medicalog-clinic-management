@@ -1,41 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.android.clinicmanagement.statistics.StatisticsViewModel" />
+
+        <variable
+            name="viewModel"
+            type="StatisticsViewModel" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:elevation="0dp"
             app:liftOnScroll="true"
-            app:liftOnScrollTargetViewId="@id/scroll"
-            app:elevation="0dp">
+            app:liftOnScrollTargetViewId="@id/scroll">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:menu="@menu/statistics_menu"
-                >
+                app:menu="@menu/statistics_menu">
+
                 <ImageView
                     android:layout_width="@dimen/size_app_bar_logo_mark"
                     android:layout_height="@dimen/size_app_bar_logo_mark"
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/img_logo_main"/>
+                    app:srcCompat="@drawable/img_logo_main" />
             </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:showLoading="@{viewModel.statisticsUIState}">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/heart_beat_loading_anim"
+                app:lottie_speed="2.0" />
+
+        </FrameLayout>
+
+        <include
+            android:id="@+id/emptyView"
+            layout="@layout/screen_placeholder"
+            android:visibility="gone"
+            app:showPlaceHolder="@{viewModel.statisticsUIState}"
+            bind:failureData="@{viewModel.statisticsUIState}" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:visibility="visible"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:showContent="@{viewModel.statisticsUIState}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -54,12 +91,12 @@
                     android:id="@+id/text_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
                     android:layout_marginTop="@dimen/margin_16dp"
-                    android:text="May, 2022"
+                    android:text="@{viewModel.selectedDateFormatted}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textColor="@color/light_blue_sky"
                     app:layout_constraintBottom_toTopOf="@+id/text_income"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/card_container"
                     tools:text="May, 2022" />
@@ -68,236 +105,255 @@
                     android:id="@+id/text_income"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="2040.00 DH"
                     android:textAppearance="?attr/textAppearanceHeadline4"
                     android:textColor="@color/white"
+                    app:incomeData="@{viewModel.statisticsUIState}"
                     app:layout_constraintBottom_toTopOf="@+id/text_spending_percentage"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/text_date"
+                    app:layout_constraintStart_toStartOf="@+id/text_date"
                     app:layout_constraintTop_toBottomOf="@id/text_date"
-                    tools:text="2040.00 DH" />
+                    tools:text="2040 DH" />
 
                 <TextView
                     android:id="@+id/text_spending_percentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
                     android:layout_marginBottom="@dimen/margin_16dp"
-                    android:text="you spend 50% of your income"
-                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
                     android:textColor="@color/blue_sky"
+                    app:expensesPercentage="@{viewModel.statisticsUIState}"
                     app:layout_constraintBottom_toTopOf="@+id/card_net_income"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/text_income"
+                    app:layout_constraintStart_toStartOf="@+id/text_income"
                     app:layout_constraintTop_toBottomOf="@id/text_income"
-                    tools:text="you spend 50% of your income"
-
-                    />
+                    tools:text="you spent 50% of your income" />
 
 
-                <View
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_net_income"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height_statistics_card"
                     android:layout_marginStart="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:layout_marginBottom="@dimen/margin_16dp"
-                    android:background="@drawable/shape_card"
+                    app:cardElevation="0dp"
                     app:layout_constraintBottom_toTopOf="@+id/card_chart"
                     app:layout_constraintEnd_toStartOf="@id/card_expenditure"
                     app:layout_constraintStart_toStartOf="@id/card_container"
-                    app:layout_constraintTop_toBottomOf="@+id/text_spending_percentage" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_spending_percentage">
 
-                <TextView
-                    android:id="@+id/title_net_income"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="@string/net_income"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@+id/card_net_income"
-                    app:layout_constraintTop_toTopOf="@+id/card_net_income" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/text_net_income"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:text="2000.00 DH"
+                        <TextView
+                            android:id="@+id/title_net_income"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:text="@string/net_income"
+                            android:textAppearance="?attr/textAppearanceSubtitle1"
+                            android:textColor="@color/color_primary_70"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="?attr/colorPrimaryDark"
-                    app:layout_constraintStart_toStartOf="@+id/card_net_income"
-                    app:layout_constraintTop_toBottomOf="@+id/title_net_income" />
-
-                <TextView
-                    android:id="@+id/text_diff_net_income"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:layout_marginBottom="@dimen/margin_16dp"
-                    android:text="+15%"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    android:textColor="@color/cerulean"
-                    app:layout_constraintBottom_toBottomOf="@+id/card_net_income"
-                    app:layout_constraintEnd_toEndOf="@+id/card_net_income"
-                    app:layout_constraintStart_toEndOf="@+id/text_net_income" />
-
-                <ImageView
-                    android:id="@+id/image_arrow_circle_down"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
-                    android:src="@drawable/ic_arrowcircle_down"
-                    app:layout_constraintEnd_toEndOf="@+id/card_net_income"
-                    app:layout_constraintTop_toTopOf="@+id/card_net_income" />
+                        <TextView
+                            android:id="@+id/text_net_income"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_container_text_40dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:layout_marginEnd="@dimen/margin_8dp"
+                            android:gravity="center_vertical"
+                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            android:textColor="?attr/colorPrimary"
+                            android:textStyle="bold"
+                            app:autoSizeMaxTextSize="23sp"
+                            app:autoSizeMinTextSize="15sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/title_net_income"
+                            app:layout_constraintTop_toBottomOf="@+id/image_arrow_circle_down"
+                            app:netIncomeData="@{viewModel.statisticsUIState}"
+                            tools:text="200000 DH" />
 
 
-                <View
+                        <ImageView
+                            android:id="@+id/image_arrow_circle_down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_8dp"
+                            android:src="@drawable/ic_arrowcircle_down"
+                            app:layout_constraintBottom_toBottomOf="@+id/title_net_income"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/title_net_income" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_expenditure"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height_statistics_card"
                     android:layout_marginEnd="@dimen/margin_16dp"
-                    android:background="@drawable/shape_card"
+                    app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_net_income"
                     app:layout_constraintEnd_toEndOf="@id/card_container"
                     app:layout_constraintStart_toEndOf="@id/card_net_income"
-                    app:layout_constraintTop_toTopOf="@+id/card_net_income" />
+                    app:layout_constraintTop_toTopOf="@+id/card_net_income">
 
-                <TextView
-                    android:id="@+id/title_expenditure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="@string/expenditure"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@+id/card_expenditure"
-                    app:layout_constraintTop_toTopOf="@+id/card_expenditure" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/text_expenditure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:text="2000.00 DH"
+                        <TextView
+                            android:id="@+id/title_expenditure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:text="@string/expenditure"
+                            android:textAppearance="?attr/textAppearanceSubtitle1"
+                            android:textColor="@color/color_primary_70"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="?attr/colorPrimaryDark"
-                    app:layout_constraintStart_toStartOf="@+id/card_expenditure"
-                    app:layout_constraintTop_toBottomOf="@+id/title_expenditure" />
+                        <TextView
+                            android:id="@+id/text_expenditure"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_container_text_40dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:layout_marginEnd="@dimen/margin_8dp"
+                            android:gravity="center_vertical"
+                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            android:textColor="?attr/colorPrimary"
+                            android:textStyle="bold"
+                            app:autoSizeMaxTextSize="23sp"
+                            app:autoSizeMinTextSize="15sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:expensesData="@{viewModel.statisticsUIState}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/title_expenditure"
+                            app:layout_constraintTop_toBottomOf="@+id/image_arrow_circle_up"
+                            tools:text="200000 DH" />
 
-                <TextView
-                    android:id="@+id/text_diff_expenditure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:layout_marginBottom="@dimen/margin_16dp"
-                    android:text="+15%"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    android:textColor="@color/sunrise_orange"
-                    app:layout_constraintBottom_toBottomOf="@+id/card_expenditure"
-                    app:layout_constraintEnd_toEndOf="@+id/card_expenditure"
-                    app:layout_constraintStart_toEndOf="@+id/text_expenditure" />
+                        <ImageView
+                            android:id="@+id/image_arrow_circle_up"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_8dp"
+                            android:src="@drawable/ic_arrowcircle_up"
+                            app:layout_constraintBottom_toBottomOf="@+id/title_expenditure"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/title_expenditure" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <ImageView
-                    android:id="@+id/image_arrow_circle_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
-                    android:src="@drawable/ic_arrowcircle_up"
-                    app:layout_constraintEnd_toEndOf="@+id/card_expenditure"
-                    app:layout_constraintTop_toTopOf="@+id/card_expenditure" />
-
-                <View
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_chart"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height_chart_card"
                     android:layout_marginStart="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
-                    android:background="@drawable/shape_card_chart"
+                    app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_container"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card_container" />
+                    app:layout_constraintTop_toBottomOf="@+id/card_container"
+                    app:strokeColor="@color/dark_midnight"
+                    app:strokeWidth="@dimen/width_stroke_card">
 
-                <TextView
-                    android:id="@+id/text_chart_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginBottom="@dimen/margin_8dp"
-                    android:text="@string/title_chart_expenditure_dh"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintBottom_toTopOf="@+id/chart"
-                    app:layout_constraintStart_toStartOf="@+id/card_chart"
-                    app:layout_constraintTop_toTopOf="@+id/card_chart" />
 
-                <ImageView
-                    android:id="@+id/image_arrow_circle"
-                    android:layout_width="@dimen/size_icon_chart"
-                    android:layout_height="@dimen/size_icon_chart"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:src="@drawable/ic_arrowcircle_up"
-                    app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
-                    app:layout_constraintStart_toEndOf="@+id/text_chart_title"
-                    app:layout_constraintTop_toTopOf="@+id/text_chart_title" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/button_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:padding="@dimen/padding_8dp"
-                    android:src="@drawable/ic_switch_left"
-                    android:background="?attr/actionBarItemBackground"
-                    app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
-                    app:layout_constraintEnd_toEndOf="@+id/card_chart"
-                    app:layout_constraintTop_toTopOf="@+id/text_chart_title" />
 
-                <com.example.android.clinicmanagement.barChart.RoundedBarChart
-                    android:id="@+id/chart"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
-                    android:layout_marginBottom="@dimen/margin_8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/card_chart"
-                    app:layout_constraintEnd_toEndOf="@+id/card_chart"
-                    app:layout_constraintStart_toStartOf="@+id/card_chart"
-                    app:layout_constraintTop_toBottomOf="@+id/text_chart_title" />
+                        <TextView
+                            android:id="@+id/text_chart_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_16dp"
+                            android:layout_marginTop="@dimen/margin_16dp"
+                            android:layout_marginBottom="@dimen/margin_8dp"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textColor="@color/color_primary_70"
+                            app:chartTitle="@{viewModel.chartType}"
+                            app:layout_constraintBottom_toTopOf="@+id/chart"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/title_chart_expenditure_dh" />
+
+                        <ImageView
+                            android:id="@+id/image_arrow_circle"
+                            android:layout_width="@dimen/size_icon_chart"
+                            android:layout_height="@dimen/size_icon_chart"
+                            android:layout_marginStart="@dimen/margin_16dp"
+                            android:src="@drawable/ic_arrowcircle_up"
+                            app:chartTitleIcon="@{viewModel.chartType}"
+                            app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
+                            app:layout_constraintStart_toEndOf="@+id/text_chart_title"
+                            app:layout_constraintTop_toTopOf="@+id/text_chart_title" />
+
+                        <ImageButton
+                            android:id="@+id/button_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_16dp"
+                            android:background="?attr/actionBarItemBackground"
+                            android:onClick="@{() -> viewModel.switchChart()}"
+                            android:padding="@dimen/padding_8dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/text_chart_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/text_chart_title"
+                            app:switchButtonImage="@{viewModel.chartType}"
+                            tools:src="@drawable/ic_switch_left" />
+
+                        <com.example.android.clinicmanagement.barChart.RoundedBarChart
+                            android:id="@+id/chart"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_8dp"
+                            android:layout_marginEnd="@dimen/margin_8dp"
+                            android:layout_marginBottom="@dimen/margin_8dp"
+                            app:chartType="@{viewModel.chartType}"
+                            app:context="@{context}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_chart_title"
+                            app:selectedMonth="@{viewModel.selectedDateInMillis}"
+                            app:uiState="@{viewModel.statisticsUIState}" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     android:id="@+id/text_expenditure_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
                     android:text="@string/expenditures_by_categories"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginStart="@dimen/margin_16dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/chart" />
+                    app:layout_constraintTop_toBottomOf="@id/card_chart" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_expenditure"
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:paddingStart="@dimen/padding_16dp"
-                    android:clipToPadding="false"
+                    app:expensesList="@{viewModel.statisticsUIState}"
+                    app:expensesTitle="@{textExpenditureTitle}"
                     android:layout_marginTop="@dimen/margin_16dp"
-                    tools:listitem="@layout/list_item_expenditure_category"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/padding_16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_expenditure_title"
-                    />
+                    tools:listitem="@layout/list_item_expenditure_category" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>

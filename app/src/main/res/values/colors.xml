@@ -6,13 +6,24 @@
     <color name="blue_sky">#3ab1ea</color>
     <color name="light_blue_sky">#7ae3ff</color>
     <color name="dark_blue_sky">#0082b7</color>
-    <color name="green">#31CB00</color>
+    <color name="green">#55E1C2</color>
     <color name="cerulean">#00AFB9</color>
-    <color name="red">#FF3C38</color>
+    <color name="yellow">#F8C95E</color>
     <color name="sunrise_orange">#F07167</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="grey">#F5F5F5</color>
     <color name="dark_grey">#686C7D</color>
     <color name="bluish_white">#F2FBFF</color>
+
+    <color name="expenses_bright_pink_crayola">#AD33D9</color>
+    <color name="expenses_coral">#F7796B</color>
+    <color name="expenses_sunglow">#43DE7E</color>
+    <color name="expenses_mantis">#65A1B7</color>
+    <color name="expenses_emerald">#07B588</color>
+    <color name="expenses_light_sea_green">#0cb0a9</color>
+    <color name="expenses_blue_ncs">#118ab2</color>
+    <color name="expenses_midnight_green">#105971</color>
+
+
 </resources>

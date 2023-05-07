@@ -16,6 +16,7 @@
     <string name="divers">Divers</string>
     <string name="years_old_abbreviation">y.o</string>
     <string name="title_range">Age range %1$d y.o - %2$d y.o </string>
+    <string name="month_year_dialog_title">%1$s, %2$s</string>
     <string name="select_category">Select a category :</string>
     <string name="amount">Amount</string>
     <string name="add_amount">Add amount</string>
@@ -31,6 +32,12 @@
     <string name="fab_add_patient_transition_name">add patient fab</string>
     <string name="new_session_transition_name">new session</string>
     <string name="fab_add_session_transition_name">add session fab</string>
+    <string name="chart_no_data_message">\'Sorry, not enough data to display\'</string>
+
+    <string name="statistics_spending_percentage">You spent %1$d\%% of your income</string>
+    <string name="statistics_spending_all">You spent everything you earned</string>
+    <string name="statistics_spending_nothing">You didn\'t spend any of your income</string>
+
 
     <string name="filter">filter</string>
     <string name="profile">Profile</string>
@@ -74,5 +81,9 @@
     <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="expenditures_of">Expenditures Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
+    <string name="statistics_empty_state_message">For the selected month, no statistics can be shown</string>
+    <string name="statistics_empty_state_tagline">No Data Available</string>
+    <string name="dialog_ok">ok</string>
+    <string name="dialog_cancel">cancel</string>
 
 </resources>

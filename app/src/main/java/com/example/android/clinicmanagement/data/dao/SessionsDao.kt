@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface SessionDao {
+interface SessionsDao {
     @Insert
     suspend fun insert(session: Session)
 
@@ -42,6 +42,6 @@ interface SessionDao {
             "WHERE month BETWEEN strftime('%Y-%m',:month||'-01','-3 month') AND strftime('%Y-%m',:month||'-01','+3 month')  "+
             "GROUP BY month"
     )
-    suspend fun loadIncomeStatsForMonthAndNeighbors(month: String):Array<TotalByMonth>
+    suspend fun loadIncomeStatsForMonthAndNeighbors(month: String): Array<TotalByMonth>?
     //Month argument must be in the format  "YYYY-MM"
 }

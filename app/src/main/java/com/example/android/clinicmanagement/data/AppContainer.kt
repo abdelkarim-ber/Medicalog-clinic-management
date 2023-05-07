@@ -9,13 +9,13 @@ class AppContainer(context: Context) {
 
     private val clinicDatabase = ClinicDatabase.getInstance(context)
     private val patientDataSource = PatientDataSource(clinicDatabase.patientDao)
-    private val sessionDataSource = SessionDataSource(clinicDatabase.sessionDao)
+    private val sessionsDataSource = SessionsDataSource(clinicDatabase.sessionsDao)
     private val expenditureDataSource = ExpenditureDataSource(clinicDatabase.expenditureDao)
     private val quotationDataSource = QuotationDataSource(clinicDatabase.quotationDao)
     private val invoiceDataSource = InvoiceDataSource(clinicDatabase.invoiceDao)
 
     val patientRepository = PatientRepository(patientDataSource)
-    val sessionRepository = SessionRepository(sessionDataSource)
+    val sessionsRepository = SessionsRepository(sessionsDataSource)
     val expenditureRepository = ExpenditureRepository(expenditureDataSource)
     val quotationRepository = QuotationRepository(quotationDataSource)
     val invoiceRepository = InvoiceRepository(invoiceDataSource)

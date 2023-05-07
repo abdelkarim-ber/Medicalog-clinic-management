@@ -10,12 +10,13 @@ buildscript {
         version_room = "2.4.3"
         version_kotlin = "1.8.10"
         version_gradle="7.3.1"
+        version_lottie="3.4.0"
     }
 }
 plugins {
     id 'com.android.application' version "$version_gradle" apply false
     id 'com.android.library' version "$version_gradle" apply false
     id 'org.jetbrains.kotlin.android' version "$version_kotlin" apply false
-    id 'com.google.devtools.ksp' version '1.8.10-1.0.9' apply false
+    id "org.jetbrains.kotlin.kapt" version "1.8.21" apply false
     id 'androidx.navigation.safeargs' version "$version_navigation" apply false
 }

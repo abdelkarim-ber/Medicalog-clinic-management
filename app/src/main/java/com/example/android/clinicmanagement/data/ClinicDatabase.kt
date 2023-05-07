@@ -18,7 +18,7 @@ abstract class ClinicDatabase : RoomDatabase() {
      * Connects the database to the DAO.
      */
     abstract val patientDao: PatientDao
-    abstract val sessionDao: SessionDao
+    abstract val sessionsDao: SessionsDao
     abstract val expenditureDao: ExpenditureDao
     abstract val invoiceDao: InvoiceDao
     abstract val quotationDao: QuotationDao

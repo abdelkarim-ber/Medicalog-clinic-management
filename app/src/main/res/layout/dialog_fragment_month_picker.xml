@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="month"
+        type="androidx.lifecycle.LiveData&lt;java.lang.String&gt;" />
+    <variable
+        name="year"
+        type="androidx.lifecycle.LiveData&lt;java.lang.String&gt;" />
+</data>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/midnight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/margin_24dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:text="Select month and year"
+                    android:textAllCaps="true"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/month_year_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_marginStart="@dimen/margin_24dp"
+                    android:layout_marginEnd="@dimen/margin_72dp"
+                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:text="@{@string/month_year_dialog_title(month,year)}"
+                    tools:text="Feb, 2020"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    android:textColor="@color/white" />
+
+            </FrameLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:layout_constraintBottom_toTopOf="@+id/picker_month"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <NumberPicker
+                android:id="@+id/picker_month"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:theme="@style/ThemeOverlay.ClinicManagement.Picker"
+                app:layout_constraintBottom_toTopOf="@id/divider_bottom"
+                app:layout_constraintEnd_toStartOf="@id/picker_year"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_top" />
+
+            <NumberPicker
+                android:id="@+id/picker_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:theme="@style/ThemeOverlay.ClinicManagement.Picker"
+                app:layout_constraintBottom_toBottomOf="@+id/picker_month"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/picker_month"
+                app:layout_constraintTop_toTopOf="@+id/picker_month" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/picker_month" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_ok"
+                style="@style/Widget.clinicManagement.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:text="@string/dialog_ok"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_bottom" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_cancel"
+                style="@style/Widget.clinicManagement.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_cancel"
+                app:layout_constraintBottom_toBottomOf="@+id/button_ok"
+                app:layout_constraintEnd_toStartOf="@+id/button_ok"
+                app:layout_constraintTop_toTopOf="@+id/button_ok" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

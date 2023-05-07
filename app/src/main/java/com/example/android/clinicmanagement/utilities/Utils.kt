@@ -1,6 +1,7 @@
 package com.example.android.clinicmanagement.utilities
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +94,16 @@ fun BottomNavigationView.hide() {
     } else {
         visibility = View.GONE
     }
+}
 
+fun convertDpToPixels(context: Context, dp: Int) =
+    (dp * context.resources.displayMetrics.density).toInt()
 
+fun convertPixelsToDp(context: Context, pixels: Int) =
+    (pixels / context.resources.displayMetrics.density).toInt()
+
+sealed class UiState {
+    object Loading : UiState()
+    data class Success<T>(val content:T ):UiState()
+    data class Failure(val tagLine:String,val message:String):UiState()
 }
