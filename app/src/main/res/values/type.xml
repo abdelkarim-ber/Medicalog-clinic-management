@@ -82,5 +82,8 @@
     <style name="TextAppearance.clinicManagement.BottomNavigation" parent="TextAppearance.clinicManagement.Caption">
         <item name="android:textSize">13sp</item>
     </style>
+    <style name="TextAppearance.clinicManagement.prefixSuffixText" parent="TextAppearance.clinicManagement.Subtitle1">
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

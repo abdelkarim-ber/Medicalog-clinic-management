@@ -21,6 +21,9 @@
     <string name="amount">Amount</string>
     <string name="add_amount">Add amount</string>
     <string name="save">save</string>
+    <string name="update">update</string>
+    <string name="add_patient">Add patient</string>
+    <string name="update_info">Update info</string>
     <string name="moroccan_currency">DH</string>
     <string name="moroccan_currency_plural">dhs</string>
     <string name="patients">Patients</string>
@@ -68,21 +71,45 @@
     <string name="receipt">Receipt</string>
     <string name="gender">Gender</string>
     <string name="doctor_fullName">Doctor full name</string>
+    <string name="treating_doctor">Treating doctor</string>
     <string name="doctor_short">Dr.</string>
     <string name="sessions">sessions</string>
     <string name="time">Time</string>
     <string name="hour">Hour</string>
     <string name="minutes">Minutes</string>
     <string name="add_session">Add session</string>
-    <string name="hint_session_date">Click the icon to select</string>
+
     <string name="hint_session_amount">Enter amount</string>
-    <string name="hint_session_time">Click the icon to select</string>
     <string name="session_time_selection_title">Select Session time</string>
-    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+<!--    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>-->
     <string name="expenditures_of">Expenditures Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
+
     <string name="statistics_empty_state_message">For the selected month, no statistics can be shown</string>
     <string name="statistics_empty_state_tagline">No Data Available</string>
+    <string name="statistics_loading_message">Retrieving your financial data…</string>
+
+
+
+    <string name="form_error_no_special_char">Special characters are not permitted</string>
+    <string name="form_error_field_required">Required field</string>
+    <string name="form_helper_optional">Optional</string>
+    <string name="form_error_age">Invalid age</string>
+    <string name="form_helper_icon_selection">Select by clicking the icon</string>
+    <string name="form_patient_add">New patient was added successfully</string>
+    <string name="form_patient_update">The patient info was updated successfully</string>
+    <string name="form_loading_patient_info">Loading patient informations…</string>
+    <string name="form_validating_patient_info">Validating patient informations…</string>
+    <string name="form_persisting_patient_info">Saving patient data…</string>
+
+
+    <string name="dialog_month_picker_title">Select month</string>
+    <string name="dialog_date_picker_title">Select date</string>
+    <string name="dialog_range_picker_title">Select range</string>
+
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
     <string name="dialog_ok">ok</string>
     <string name="dialog_cancel">cancel</string>
 

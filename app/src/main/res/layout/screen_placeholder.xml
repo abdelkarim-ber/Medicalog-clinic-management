@@ -34,12 +34,14 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/img_placeholder"
             app:layout_constraintEnd_toEndOf="@+id/img_placeholder"
             app:layout_constraintStart_toStartOf="@+id/img_placeholder"
             app:layout_constraintTop_toTopOf="parent"
+            app:context="@{context}"
             app:tagLineText="@{failureData}"
-            tools:text="No Data Available" />
+            tools:text="@string/statistics_empty_state_tagline" />
 
         <TextView
             android:id="@+id/message"
@@ -48,12 +50,14 @@
             android:layout_marginStart="@dimen/margin_32dp"
             android:layout_marginEnd="@dimen/margin_32dp"
             android:maxWidth="250dp"
+            android:textColor="@color/charcoal_black"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_placeholder"
+            app:context="@{context}"
             app:messageText="@{failureData}"
             tools:text="@string/statistics_empty_state_message" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.example.android.clinicmanagement.data
 import android.content.Context
 import com.example.android.clinicmanagement.data.datasources.*
 import com.example.android.clinicmanagement.data.repositories.*
+import com.example.android.clinicmanagement.domain.LoadPatientInfoUseCase
+import com.example.android.clinicmanagement.domain.SubmitPatientInfoUseCase
 
 // Container of objects shared across the whole app
 class AppContainer(context: Context) {
@@ -19,4 +21,7 @@ class AppContainer(context: Context) {
     val expenditureRepository = ExpenditureRepository(expenditureDataSource)
     val quotationRepository = QuotationRepository(quotationDataSource)
     val invoiceRepository = InvoiceRepository(invoiceDataSource)
+
+    val submitPatientInfoUseCase = SubmitPatientInfoUseCase(patientRepository)
+    val loadPatientInfoUseCase = LoadPatientInfoUseCase(patientRepository)
 }

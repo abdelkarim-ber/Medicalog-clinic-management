@@ -50,7 +50,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/text_field_date"
-                    android:hint="@string/hint_session_date"
+                    android:hint="@string/form_helper_icon_selection"
                     android:textAlignment="center"
                     android:enabled="false"
                     android:textAppearance="?attr/textAppearanceHeadline6"
@@ -95,7 +95,7 @@
                     android:enabled="false"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColorHint="@color/color_primary_70"
-                    android:hint="@string/hint_session_time"
+                    android:hint="@string/form_helper_icon_selection"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>

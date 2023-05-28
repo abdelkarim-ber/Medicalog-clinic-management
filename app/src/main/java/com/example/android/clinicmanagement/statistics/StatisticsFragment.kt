@@ -75,19 +75,5 @@ class StatisticsFragment : Fragment() {
             true
         }
 
-//        lifecycleScope.launchWhenStarted {
-//            delay(2000L)
-//            binding.animationView.visibility = View.GONE
-//            binding.emptyView.root.visibility = View.VISIBLE
-//            binding.emptyView.root.setAlpha(0f)
-//            binding.emptyView.root.setScaleX(0f)
-//            binding.emptyView.root.setScaleY(0f)
-//            binding.emptyView.root.animate()
-//                .alpha(1f)
-//                .scaleX(1f).scaleY(1f)
-//                .setDuration(300)
-//                .start();
-//        }
-
     }
 }

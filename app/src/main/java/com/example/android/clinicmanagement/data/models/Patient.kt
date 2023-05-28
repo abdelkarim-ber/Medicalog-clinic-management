@@ -23,7 +23,7 @@ data class Patient(
     val phoneNumber: String,
 
     @ColumnInfo(name = "consultation_date_seconds")
-    val consultationDateInSeconds: Long = System.currentTimeMillis() / 1000,
+    val consultationDateInSeconds: Long ,
 
     @ColumnInfo(name = "doctor_full_name")
     val doctorFullName: String,

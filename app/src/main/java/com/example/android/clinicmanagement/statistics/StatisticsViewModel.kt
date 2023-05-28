@@ -1,10 +1,8 @@
 package com.example.android.clinicmanagement.statistics
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.clinicmanagement.R
-import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
 import com.example.android.clinicmanagement.data.models.TotalByMonth
 import com.example.android.clinicmanagement.data.repositories.ExpenditureRepository
 import com.example.android.clinicmanagement.data.repositories.SessionsRepository
@@ -55,7 +53,7 @@ class StatisticsViewModel(
         month: String
     ) {
         viewModelScope.launch {
-            _statisticsUIState.value = UiState.Loading
+            _statisticsUIState.value = UiState.Loading(R.string.statistics_loading_message)
             delay(3000L)
 
             val income = sessionsRepository.getIncomeForMonth(month)
@@ -104,8 +102,8 @@ class StatisticsViewModel(
 
             } else {
                 _statisticsUIState.value = UiState.Failure(
-                    getApplication<Application>().getString(R.string.statistics_empty_state_tagline),
-                    getApplication<Application>().getString(R.string.statistics_empty_state_message))
+                    R.string.statistics_empty_state_tagline,
+                    R.string.statistics_empty_state_message)
 
             }
         }

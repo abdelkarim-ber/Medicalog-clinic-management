@@ -41,23 +41,12 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
+        <include
             android:id="@+id/animationView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            layout="@layout/screen_loading"
+            bind:loadingData="@{viewModel.statisticsUIState}"
             android:visibility="gone"
-            app:showLoading="@{viewModel.statisticsUIState}">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/heart_beat_loading_anim"
-                app:lottie_speed="2.0" />
-
-        </FrameLayout>
+            app:showLoading="@{viewModel.statisticsUIState}"/>
 
         <include
             android:id="@+id/emptyView"
@@ -70,7 +59,8 @@
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
+            tools:visibility="visible"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:showContent="@{viewModel.statisticsUIState}">
 

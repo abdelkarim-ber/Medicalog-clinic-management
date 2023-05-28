@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.patientForm.PatientFormViewModel" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionName="@string/new_patient_form_transition_name"
@@ -14,13 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="Form" />
+            app:title="@string/add_patient" />
+
+        <include
+            android:id="@+id/animationView"
+            layout="@layout/screen_loading"
+            bind:loadingData="@{viewModel.patientFormUIState}"
+            android:visibility="gone"
+            app:showLoading="@{viewModel.patientFormUIState}"/>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:showContent="@{viewModel.patientFormUIState}"
             android:layout_marginTop="?attr/actionBarSize">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -33,9 +53,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/first_name"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorFirstName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +67,11 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_first_name"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapWords"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -55,6 +82,9 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/last_name"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorLastName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_first_name"
@@ -63,7 +93,11 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_last_name"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:imeOptions="actionDone"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        android:inputType="textCapCharacters"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -74,6 +108,9 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/age"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorAge}"
                     app:layout_constraintEnd_toStartOf="@id/layout_gender"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_last_name"
@@ -83,7 +120,11 @@
                         android:id="@+id/text_age"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="number" />
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        android:maxLength="3"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -94,6 +135,9 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/gender"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorGender}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/layout_age"
                     app:layout_constraintTop_toBottomOf="@id/layout_last_name">
@@ -102,7 +146,9 @@
                         android:id="@+id/dropdown_gender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:inputType="none"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -113,6 +159,9 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/phone_number"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorPhoneNumber}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_age"
@@ -122,7 +171,10 @@
                         android:id="@+id/text_phone_number"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="phone" />
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -133,6 +185,11 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/consultation_date"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorConsultationDate}"
+                    app:helperText="@string/form_helper_icon_selection"
+                    app:helperTextEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_phone_number"
@@ -142,7 +199,11 @@
                         android:id="@+id/text_consultation_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="date" />
+                        android:enabled="false"
+                        android:imeOptions="actionDone"
+                        android:inputType="date"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -152,18 +213,24 @@
                     android:layout_marginStart="@dimen/margin_16dp"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
-                    android:hint="@string/doctor_fullName"
-                    app:prefixText="@string/doctor_short"
+                    android:hint="@string/treating_doctor"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorDoctorFullName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_consultation_date"
-                    app:startIconDrawable="@drawable/ic_user_filled">
+                    app:prefixText="@string/doctor_short"
+                    app:startIconDrawable="@drawable/ic_doctor_filled">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_doctor_fullName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="text" />
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapWords"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -176,6 +243,9 @@
                     android:hint="@string/diagnostic"
                     app:counterEnabled="true"
                     app:counterMaxLength="100"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorDiagnosis}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_doctor_fullName"
@@ -186,11 +256,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="top"
+                        android:imeOptions="actionDone"
                         android:inputType="textMultiLine|textCapSentences"
                         android:lines="4"
                         android:maxLength="101"
+                        app:previousValue="@{viewModel.patientFormUIState}"
                         android:scrollbarStyle="insideInset"
-                        android:scrollbars="vertical" />
+                        android:scrollbars="vertical"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -203,6 +276,9 @@
                     android:hint="@string/frequency"
                     app:counterEnabled="true"
                     app:counterMaxLength="80"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorFrequency}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_diagnostic">
@@ -211,8 +287,11 @@
                         android:id="@+id/text_frequency"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:imeOptions="actionDone"
                         android:inputType="textCapSentences"
-                        android:maxLength="81" />
+                        android:maxLength="81"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -223,17 +302,23 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/session_count"
-                    app:suffixText="@string/sessions"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorSessionCount}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_frequency">
+                    app:layout_constraintTop_toBottomOf="@id/layout_frequency"
+                    app:suffixText="@string/sessions">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_session_count"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textAlignment="center"
-                        android:inputType="number" />
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:textAlignment="textEnd"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -244,6 +329,9 @@
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/session_price"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorSessionPrice}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_session_count"
@@ -254,8 +342,11 @@
                         android:id="@+id/text_session_price"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textAlignment="center"
-                        android:inputType="number" />
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:textAlignment="textEnd"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -265,76 +356,59 @@
                     android:layout_marginStart="@dimen/margin_16dp"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
-                    android:hint="@string/total"
-                    app:suffixText="@string/moroccan_currency"
                     android:enabled="false"
+                    android:hint="@string/total"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_session_price"
-                  >
+                    app:suffixText="@string/moroccan_currency">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_total"
-                        android:textAlignment="center"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                         />
+                        android:textAlignment="textEnd" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout_total_in_letters"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:hint="@string/total_in_letters"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="90"
-                    app:suffixText="@string/moroccan_currency_plural"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_total"
-                  >
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_total_in_letters"
-                        android:gravity="top"
-                        android:inputType="textMultiLine|textCapSentences"
-                        android:lines="4"
-                        android:maxLength="91"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                       />
-                </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout_social_coverage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:layout_marginTop="@dimen/margin_24dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:hint="@string/social_coverage"
+                    app:errorEnabled="true"
+                    app:context="@{context}"
+                    app:helperText="@string/form_helper_optional"
+                    app:helperTextEnabled="true"
+                    app:errorTextResource="@{viewModel.patientFormDataState.errorSocialCoverage}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_total_in_letters"
-                    >
+                    app:layout_constraintTop_toBottomOf="@id/layout_total">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_social_coverage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        />
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences"
+                        app:previousValue="@{viewModel.patientFormUIState}"
+                        app:onTextChangedEvent="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <Button
                     android:id="@+id/button_save"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/save"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_social_coverage"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/margin_16dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
-                    />
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:onClick="@{()->viewModel.submit()}"
+                    android:text="@string/save"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_social_coverage" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </FrameLayout>

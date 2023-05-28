@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.FrameLayout
 import androidx.core.util.Pair
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.marginBottom
 
 import androidx.fragment.app.Fragment
 
@@ -64,18 +65,23 @@ class PatientsFragment : Fragment() {
         val dateRangePicker =
             MaterialDatePicker.Builder.dateRangePicker()
                 .setTitleText("Select dates")
-                .setSelection(Pair(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds()))
+                .setSelection(
+                    Pair(
+                        MaterialDatePicker.thisMonthInUtcMilliseconds(),
+                        MaterialDatePicker.todayInUtcMilliseconds()
+                    )
+                )
                 .build()
 
 
         binding.textLayoutDate.setStartIconOnClickListener {
             // Respond to end icon presses
-            dateRangePicker.show(childFragmentManager,"tag")
+            dateRangePicker.show(childFragmentManager, "tag")
 
         }
 
         dateRangePicker.addOnPositiveButtonClickListener {
-            var formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault() )
+            var formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val date1 = Date(it.first)
             val date2 = Date(it.second)
             var formattedDate = "${formatter.format(date1)} to ${formatter.format(date2)}"
@@ -99,27 +105,38 @@ class PatientsFragment : Fragment() {
                 this, viewModelFactory
             ).get(PatientsViewModel::class.java)
 
-        binding.listPatients.adapter = PatientsAdapter { view,id ->
-            patientsViewModel.onPatientClicked(view,id)
+        binding.listPatients.adapter = PatientsAdapter { view, id ->
+            patientsViewModel.onPatientClicked(view, id)
         }
 
         binding.viewModel = patientsViewModel
 
-        patientsViewModel.navigateToNewPatient.observe(viewLifecycleOwner){
-                fabInfo ->
+        patientsViewModel.navigateToNewPatient.observe(viewLifecycleOwner) { fabInfo ->
             val fabView = fabInfo.first
             val fabClicked = fabInfo.second
-            if (fabClicked && fabView != null){
+            val layoutParams = fabView?.layoutParams as? ViewGroup.MarginLayoutParams
+            layoutParams?.bottomMargin =
+                resources.getDimensionPixelSize(com.google.android.material.R.dimen.design_bottom_navigation_height) +
+                        resources.getDimensionPixelSize(R.dimen.margin_16dp)
+            fabView?.layoutParams = layoutParams
+
+            if (fabClicked && fabView != null) {
                 exitTransition = MaterialElevationScale(false).apply {
-                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    duration =
+                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
+                            .toLong()
                 }
                 reenterTransition = MaterialElevationScale(true).apply {
-                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    duration =
+                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
+                            .toLong()
                 }
-                val newPatientFormTransitionName = getString(R.string.new_patient_form_transition_name)
+                val newPatientFormTransitionName =
+                    getString(R.string.new_patient_form_transition_name)
                 val extras = FragmentNavigatorExtras(fabView to newPatientFormTransitionName)
 
-                this.findNavController().navigate(PatientsFragmentDirections.actionPatientsToPatientForm(),extras)
+                this.findNavController()
+                    .navigate(PatientsFragmentDirections.actionPatientsToPatientForm(), extras)
                 patientsViewModel.onNewPatientNavigated()
             }
         }
@@ -127,28 +144,34 @@ class PatientsFragment : Fragment() {
 
 
         patientsViewModel.navigateToPatientProfile.observe(
-            viewLifecycleOwner)
+            viewLifecycleOwner
+        )
         { info ->
             //info parameter consist of view that's clicked and patient id
             info?.let {
                 exitTransition = MaterialElevationScale(false).apply {
-                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    duration =
+                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
+                            .toLong()
                 }
                 reenterTransition = MaterialElevationScale(true).apply {
-                    duration = resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong()
+                    duration =
+                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
+                            .toLong()
                 }
-                val patientProfileTransitionName = getString(R.string.patient_profile_transition_name)
+                val patientProfileTransitionName =
+                    getString(R.string.patient_profile_transition_name)
                 val extras = FragmentNavigatorExtras(info.first to patientProfileTransitionName)
 
                 this.findNavController()
-                    .navigate(PatientsFragmentDirections.actionPatientsToPatientProfile(info.second),extras)
+                    .navigate(
+                        PatientsFragmentDirections.actionPatientsToPatientProfile(info.second),
+                        extras
+                    )
                 patientsViewModel.onPatientProfileNavigated()
             }
 
         }
-
-
-
 
 
     }

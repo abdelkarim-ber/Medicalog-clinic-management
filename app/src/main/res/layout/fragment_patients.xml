@@ -247,6 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
                     android:layout_margin="16dp"
+                    app:layout_behavior="com.google.android.material.behavior.FloatingActionButtonBehavior"
                     android:backgroundTint="@color/light_blue_sky"
                     android:onClick="@{(view) -> viewModel.onAddNewPatientClicked(view) }"
                     android:src="@drawable/ic_user_add"

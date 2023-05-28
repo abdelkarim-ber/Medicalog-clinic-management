@@ -26,50 +26,50 @@ enum class ChartType {
 
 @BindingAdapter("showLoading")
 fun View.showLoading(uiState: UiState) {
-    visibility = if (uiState is UiState.Loading) {
-        View.VISIBLE
+    if (uiState is UiState.Loading) {
+       if (visibility == View.GONE) crossFadeIn()
     } else {
-        View.GONE
+        if (visibility == View.VISIBLE) crossFadeOut()
     }
 }
 
 @BindingAdapter("showPlaceHolder")
 fun View.showPlaceHolder(uiState: UiState) {
      if (uiState is UiState.Failure) {
-        visibility = View.VISIBLE
-            this.setAlpha(0f)
-            this.setScaleX(0f)
-            this.setScaleY(0f)
-            this.animate()
-                .alpha(1f)
-                .scaleX(1f).scaleY(1f)
-                .setDuration(300)
-                .start();
+         if (visibility == View.GONE) scaleUp()
     } else {
-         visibility =View.GONE
+         if (visibility == View.VISIBLE) crossFadeOut()
     }
 }
 
 @BindingAdapter("showContent")
 fun View.showContent(uiState: UiState) {
-    visibility = if (uiState is UiState.Success<*>) {
-        View.VISIBLE
+    if (uiState is UiState.Success<*>) {
+        if (visibility == View.GONE) crossFadeIn()
     } else {
-        View.GONE
+        if (visibility == View.VISIBLE) crossFadeOut()
     }
 }
 
-@BindingAdapter("tagLineText")
-fun TextView.setTagLineText(uiState: UiState) {
+@BindingAdapter("context","tagLineText")
+fun TextView.setTagLineText(context: Context,uiState: UiState) {
     if (uiState is UiState.Failure) {
-        text = uiState.tagLine
+        text = context.getString(uiState.tagLineResource)
     }
 }
 
-@BindingAdapter("messageText")
-fun TextView.setMessageText(uiState: UiState) {
+@BindingAdapter("context","messageText")
+fun TextView.setMessageText(context: Context,uiState: UiState) {
     if (uiState is UiState.Failure) {
-        text = uiState.message
+        text = context.getString(uiState.messageResource)
+    }
+}
+
+//binding adapter for setting loading message
+@BindingAdapter("context","loadingMessageText")
+fun TextView.setLoadingMessageText(context: Context,uiState: UiState) {
+    if (uiState is UiState.Loading) {
+        text = context.getString(uiState.messageResource)
     }
 }
 

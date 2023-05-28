@@ -55,6 +55,9 @@
         <item name="android:textColorHint">@color/color_primary_70</item>
         <item name="suffixTextColor">?attr/colorPrimary</item>
         <item name="prefixTextColor">?attr/colorPrimary</item>
+        <item name="prefixTextAppearance">@style/TextAppearance.clinicManagement.prefixSuffixText</item>
+        <item name="suffixTextAppearance">@style/TextAppearance.clinicManagement.prefixSuffixText</item>
+        <item name="helperTextTextColor">@color/black</item>
         <item name="boxStrokeColor">@drawable/selector_text_input_layout</item>
         <item name="counterTextColor">@color/black</item>
     </style>
