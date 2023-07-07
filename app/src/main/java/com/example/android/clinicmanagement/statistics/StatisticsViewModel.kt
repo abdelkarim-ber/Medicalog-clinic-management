@@ -103,7 +103,9 @@ class StatisticsViewModel(
             } else {
                 _statisticsUIState.value = UiState.Failure(
                     R.string.statistics_empty_state_tagline,
-                    R.string.statistics_empty_state_message)
+                    R.string.statistics_empty_state_message,
+                    R.drawable.img_placeholder_data_processing
+                    )
 
             }
         }

@@ -1,9 +1,21 @@
 package com.example.android.clinicmanagement.data.repositories
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import com.example.android.clinicmanagement.data.datasources.PatientDataSource
 import com.example.android.clinicmanagement.data.models.Patient
 import com.example.android.clinicmanagement.data.models.PatientStatus
+import com.example.android.clinicmanagement.patientsList.FilterDataState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+
+
+private const val ITEMS_PER_PAGE = 10
+private const val MAX_ITEMS = 50
+
 
 class PatientRepository(private val patientDataSource: PatientDataSource) {
 
@@ -16,35 +28,50 @@ class PatientRepository(private val patientDataSource: PatientDataSource) {
     suspend fun loadPatientWithId(patientId: Long): Patient =
         patientDataSource.loadPatientWithId(patientId)
 
-    fun loadAllPatientsStatus(): PagingSource<Int, PatientStatus> =
-        patientDataSource.loadAllPatientsStatus()
+    fun loadPatientsStatusWithFilter(
+        filterDataState:FilterDataState
+    ): Flow<PagingData<PatientStatus>> {
 
-    fun findPatientsWithFirstName(firstName: String): PagingSource<Int, PatientStatus> =
-        patientDataSource.findPatientsWithFirstName(firstName)
+        val patientsPagingSourceFactory = {
+            patientDataSource.loadPatientsStatusWithFilter(
+                filterDataState.firstName,
+                filterDataState.lastName,
+                filterDataState.consultDateRangeStart,
+                filterDataState.consultDateRangeEnd,
+                filterDataState.ageRangeStart,
+                filterDataState.ageRangeEnd,
+                filterDataState.diagnosis,
+                filterDataState.gender,
+                filterDataState.sessionsCompletionState
+            )
+        }
 
-    fun findPatientsWithLastName(lastName: String): PagingSource<Int, PatientStatus> =
-        patientDataSource.findPatientsWithLastName(lastName)
+        return Pager(
+            config = PagingConfig(
+                initialLoadSize = ITEMS_PER_PAGE * 2,
+                maxSize = MAX_ITEMS,
+                pageSize = ITEMS_PER_PAGE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = patientsPagingSourceFactory
+        ).flow
 
-    fun findPatientsWithConsultDateRange(
-        startDate: String,
-        endDate: String
-    ): PagingSource<Int, PatientStatus> =
-        patientDataSource.findPatientsWithConsultDateRange(startDate, endDate)
-
-    fun findPatientsWithAgeRange(startAge: Int, endAge: Int): PagingSource<Int, PatientStatus> =
-        patientDataSource.findPatientsWithAgeRange(startAge, endAge)
-
-    suspend fun countPatientsWithFirstName(firstName: String): Int =
-        patientDataSource.countPatientsWithFirstName(firstName)
-
-    suspend fun countPatientsWithLastName(lastName: String): Int =
-        patientDataSource.countPatientsWithLastName(lastName)
-
-    suspend fun countPatientsWithConsultDateRange(startDate: String, endDate: String): Int =
-        patientDataSource.countPatientsWithConsultDateRange(startDate, endDate)
-
-    suspend fun countPatientsWithAgeRange(startAge: Int, endAge: Int): Int =
-        patientDataSource.countPatientsWithAgeRange(startAge, endAge)
+    }
 
 
+    suspend fun countPatientsStatusWithFilter(
+        filterDataState:FilterDataState
+    ): Int {
+        return patientDataSource.countPatientsStatusWithFilter(
+            filterDataState.firstName,
+            filterDataState.lastName,
+            filterDataState.consultDateRangeStart,
+            filterDataState.consultDateRangeEnd,
+            filterDataState.ageRangeStart,
+            filterDataState.ageRangeEnd,
+            filterDataState.diagnosis,
+            filterDataState.gender,
+            filterDataState.sessionsCompletionState
+            )
+    }
 }

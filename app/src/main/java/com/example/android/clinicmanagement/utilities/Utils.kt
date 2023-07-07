@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.animation.doOnEnd
 import androidx.core.view.drawToBitmap
@@ -112,14 +113,14 @@ fun View.crossFadeIn() {
     // listener set on the view.
     animate()
         .alpha(1f)
-        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_large).toLong())
+        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong())
         .setListener(null)
 }
 
 fun View.crossFadeOut() {
     animate()
         .alpha(0f)
-        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_large).toLong())
+        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong())
         .setListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 visibility = View.GONE
@@ -134,7 +135,7 @@ fun View.scaleUp() {
     animate()
         .alpha(1f)
         .scaleX(1f).scaleY(1f)
-        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_large).toLong())
+        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong())
         .setListener(null)
 }
 
@@ -147,25 +148,50 @@ fun convertPixelsToDp(context: Context, pixels: Int) =
 sealed class UiState {
     data class Loading(@StringRes val messageResource:Int) : UiState()
     data class Success<T>(val content: T) : UiState()
-    data class Failure(@StringRes val tagLineResource: Int,@StringRes val messageResource: Int) : UiState()
+    data class Failure(@StringRes val tagLineResource: Int,
+                       @StringRes val messageResource: Int,
+                       @DrawableRes val imageDrawableRes:Int
+                       ) : UiState()
 }
-const val MALE_CHARACTER = 'M'
-const val FEMALE_CHARACTER = 'F'
+
 
 /**
-* This method converts a date in format  yyyy/MM/dd to date in seconds
-* @param dateString must be in format yyyy/MM/dd
+* This method converts a date in format  dd/MM/yyyy to date in seconds for
+ * use in persisting date into the database
+* @param dateString must be in format dd/MM/yyyy
  */
 fun convertDateStringToDateSeconds(dateString:String):Long{
-    val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
-    val date = dateFormat.parse(dateString) as Date
+
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+    //We add noon time to data string here to avoid mistakes in dates
+    //for countries that add one hour in summer
+    val date = dateFormat.parse("$dateString 12:00:00") as Date
     return date.time.div(1000)
 }
 /**
-* This method converts date in seconds to date in format yyyy/MM/dd
+* This method converts date in seconds to date in format dd/MM/yyyy
 * @param dateInSeconds the date in seconds
  */
 fun convertDateSecondsToDateString(dateInSeconds:Long):String{
-    val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     return dateFormat.format(dateInSeconds*1000)
 }
+
+/**
+ * This method checks if the passed string argument is not blank
+ * , if it is not blank it returns the passed string itself
+ * , if it is blank it returns null instead
+ */
+fun getStringOrNull(str: String): String? {
+    return str.takeIf { it.isNotBlank() }
+}
+
+
+
+const val MALE_CHARACTER = 'M'
+const val FEMALE_CHARACTER = 'F'
+
+const val SESSIONS_COMPLETION_STATE_COMPLETED = 1
+const val SESSIONS_COMPLETION_STATE_IN_PROGRESS = 0
+
+

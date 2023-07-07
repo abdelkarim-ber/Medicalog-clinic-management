@@ -44,6 +44,9 @@
         <include
             android:id="@+id/animationView"
             layout="@layout/screen_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
             bind:loadingData="@{viewModel.statisticsUIState}"
             android:visibility="gone"
             app:showLoading="@{viewModel.statisticsUIState}"/>
@@ -52,6 +55,9 @@
             android:id="@+id/emptyView"
             layout="@layout/screen_placeholder"
             android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
             app:showPlaceHolder="@{viewModel.statisticsUIState}"
             bind:failureData="@{viewModel.statisticsUIState}" />
 
@@ -277,8 +283,8 @@
 
                         <ImageView
                             android:id="@+id/image_arrow_circle"
-                            android:layout_width="@dimen/size_icon_chart"
-                            android:layout_height="@dimen/size_icon_chart"
+                            android:layout_width="@dimen/size_icon_32dp"
+                            android:layout_height="@dimen/size_icon_32dp"
                             android:layout_marginStart="@dimen/margin_16dp"
                             android:src="@drawable/ic_arrowcircle_up"
                             app:chartTitleIcon="@{viewModel.chartType}"

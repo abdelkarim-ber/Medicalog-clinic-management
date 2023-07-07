@@ -20,7 +20,8 @@
             app:destination="@id/patientProfile" />
         <action
             android:id="@+id/action_patients_to_patientForm"
-            app:destination="@id/patientForm" />
+            app:destination="@id/patientForm"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/patientProfile"

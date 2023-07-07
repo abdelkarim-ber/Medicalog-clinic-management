@@ -68,6 +68,9 @@ dependencies {
     //Paging 3 Integration
     implementation "androidx.room:room-paging:$version_room"
 
+    implementation "androidx.paging:paging-runtime:$version_paging"
+
+
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

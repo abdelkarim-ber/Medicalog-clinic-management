@@ -15,6 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -42,7 +43,6 @@
             android:maxWidth="250dp"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceBody1"
-            app:context="@{context}"
             android:textColor="@color/charcoal_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

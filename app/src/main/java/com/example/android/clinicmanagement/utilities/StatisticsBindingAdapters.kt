@@ -1,6 +1,7 @@
 package com.example.android.clinicmanagement.utilities
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -27,7 +28,7 @@ enum class ChartType {
 @BindingAdapter("showLoading")
 fun View.showLoading(uiState: UiState) {
     if (uiState is UiState.Loading) {
-       if (visibility == View.GONE) crossFadeIn()
+        if (visibility == View.GONE) crossFadeIn()
     } else {
         if (visibility == View.VISIBLE) crossFadeOut()
     }
@@ -35,44 +36,52 @@ fun View.showLoading(uiState: UiState) {
 
 @BindingAdapter("showPlaceHolder")
 fun View.showPlaceHolder(uiState: UiState) {
-     if (uiState is UiState.Failure) {
-         if (visibility == View.GONE) scaleUp()
+    if (uiState is UiState.Failure) {
+        if (visibility == View.GONE) scaleUp()
     } else {
-         if (visibility == View.VISIBLE) crossFadeOut()
+        if (visibility == View.VISIBLE) crossFadeOut()
     }
 }
 
 @BindingAdapter("showContent")
 fun View.showContent(uiState: UiState) {
     if (uiState is UiState.Success<*>) {
-        if (visibility == View.GONE) crossFadeIn()
+        if (visibility == View.GONE)
+            crossFadeIn()
     } else {
-        if (visibility == View.VISIBLE) crossFadeOut()
+        if (visibility == View.VISIBLE)
+            crossFadeOut()
     }
 }
-
-@BindingAdapter("context","tagLineText")
-fun TextView.setTagLineText(context: Context,uiState: UiState) {
+//Binding Adapters for empty State Screen items
+@BindingAdapter("emptyStateIcon")
+fun ImageView.setEmptyStateIcon(uiState: UiState) {
+    if (uiState is UiState.Failure) {
+        this.setImageResource(uiState.imageDrawableRes)
+    }
+}
+@BindingAdapter("tagLineText")
+fun TextView.setTagLineText(uiState: UiState) {
     if (uiState is UiState.Failure) {
         text = context.getString(uiState.tagLineResource)
     }
 }
 
-@BindingAdapter("context","messageText")
-fun TextView.setMessageText(context: Context,uiState: UiState) {
+@BindingAdapter("messageText")
+fun TextView.setMessageText(uiState: UiState) {
     if (uiState is UiState.Failure) {
         text = context.getString(uiState.messageResource)
     }
 }
 
-//binding adapter for setting loading message
-@BindingAdapter("context","loadingMessageText")
-fun TextView.setLoadingMessageText(context: Context,uiState: UiState) {
+//binding adapter for  loading screen
+@BindingAdapter("loadingMessageText")
+fun TextView.setLoadingMessageText(uiState: UiState) {
     if (uiState is UiState.Loading) {
         text = context.getString(uiState.messageResource)
     }
 }
-
+//----
 @BindingAdapter("switchButtonImage")
 fun ImageButton.setSwitchButtonImage(chartType: ChartType) {
     when (chartType) {

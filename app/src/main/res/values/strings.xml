@@ -15,7 +15,7 @@
     <string name="supplies">Supplies</string>
     <string name="divers">Divers</string>
     <string name="years_old_abbreviation">y.o</string>
-    <string name="title_range">Age range %1$d y.o - %2$d y.o </string>
+    <string name="title_age_range">Age range %1$d y.o - %2$d y.o </string>
     <string name="month_year_dialog_title">%1$s, %2$s</string>
     <string name="select_category">Select a category :</string>
     <string name="amount">Amount</string>
@@ -54,13 +54,16 @@
     <string name="phone_number">Phone number</string>
     <string name="consultation_date">Consultation date</string>
     <string name="doctor">Doctor</string>
-    <string name="diagnostic">Diagnostic</string>
+    <string name="diagnosis">Diagnosis</string>
     <string name="session_count">Session count</string>
     <string name="frequency">Frequency</string>
     <string name="session_price">Session price</string>
     <string name="total">Total</string>
     <string name="total_in_letters">Total in letters</string>
     <string name="social_coverage">Social coverage</string>
+
+    <string name="sessions_completion_completed">Completed</string>
+    <string name="sessions_completion_in_progress">In progress</string>
 
     <string name="history">History</string>
     <string name="number">N° :</string>
@@ -85,32 +88,55 @@
     <string name="expenditures_of">Expenditures Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
 
-    <string name="statistics_empty_state_message">For the selected month, no statistics can be shown</string>
+    <string name="statistics_empty_state_message">For the selected month, no statistics can be shown.</string>
     <string name="statistics_empty_state_tagline">No Data Available</string>
     <string name="statistics_loading_message">Retrieving your financial data…</string>
 
-
+    <string name="helper_date_selection">Select date by clicking the icon</string>
+    <string name="helper_time_selection">Select time by clicking the icon</string>
+    <string name="helper_date_range_selection">Select date range by clicking the icon</string>
 
     <string name="form_error_no_special_char">Special characters are not permitted</string>
     <string name="form_error_field_required">Required field</string>
     <string name="form_helper_optional">Optional</string>
     <string name="form_error_age">Invalid age</string>
-    <string name="form_helper_icon_selection">Select by clicking the icon</string>
+
     <string name="form_patient_add">New patient was added successfully</string>
     <string name="form_patient_update">The patient info was updated successfully</string>
     <string name="form_loading_patient_info">Loading patient informations…</string>
     <string name="form_validating_patient_info">Validating patient informations…</string>
     <string name="form_persisting_patient_info">Saving patient data…</string>
 
+    <string name="patients_list_empty_state_message">Sorry, we couldn\'t find any patients.Please adjust your filters or add patients to see results.</string>
+    <string name="patients_list_empty_state_tagline">"No Results Found</string>
+    <string name="patients_list_loading_message">Loading patients list…</string>
+
+    <string name="patients_filter_results_count_loading">Counting results…</string>
+    <string name="patients_filter_no_results">No results found</string>
+    <string name="patients_filter_no_criteria">Showing all patients</string>
+
+    <plurals name="patients_filter_results_count">
+        <item quantity="one">Found results : %1$d patient</item>
+        <item quantity="other">Found results : %1$d patients</item>
+    </plurals>
+
+
+
+
+
 
     <string name="dialog_month_picker_title">Select month</string>
     <string name="dialog_date_picker_title">Select date</string>
-    <string name="dialog_range_picker_title">Select range</string>
+    <string name="dialog_date_range_picker_title">Select date range</string>
 
     <string name="male">Male</string>
     <string name="female">Female</string>
 
     <string name="dialog_ok">ok</string>
     <string name="dialog_cancel">cancel</string>
+    <string name="sessions_completion">Sessions completion :</string>
+    <string name="diagnosis_double_points">Diagnosis :</string>
+    <string name="last_session">Last session :</string>
+    <string name="consultation_date_range">Consultation date range</string>
 
 </resources>

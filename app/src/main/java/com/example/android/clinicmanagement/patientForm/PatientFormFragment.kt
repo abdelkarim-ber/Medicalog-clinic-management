@@ -24,6 +24,7 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.Slide
 import com.airbnb.lottie.utils.Logger.error
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
@@ -57,6 +58,17 @@ class PatientFormFragment : Fragment() {
             interpolator = FastOutSlowInInterpolator()
             fadeMode = MaterialContainerTransform.FADE_MODE_IN
         }
+        sharedElementReturnTransition = null
+
+        //In the update patient info version we want to keep the transition defined in navigation.xml file
+        //In the add patient version we want to do this following return transition
+        if (args.patientKey == -1L) {
+            returnTransition = Slide().apply {
+                duration =
+                    resources.getInteger(R.integer.clinicmanagement_motion_duration_small).toLong()
+                addTarget(R.id.patient_form)
+            }
+        }
 
         val application = requireNotNull(this.activity).application
 
@@ -68,11 +80,10 @@ class PatientFormFragment : Fragment() {
             appContainer.loadPatientInfoUseCase
         )
 
-        val viewModel = ViewModelProvider(
+        patientFormViewModel = ViewModelProvider(
             this, patientFormViewModelFactory
         ).get(PatientFormViewModel::class.java)
 
-        patientFormViewModel = viewModel
 
 
     }
@@ -112,7 +123,7 @@ class PatientFormFragment : Fragment() {
             }
         }
         patientFormViewModel.clearFormEvent.observe(viewLifecycleOwner) { isClearState ->
-            if(isClearState) {
+            if (isClearState) {
                 with(binding) {
                     dropdownGender.text?.clear()
                     val editTextList: List<TextInputEditText> = listOf(
@@ -129,10 +140,11 @@ class PatientFormFragment : Fragment() {
                         textSocialCoverage
                     )
                     editTextList.forEach { it.text?.clear() }
+                    textFirstName.requestFocus()
                 }
                 patientFormViewModel.formFieldsCleared()
                 //in the update case when we save info we return automatically
-                if (args.patientKey != -1L){
+                if (args.patientKey != -1L) {
                     findNavController().popBackStack()
                 }
             }
@@ -145,7 +157,7 @@ class PatientFormFragment : Fragment() {
                 .build()
 
         datePicker.addOnPositiveButtonClickListener {
-            var formatter = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+            var formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             binding.textConsultationDate.setText(formatter.format(it))
         }
         binding.layoutConsultationDate.setStartIconOnClickListener {
@@ -167,7 +179,7 @@ class PatientFormFragment : Fragment() {
         binding.toolBar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        if (args.patientKey != -1L){
+        if (args.patientKey != -1L) {
             binding.toolBar.title = getString(R.string.update_info)
             binding.buttonSave.text = getString(R.string.update)
         }

@@ -4,77 +4,200 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="number"
-            type="Integer" />
+            name="patientStatus"
+            type="com.example.android.clinicmanagement.data.models.PatientStatus" />
+
+        <variable
+            name="patientId"
+            type="Long" />
+
+        <variable
+            name="patientClickListener"
+            type="com.example.android.clinicmanagement.patientsList.PatientsAdapter.PatientClickListener" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/layout"
-    android:clickable="true"
-    android:background="?selectableItemBackground"
-    android:transitionName="@{@string/patients_list_item_transition_name(number)}"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:focusable="true">
 
-    <ImageView
-        android:id="@+id/img_avatar_patient"
-        android:layout_width="@dimen/size_image_40dp"
-        android:layout_height="@dimen/size_image_40dp"
-        android:layout_marginStart="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_16dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/avatar_patient_boy" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_patient_full_name"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16dp"
-        android:textAppearance="?attr/textAppearanceSubtitle1"
-        android:textColor="@color/dark_midnight"
-        app:layout_constraintStart_toEndOf="@id/img_avatar_patient"
-        app:layout_constraintTop_toTopOf="@id/img_avatar_patient"
-        app:layout_constraintBottom_toTopOf="@id/text_patient_status"
-        tools:text="Jonathan barry" />
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{(view)->patientClickListener.onClick(view,patientId)}"
+        android:transitionName="@{@string/patients_list_item_transition_name(patientId)}"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="1dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_patient_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceSubtitle2"
-        android:textColor="@color/dark_midnight"
-        app:layout_constraintStart_toStartOf="@id/text_patient_full_name"
-        app:layout_constraintTop_toBottomOf="@id/text_patient_full_name"
-        app:layout_constraintBottom_toBottomOf="@id/img_avatar_patient"
-        tools:text="In progress"
-        tools:textColor="@color/sunrise_orange" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_patient_payed_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_16dp"
-        android:textAppearance="?attr/textAppearanceSubtitle2"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/text_patient_status"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_patient_full_name"
-        tools:text="2500 DH"
-        tools:textColor="@color/black"
-        />
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/size_thickness_divider"
-        android:alpha="@dimen/opacity_20"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/text_patient_status"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/size_image_90dp"
+                android:layout_height="@dimen/size_image_90dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:scaleType="fitCenter"
+                app:avatarImage="@{patientStatus}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/avatar_patient_boy" />
+
+            <ImageView
+                android:id="@+id/shape_circle"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:src="@drawable/shape_circle"
+                app:layout_constraintBottom_toBottomOf="@id/text_full_name"
+                app:layout_constraintStart_toEndOf="@id/img_avatar"
+                app:layout_constraintTop_toTopOf="@id/text_full_name"
+                app:tint="@color/blue_sky" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_full_name"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_container_text_35dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/dark_midnight"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                app:autoSizeMaxTextSize="15sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shape_circle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:patientFullName="@{patientStatus}"
+                tools:text="Jonathan barry" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_completion_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/sessions_completion"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/shape_circle"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                tools:layout_editor_absoluteY="42dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_completion_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                app:completionStatus="@{patientStatus}"
+                app:layout_constraintStart_toStartOf="@+id/title_completion_status"
+                app:layout_constraintTop_toBottomOf="@+id/title_completion_status"
+                tools:text="In progress"
+                tools:textColor="@color/sunrise_orange" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/title_completion_status"
+                app:layout_constraintTop_toBottomOf="@id/text_full_name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_diagnosis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/diagnosis_double_points"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/title_completion_status"
+                app:layout_constraintTop_toBottomOf="@+id/text_completion_status" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_diagnosis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/color_primary_70"
+                app:diagnosis="@{patientStatus}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/title_diagnosis"
+                app:layout_constraintTop_toBottomOf="@id/title_diagnosis"
+                tools:text="Gastrointestinal disorder" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_last_session"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:text="@string/last_session"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/text_diagnosis"
+                app:layout_constraintTop_toBottomOf="@+id/text_diagnosis" />
+
+            <ImageView
+                android:id="@+id/icon_calendar"
+                android:layout_width="@dimen/size_icon_24dp"
+                android:layout_height="@dimen/size_icon_24dp"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/title_last_session"
+                app:layout_constraintTop_toBottomOf="@id/title_last_session"
+                app:tint="@color/midnight" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_last_session_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/color_primary_70"
+                app:lastSessionDate="@{patientStatus}"
+                app:layout_constraintBottom_toBottomOf="@id/icon_calendar"
+                app:layout_constraintStart_toEndOf="@id/icon_calendar"
+                app:layout_constraintTop_toTopOf="@id/icon_calendar"
+                tools:text="12/05/2023" />
+
+            <ImageView
+                android:id="@+id/icon_watch"
+                android:layout_width="@dimen/size_icon_24dp"
+                android:layout_height="@dimen/size_icon_24dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:src="@drawable/ic_watch"
+                app:layout_constraintBottom_toBottomOf="@id/text_last_session_date"
+                app:layout_constraintStart_toEndOf="@id/text_last_session_date"
+                app:layout_constraintTop_toTopOf="@id/text_last_session_date"
+                app:tint="@color/midnight" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_last_session_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/color_primary_70"
+                app:lastSessionTime="@{patientStatus}"
+                app:layout_constraintBottom_toBottomOf="@id/icon_watch"
+                app:layout_constraintStart_toEndOf="@id/icon_watch"
+                app:layout_constraintTop_toTopOf="@id/icon_watch"
+                tools:text="12:50 PM" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

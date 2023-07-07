@@ -1,35 +1,62 @@
 package com.example.android.clinicmanagement.patientsList
 
+import android.content.Context
 import android.os.Bundle
-
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import androidx.core.util.Pair
 import androidx.core.view.doOnPreDraw
-import androidx.core.view.marginBottom
-
-import androidx.fragment.app.Fragment
-
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-
+import androidx.paging.LoadState
+import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
-
 import com.example.android.clinicmanagement.databinding.FragmentPatientsBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.transition.MaterialElevationScale
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-
 import kotlin.math.roundToInt
+
 
 class PatientsFragment : Fragment() {
 
-    lateinit var binding: FragmentPatientsBinding
-    lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+    private lateinit var binding: FragmentPatientsBinding
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+    private lateinit var patientsViewModel: PatientsViewModel
+
+    private lateinit var resetMenuItem: MenuItem
+    private var previousCollectionProcess: Job? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val application = requireNotNull(this.activity).application
+
+        val appContainer = (application as ClinicApplication).appContainer
+
+        val patientsViewModelFactory = PatientsViewModelFactory(appContainer.patientRepository)
+
+        patientsViewModel = ViewModelProvider(
+            this, patientsViewModelFactory
+        ).get(PatientsViewModel::class.java)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +65,8 @@ class PatientsFragment : Fragment() {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_patients, container, false
         )
-
+        binding.viewModel = patientsViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -48,23 +76,9 @@ class PatientsFragment : Fragment() {
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
-        binding.rangeSlider.setLabelFormatter { value ->
-            "${value.roundToInt()} ${getString(R.string.years_old_abbreviation)}"
-        }
-        binding.rangeSlider.addOnChangeListener { _, _, _ ->
-            val values = binding.rangeSlider.values
-            binding.titleRange.text =
-                getString(R.string.title_range, values[0].roundToInt(), values[1].roundToInt())
-        }
-
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetLayout)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        bottomSheetBehavior.isDraggable = false
-        enableFilterWidgets(false)
-
         val dateRangePicker =
             MaterialDatePicker.Builder.dateRangePicker()
-                .setTitleText("Select dates")
+                .setTitleText(getString(R.string.dialog_date_range_picker_title))
                 .setSelection(
                     Pair(
                         MaterialDatePicker.thisMonthInUtcMilliseconds(),
@@ -73,47 +87,129 @@ class PatientsFragment : Fragment() {
                 )
                 .build()
 
-
-        binding.textLayoutDate.setStartIconOnClickListener {
-            // Respond to end icon presses
-            dateRangePicker.show(childFragmentManager, "tag")
-
-        }
-
         dateRangePicker.addOnPositiveButtonClickListener {
             var formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val date1 = Date(it.first)
             val date2 = Date(it.second)
-            var formattedDate = "${formatter.format(date1)} to ${formatter.format(date2)}"
-            binding.textFieldDate.setText(formattedDate)
+            var formattedDate = "${formatter.format(date1)} → ${formatter.format(date2)}"
+            binding.textFilterConsultationDateRange.setText(formattedDate)
 
         }
 
 
-        binding.appBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.filter -> setBottomSheetVisibility(it)
+        with(binding) {
+
+            bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            bottomSheetBehavior.isDraggable = false
+            enableFilterWidgets(false)
+
+            layoutConsultationDateRange.setStartIconOnClickListener {
+                // Respond to end icon presses
+                dateRangePicker.show(childFragmentManager, "tag")
             }
-            // Handle the menu selection
-            true
+
+
+
+
+            resetMenuItem = appBar.menu.findItem(R.id.reset)
+
+
+            resetMenuItem.setOnMenuItemClickListener {
+                resetFilter()
+                true
+            }
+
+
+
+
+            ageRangeSlider.setLabelFormatter { value ->
+                "${value.roundToInt()} ${getString(R.string.years_old_abbreviation)}"
+            }
+
+            appBar.setNavigationOnClickListener {
+                setBottomSheetVisibility()
+            }
+
+
+            //to reset Age range slider
+            buttonResetAge.setOnClickListener {
+                resetAge()
+            }
+
+
+            //To prevent the keyboard from showing when focusing on Consultation date range field
+            textFilterConsultationDateRange.showSoftInputOnFocus = false
+            //to hide keyboard when focusing on when focusing on Consultation date range field
+            textFilterConsultationDateRange.setOnFocusChangeListener { view, hasFocus ->
+                if (hasFocus) {
+                    val inputMethodManager =
+                        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+                }
+            }
+
         }
 
-        val viewModelFactory = PatientsViewModelFactory()
 
-        val patientsViewModel =
-            ViewModelProvider(
-                this, viewModelFactory
-            ).get(PatientsViewModel::class.java)
-
-        binding.listPatients.adapter = PatientsAdapter { view, id ->
+        val adapter = PatientsAdapter { view, id ->
             patientsViewModel.onPatientClicked(view, id)
         }
 
-        binding.viewModel = patientsViewModel
+        //Display the load state for the initial patients list data load
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                adapter.loadStateFlow.collect { loadStates ->
+                    //we check if it's the initial load
+                    val isLoading = loadStates.refresh is LoadState.Loading
+                    // Show or hide the loading animation based on `isLoading`
+                    if(isLoading){
+                        patientsViewModel.showLoadingScreen()
+                        //Here we delay for a second to give the animations of showing/hiding loading
+                        // and showing/hiding content enough time to run.
+                        delay(1000L)
+                        //After each refresh we scroll to position zero either when we change filter infos
+                        // or when there is a change in the underlying data of the current patients list.
+                        binding.listPatients.scrollToPosition(0)
+                    }else{
+                            patientsViewModel.hideLoadingScreen()
+                    }
 
-        patientsViewModel.navigateToNewPatient.observe(viewLifecycleOwner) { fabInfo ->
+                }
+            }
+        }
+
+        //Display the load state for Header and footer
+        binding.listPatients.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = LoadStateAdapter(),
+            footer = LoadStateAdapter()
+        )
+
+        // Add an Observer on the state variable for patients list pager when a new patients list
+        // with a new set of filter informations is requested
+        patientsViewModel.newPatientsListPagerEvent.observe(viewLifecycleOwner) { patientsList ->
+
+            //Here we cancel the previous coroutine when we receive a new pager
+            previousCollectionProcess?.cancel()
+
+            previousCollectionProcess = viewLifecycleOwner.lifecycleScope.launch {
+                    repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        patientsList.collectLatest {
+                            adapter.submitData(it)
+                        }
+                    }
+                }
+
+        }
+
+
+        // Add an Observer on the state variable for Navigating to patient form screen when
+        // the fab button is clicked
+        patientsViewModel.navigateToNewPatientEvent.observe(viewLifecycleOwner) { fabInfo ->
             val fabView = fabInfo.first
             val fabClicked = fabInfo.second
+
+            //To keep the same float action button position when the bottom navigation view is removed
             val layoutParams = fabView?.layoutParams as? ViewGroup.MarginLayoutParams
             layoutParams?.bottomMargin =
                 resources.getDimensionPixelSize(com.google.android.material.R.dimen.design_bottom_navigation_height) +
@@ -142,8 +238,9 @@ class PatientsFragment : Fragment() {
         }
 
 
-
-        patientsViewModel.navigateToPatientProfile.observe(
+        // Add an Observer on the state variable for Navigating to patient profile screen when
+        // a patients list item is clicked
+        patientsViewModel.navigateToPatientProfileEvent.observe(
             viewLifecycleOwner
         )
         { info ->
@@ -173,26 +270,78 @@ class PatientsFragment : Fragment() {
 
         }
 
-
     }
 
-    private fun setBottomSheetVisibility(menuItem: MenuItem) {
+
+    /**
+     * Executes when we click the filter button
+     */
+    private fun setBottomSheetVisibility() {
         if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+            //Only when the bottom sheet is up ,only then we load patients list data
+            patientsViewModel.loadPatients()
+
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            menuItem.setIcon(R.drawable.ic_filter)
+            binding.appBar.setNavigationIcon(R.drawable.ic_filter)
+            resetMenuItem.isVisible = false
             enableFilterWidgets(false)
+
         } else {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            menuItem.setIcon(R.drawable.ic_close)
+            binding.appBar.setNavigationIcon(R.drawable.ic_close)
+            resetMenuItem.isVisible = true
             enableFilterWidgets(true)
 
         }
     }
 
+    /**
+     * Enable/Disable all widgets of the back layer
+     */
     private fun enableFilterWidgets(isEnabled: Boolean) {
-        binding.textFieldFirstName.isEnabled = isEnabled
-        binding.textFieldLastName.isEnabled = isEnabled
-        binding.textFieldDate.isEnabled = isEnabled
-        binding.rangeSlider.isEnabled = isEnabled
+        with(binding) {
+            textFilterFirstName.isEnabled = isEnabled
+            textFilterLastName.isEnabled = isEnabled
+            textFilterConsultationDateRange.isEnabled = isEnabled
+            textFilterDiagnosis.isEnabled = isEnabled
+            chipGroupGender.apply {
+                getChildAt(0).isEnabled = isEnabled
+                getChildAt(1).isEnabled = isEnabled
+            }
+            chipGroupSessionsCompletion.apply {
+                getChildAt(0).isEnabled = isEnabled
+                getChildAt(1).isEnabled = isEnabled
+            }
+            ageRangeSlider.isEnabled = isEnabled
+            buttonResetAge.isEnabled = isEnabled
+        }
     }
+
+    /**
+     * Resets age range slider to its initial state
+     */
+    private fun resetAge() {
+        val values = resources.getIntArray(R.array.initial_range_slider_values)
+        binding.titleAgeRange.text =
+            getString(R.string.title_age_range, values[0], values[1])
+        binding.ageRangeSlider.setValues(values[0].toFloat(), values[1].toFloat())
+    }
+
+    /**
+     * Resets all back layer widgets to their initial state
+     */
+    private fun resetFilter(){
+        with(binding){
+            textFilterFirstName.text?.clear()
+            textFilterLastName.text?.clear()
+            textFilterConsultationDateRange.text?.clear()
+            textFilterDiagnosis.text?.clear()
+            chipGroupGender.clearCheck()
+            chipGroupSessionsCompletion.clearCheck()
+            resetAge()
+        }
+    }
+
+
+
 }

@@ -18,28 +18,28 @@
 
         <ImageView
             android:id="@+id/img_placeholder"
-            android:layout_width="225dp"
-            android:layout_height="225dp"
-            android:src="@drawable/img_placeholder_data_processing"
-            app:layout_constraintBottom_toTopOf="@id/message"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            app:emptyStateIcon="@{failureData}"
+            tools:src="@drawable/img_placeholder_data_processing"
+            app:layout_constraintBottom_toTopOf="@id/tagline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tagline"
-             />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/tagline"
-            app:layout_constraintVertical_chainStyle="packed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/img_placeholder"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/message"
             app:layout_constraintEnd_toEndOf="@+id/img_placeholder"
             app:layout_constraintStart_toStartOf="@+id/img_placeholder"
-            app:layout_constraintTop_toTopOf="parent"
-            app:context="@{context}"
+            app:layout_constraintTop_toBottomOf="@+id/img_placeholder"
             app:tagLineText="@{failureData}"
             tools:text="@string/statistics_empty_state_tagline" />
 
@@ -48,16 +48,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_32dp"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:layout_marginEnd="@dimen/margin_32dp"
             android:maxWidth="250dp"
-            android:textColor="@color/charcoal_black"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@color/charcoal_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_placeholder"
-            app:context="@{context}"
+            app:layout_constraintTop_toBottomOf="@id/tagline"
             app:messageText="@{failureData}"
             tools:text="@string/statistics_empty_state_message" />
     </androidx.constraintlayout.widget.ConstraintLayout>

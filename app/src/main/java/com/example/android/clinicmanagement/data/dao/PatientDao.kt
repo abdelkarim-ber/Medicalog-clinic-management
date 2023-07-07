@@ -9,15 +9,6 @@ import androidx.room.Update
 import com.example.android.clinicmanagement.data.models.Patient
 import com.example.android.clinicmanagement.data.models.PatientStatus
 
-//Here we select invoice_number to know the status of patient: In progress or done
-const val GET_PATIENTS_WITH_STATUS =
-    "SELECT id,first_name,last_name,invoice_number FROM patient_table AS p " +
-            "LEFT JOIN invoice_track_table AS i ON p.id = i.patient_id "
-
-const val COUNT_PATIENTS_WITH_STATUS =
-    "SELECT count(*) FROM patient_table AS p " +
-            "LEFT JOIN invoice_track_table AS i ON p.id = i.patient_id "
-
 @Dao
 interface PatientDao {
     @Insert
@@ -33,72 +24,60 @@ interface PatientDao {
         "SELECT * FROM patient_table" +
                 " WHERE id = :patientId"
     )
-    suspend fun loadPatientWithId(patientId:Long): Patient
+    suspend fun loadPatientWithId(patientId: Long): Patient
 
+    //------------------------------------------------------
     @Query(
-        GET_PATIENTS_WITH_STATUS +
-                " ORDER BY consultation_date_seconds DESC"
-    )
-    fun loadAllPatientsStatus(): PagingSource<Int, PatientStatus>
+        "SELECT P.id,first_name,last_name,invoice_number,gender,age,diagnosis,max(S.date_in_seconds) as lastSession FROM patient_table AS P " +
+                "LEFT JOIN invoice_track_table AS I ON P.id = I.patient_id " +
+                "LEFT JOIN session_table AS S ON S.patient_id = P.id " +
 
-    @Query(
-        GET_PATIENTS_WITH_STATUS +
-                " WHERE first_name LIKE '%' || :firstName || '%'"
+                "WHERE (:firstName IS NULL OR (first_name LIKE '%' || :firstName || '%') )" +
+                " AND ( :lastName IS NULL OR (last_name LIKE '%' || :lastName || '%')  ) " +
+                " AND (:startConsultDate IS NULL OR (date(consultation_date_seconds,'unixepoch') BETWEEN :startConsultDate AND :endConsultDate)) " +
+                " AND (:startAge  IS NULL OR ( age BETWEEN :startAge AND :endAge)) " +
+                " AND (:gender IS NULL OR gender = :gender) " +
+                " AND ( :diagnosis  IS NULL OR (diagnosis LIKE '%' || :diagnosis || '%') )" +
+                " AND ( :completion  IS NULL OR (CASE WHEN :completion = 0 THEN invoice_number IS NULL ELSE invoice_number IS NOT NULL END) ) " +
+                "GROUP BY P.id " +
+                "ORDER BY lastSession DESC "
     )
-    fun findPatientsWithFirstName(firstName: String): PagingSource<Int, PatientStatus>
-
-    @Query(
-        GET_PATIENTS_WITH_STATUS +
-                " WHERE last_name LIKE '%' || :lastName || '%'"
-    )
-    fun findPatientsWithLastName(lastName: String): PagingSource<Int, PatientStatus>
-
-    @Query(
-        GET_PATIENTS_WITH_STATUS +
-                " WHERE date(consultation_date_seconds,'unixepoch') BETWEEN :startDate AND :endDate " +
-                "ORDER BY consultation_date_seconds "
-    )
-    fun findPatientsWithConsultDateRange(
-        startDate: String,
-        endDate: String
+    fun loadPatientsStatusWithFilter(
+        firstName: String?,
+        lastName: String?,
+        startConsultDate: String?,
+        endConsultDate: String?,
+        startAge: Int?,
+        endAge: Int?,
+        diagnosis: String?,
+        gender: Char?,
+        completion: Int?
     ): PagingSource<Int, PatientStatus>
 
     @Query(
-        GET_PATIENTS_WITH_STATUS +
-                " WHERE age BETWEEN :startAge AND :endAge " +
-                "ORDER BY age "
-    )
-    fun findPatientsWithAgeRange(startAge: Int, endAge: Int): PagingSource<Int, PatientStatus>
+        "SELECT count(*) FROM (" +
+                "SELECT first_name,invoice_number FROM patient_table AS P " +
+                "LEFT JOIN invoice_track_table AS I ON P.id = I.patient_id " +
 
-
-    @Query(
-        COUNT_PATIENTS_WITH_STATUS +
-                " WHERE first_name LIKE '%' || :firstName || '%'"
+                "WHERE (:firstName IS NULL OR (first_name LIKE '%' || :firstName || '%') )" +
+                " AND ( :lastName IS NULL OR (last_name LIKE '%' || :lastName || '%')  ) " +
+                " AND (:startConsultDate IS NULL OR  (date(consultation_date_seconds,'unixepoch') BETWEEN :startConsultDate AND :endConsultDate)) " +
+                " AND (:startAge  IS NULL OR  ( age BETWEEN :startAge AND :endAge)) " +
+                " AND (:gender IS NULL OR  gender = :gender) " +
+                " AND ( :diagnosis  IS NULL OR (diagnosis LIKE '%' || :diagnosis || '%') )" +
+                " AND ( :completion  IS NULL OR (CASE WHEN :completion = 0 THEN invoice_number IS NULL ELSE invoice_number IS NOT NULL END) )" +
+                ")"
     )
-    suspend fun countPatientsWithFirstName(firstName: String): Int
-
-    @Query(
-        COUNT_PATIENTS_WITH_STATUS +
-                " WHERE last_name LIKE '%' || :lastName || '%'"
-    )
-    suspend fun countPatientsWithLastName(lastName: String): Int
-
-    @Query(
-        COUNT_PATIENTS_WITH_STATUS +
-                " WHERE date(consultation_date_seconds,'unixepoch') BETWEEN :startDate AND :endDate "
-    )
-    suspend fun countPatientsWithConsultDateRange(
-        startDate: String,
-        endDate: String
-    ): Int
-
-    @Query(
-        COUNT_PATIENTS_WITH_STATUS +
-                " WHERE age BETWEEN :startAge AND :endAge "
-    )
-    suspend fun countPatientsWithAgeRange(
-        startAge: Int,
-        endAge: Int
+    suspend fun countPatientsStatusWithFilter(
+        firstName: String?,
+        lastName: String?,
+        startConsultDate: String?,
+        endConsultDate: String?,
+        startAge: Int?,
+        endAge: Int?,
+        diagnosis: String?,
+        gender: Char?,
+        completion: Int?
     ): Int
 
 

@@ -14,7 +14,7 @@ class PatientInfoAdapter : RecyclerView.Adapter<PatientInfoAdapter.ViewHolder>()
         R.string.phone_number,
         R.string.consultation_date,
         R.string.doctor,
-        R.string.diagnostic,
+        R.string.diagnosis,
         R.string.session_count,
         R.string.frequency,
         R.string.session_price,
