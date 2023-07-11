@@ -71,7 +71,7 @@
     </style>
 
     <style name="ThemeOverlay.ClinicManagement.Picker" parent="" >
-        <item name="android:fontFamily">@font/raleway_medium</item>
+        <item name="android:fontFamily">@font/dosis</item>
         <item name="android:textSize">23sp</item>
     </style>
 

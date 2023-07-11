@@ -50,11 +50,11 @@ class RoundedBarChart : BarChart {
 
 
     private fun styleChart() {
-        val comfortaTypeFace: Typeface? = ResourcesCompat.getFont(context, R.font.comfortaa_regular)
+        val comfortaTypeFace: Typeface? = ResourcesCompat.getFont(context, R.font.nunito)
         val paint: Paint = getPaint(Chart.PAINT_INFO)
 
         paint.fontFeatureSettings
-        paint.textSize = 23f
+        paint.textSize = 25f
         paint.color = ContextCompat.getColor(context, R.color.blue_sky)
         paint.typeface = comfortaTypeFace
 
