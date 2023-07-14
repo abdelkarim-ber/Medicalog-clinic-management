@@ -9,8 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientHistoryBinding
-import com.example.android.clinicmanagement.databinding.FragmentPatientProfileBinding
-import com.example.android.clinicmanagement.patientProfile.PatientInfoAdapter
 
 
 class PatientHistoryFragment : Fragment() {

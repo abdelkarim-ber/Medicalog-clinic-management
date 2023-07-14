@@ -7,7 +7,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.android.clinicmanagement.data.models.Patient
+import com.example.android.clinicmanagement.data.models.PatientDetails
 import com.example.android.clinicmanagement.data.models.PatientStatus
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PatientDao {
@@ -79,6 +81,17 @@ interface PatientDao {
         gender: Char?,
         completion: Int?
     ): Int
+
+
+    @Query(
+        "SELECT P.first_name,P.last_name,P.age,P.gender,P.phone_number,P.consultation_date_seconds,P.doctor_full_name,P.diagnosis,P.frequency,P.session_count,P.session_price,P.social_coverage,sum(S.amount_payed) AS totalAmountPayed, count(S.id) AS doneSessions " +
+                " FROM patient_table AS P" +
+                " LEFT JOIN session_table AS S on P.id = S.patient_id" +
+                " where P.id = :patientId" +
+                " group by P.id"
+    )
+    fun loadPatientDetailsWithId(patientId: Long): Flow<PatientDetails>
+
 
 
 }

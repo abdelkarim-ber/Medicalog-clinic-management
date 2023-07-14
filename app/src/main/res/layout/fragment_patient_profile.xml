@@ -14,321 +14,767 @@
             type="Long" />
     </data>
 
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
-            android:transitionName="@string/patient_profile_transition_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/grey"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingHorizontal="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_16dp">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/email_card_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:transitionName="@string/patient_profile_transition_name"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="@dimen/card_elevation">
 
-                <View
-                    android:id="@+id/blue_container"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_small_blue_container"
-                    android:background="@drawable/shape_card_container"
-                    android:focusableInTouchMode="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/padding_5dp"
+                    android:paddingBottom="@dimen/height_receipt_section_plus">
 
-                <ImageButton
-                    android:id="@+id/icon_navigation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/actionBarItemBackground"
-                    android:padding="@dimen/padding_16dp"
-                    android:src="@drawable/ic_arrow_down"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageButton
+                        android:id="@+id/icon_return"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/actionBarItemBackground"
+                        android:padding="@dimen/padding_16dp"
+                        android:src="@drawable/ic_arrow_down"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/midnight" />
 
-                <ImageButton
-                    android:id="@+id/icon_history"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/actionBarItemBackground"
-                    android:onClick="@{()->viewModel.onPatientHistoryClicked(patientId)}"
-                    android:padding="@dimen/padding_16dp"
-                    android:src="@drawable/ic_history"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageButton
+                        android:id="@+id/icon_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/actionBarItemBackground"
+                        android:onClick="@{()->viewModel.onPatientHistoryClicked(patientId)}"
+                        android:padding="@dimen/padding_16dp"
+                        android:src="@drawable/ic_history"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/midnight" />
 
-                <ImageButton
-                    android:id="@+id/icon_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/actionBarItemBackground"
-                    android:onClick="@{()->viewModel.onPatientInfoUpdateClicked(patientId)}"
-                    android:padding="@dimen/padding_16dp"
-                    android:src="@drawable/ic_edit"
-                    app:layout_constraintEnd_toStartOf="@id/icon_history"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/img_avatar_patient"
-                    android:layout_width="@dimen/size_image_profile"
-                    android:layout_height="@dimen/size_image_profile"
-                    android:layout_marginTop="@dimen/margin_72dp"
-                    android:src="@drawable/avatar_patient_boy"
-                    app:layout_constraintEnd_toEndOf="@id/blue_container"
-                    app:layout_constraintStart_toStartOf="@id/blue_container"
-                    app:layout_constraintTop_toTopOf="@+id/blue_container" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_patient_full_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="Jonathan barry"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@id/img_avatar_patient"
-                    app:layout_constraintStart_toStartOf="@id/img_avatar_patient"
-                    app:layout_constraintTop_toBottomOf="@id/img_avatar_patient" />
+                    <ImageButton
+                        android:id="@+id/icon_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/actionBarItemBackground"
+                        android:onClick="@{()->viewModel.onPatientInfoUpdateClicked(patientId)}"
+                        android:padding="@dimen/padding_16dp"
+                        android:src="@drawable/ic_edit"
+                        app:layout_constraintEnd_toStartOf="@id/icon_history"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/midnight" />
 
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_done_sessions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/done_sessions"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/light_blue_sky"
-                    app:layout_constraintBottom_toTopOf="@id/text_done_sessions"
-                    app:layout_constraintEnd_toStartOf="@id/white_divider"
-                    app:layout_constraintStart_toStartOf="@id/blue_container"
-                    app:layout_constraintTop_toTopOf="@id/white_divider" />
+                    <ImageView
+                        android:id="@+id/img_avatar_patient"
+                        android:layout_width="@dimen/size_image_profile"
+                        android:layout_height="@dimen/size_image_profile"
+                        android:layout_marginTop="@dimen/margin_72dp"
+                        android:src="@drawable/avatar_patient_boy"
+                        app:profileAvatarImage="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_done_sessions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="20 sessions"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@id/white_divider"
-                    app:layout_constraintEnd_toEndOf="@id/title_done_sessions"
-                    app:layout_constraintStart_toStartOf="@id/title_done_sessions"
-                    app:layout_constraintTop_toBottomOf="@id/title_done_sessions" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_amount_payed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/amount_payed"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/light_blue_sky"
-                    app:layout_constraintBottom_toTopOf="@id/text_amount_payed"
-                    app:layout_constraintEnd_toEndOf="@id/blue_container"
-                    app:layout_constraintStart_toEndOf="@id/white_divider"
-                    app:layout_constraintTop_toTopOf="@id/white_divider" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_patient_full_name"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_container_text_headline5"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginHorizontal="@dimen/margin_16dp"
+                        android:gravity="center"
+                        tools:text="BARRY jonathan "
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="25sp"
+                        app:autoSizeMinTextSize="17sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:autoSizeTextType="uniform"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/img_avatar_patient" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_amount_payed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="2000 DH"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@id/white_divider"
-                    app:layout_constraintEnd_toEndOf="@id/title_amount_payed"
-                    app:layout_constraintStart_toStartOf="@id/title_amount_payed"
-                    app:layout_constraintTop_toBottomOf="@id/title_amount_payed" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_done_sessions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/done_sessions"
+                        android:layout_marginTop="@dimen/margin_16dp"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/blue_sky"
+                        app:layout_constraintBottom_toTopOf="@id/text_done_sessions"
+                        app:layout_constraintEnd_toStartOf="@id/divider_vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider_full_name" />
 
-                <View
-                    android:id="@+id/white_divider"
-                    android:layout_width="@dimen/size_thickness_divider"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginBottom="@dimen/margin_16dp"
-                    android:alpha="@dimen/opacity_20"
-                    android:background="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@id/blue_container"
-                    app:layout_constraintEnd_toEndOf="@id/blue_container"
-                    app:layout_constraintStart_toStartOf="@id/blue_container"
-                    app:layout_constraintTop_toBottomOf="@id/text_patient_full_name" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_done_sessions"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_container_text_body2"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginHorizontal="@dimen/margin_16dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        app:autoSizeMaxTextSize="16sp"
+                        app:autoSizeMinTextSize="13sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:autoSizeTextType="uniform"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintBottom_toBottomOf="@id/text_amount_payed"
+                        app:layout_constraintEnd_toStartOf="@id/divider_vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_done_sessions"
+                        tools:text="20 sessions" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/quotation_card"
-                    android:layout_width="@dimen/size_profile_card"
-                    android:layout_height="@dimen/size_profile_card"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onReceiptQuotationClicked(patientId)}"
-                    app:layout_constraintBottom_toTopOf="@id/title_patient_details"
-                    app:layout_constraintEnd_toStartOf="@+id/cards_divider"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/blue_container">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_amount_payed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/amount_payed"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/blue_sky"
+                        app:layout_constraintBottom_toTopOf="@id/text_amount_payed"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/divider_vertical"
+                        app:layout_constraintTop_toTopOf="@id/title_done_sessions" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_amount_payed"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_container_text_body2"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginHorizontal="@dimen/margin_16dp"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="16sp"
+                        app:autoSizeMinTextSize="13sp"
+                        app:autoSizeStepGranularity="1sp"
+                        app:autoSizeTextType="uniform"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintBottom_toBottomOf="@id/text_done_sessions"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/divider_vertical"
+                        app:layout_constraintTop_toBottomOf="@id/title_amount_payed"
+                        tools:text="2000 DH" />
+
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_full_name"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <View
-                            android:id="@+id/quotation_image_bg"
-                            android:layout_width="@dimen/size_image_bg_50dp"
-                            android:layout_height="@dimen/size_image_bg_50dp"
-                            android:alpha="@dimen/opacity_20"
-                            android:background="@drawable/shape_circle"
-                            android:backgroundTint="@color/cerulean"
-                            app:layout_constraintBottom_toTopOf="@id/quotation_title"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_chainStyle="packed" />
-
-                        <ImageView
-                            android:id="@+id/quotation_img"
-                            android:layout_width="@dimen/size_image_25dp"
-                            android:layout_height="@dimen/size_image_25dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_quotation"
-                            app:layout_constraintBottom_toBottomOf="@+id/quotation_image_bg"
-                            app:layout_constraintEnd_toEndOf="@+id/quotation_image_bg"
-                            app:layout_constraintStart_toStartOf="@+id/quotation_image_bg"
-                            app:layout_constraintTop_toTopOf="@+id/quotation_image_bg" />
-
-                        <TextView
-                            android:id="@+id/quotation_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_8dp"
-                            android:text="@string/quotationTrack"
-                            android:textAllCaps="true"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="@color/light_midnight"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/quotation_image_bg"
-                            app:layout_constraintStart_toStartOf="@+id/quotation_image_bg"
-                            app:layout_constraintTop_toBottomOf="@+id/quotation_image_bg" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <View
-                    android:id="@+id/cards_divider"
-                    android:layout_width="@dimen/size_thickness_divider"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginBottom="@dimen/margin_16dp"
-                    android:alpha="@dimen/opacity_20"
-                    android:background="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/title_patient_details"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/blue_container" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/invoice_card"
-                    android:layout_width="@dimen/size_profile_card"
-                    android:layout_height="@dimen/size_profile_card"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onReceiptInvoiceClicked(patientId)}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/cards_divider"
-                    app:layout_constraintTop_toBottomOf="@id/blue_container">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <View
-                            android:id="@+id/invoice_image_bg"
-                            android:layout_width="@dimen/size_image_bg_50dp"
-                            android:layout_height="@dimen/size_image_bg_50dp"
-                            android:alpha="@dimen/opacity_20"
-                            android:background="@drawable/shape_circle"
-                            android:backgroundTint="@color/sunrise_orange"
-                            app:layout_constraintBottom_toTopOf="@id/invoice_title"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_chainStyle="packed" />
-
-                        <ImageView
-                            android:id="@+id/invoice_img"
-                            android:layout_width="@dimen/size_image_25dp"
-                            android:layout_height="@dimen/size_image_25dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_invoice"
-                            app:layout_constraintBottom_toBottomOf="@+id/invoice_image_bg"
-                            app:layout_constraintEnd_toEndOf="@+id/invoice_image_bg"
-                            app:layout_constraintStart_toStartOf="@+id/invoice_image_bg"
-                            app:layout_constraintTop_toTopOf="@+id/invoice_image_bg" />
-
-                        <TextView
-                            android:id="@+id/invoice_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_8dp"
-                            android:text="@string/invoiceTrack"
-                            android:textAllCaps="true"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="@color/light_midnight"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/invoice_image_bg"
-                            app:layout_constraintStart_toStartOf="@+id/invoice_image_bg"
-                            app:layout_constraintTop_toBottomOf="@+id/invoice_image_bg" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginTop="40dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_patient_full_name" />
 
 
-                <TextView
-                    android:id="@+id/title_patient_details"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                  android:background="@color/grey"
-                    android:paddingTop="@dimen/padding_16dp"
-                    android:paddingBottom="@dimen/padding_16dp"
-                    android:text="@string/patient_details"
-                    android:textAlignment="center"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/quotation_card" />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_vertical"
+                        android:layout_width="@dimen/size_thickness_divider"
+                        android:layout_height="70dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider_full_name" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_patient_info"
-                    android:layout_width="0dp"
-                    tools:listitem="@layout/list_item_patient_infos"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_patient_details" />
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:backgroundTint="@color/light_blue_sky"
+                        android:onClick="@{(view) -> viewModel.onAddNewSessionClicked(view,patientId) }"
+                        android:src="@drawable/ic_add_session"
+                        android:transitionName="@string/fab_add_session_transition_name"
+                        app:elevation="1dp"
+                        app:layout_constraintBottom_toTopOf="@id/divider_full_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/divider_full_name"
+                        app:tint="@color/midnight" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   app:layout_constraintBottom_toBottomOf="@id/blue_container"
-                    app:layout_constraintTop_toBottomOf="@id/blue_container"
-                    app:layout_constraintStart_toStartOf="@id/blue_container"
-                    app:layout_constraintEnd_toEndOf="@id/blue_container"
-                    android:layout_margin="16dp"
-                    android:backgroundTint="@color/light_blue_sky"
-                    android:onClick="@{(view) -> viewModel.onAddNewSessionClicked(view,patientId) }"
-                    android:src="@drawable/ic_add"
-                    android:transitionName="@string/fab_add_session_transition_name"
-                    app:tint="@color/midnight" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--Personal info section...............-->
+                    <ImageView
+                        android:id="@+id/shape_circle1"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:src="@drawable/shape_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_personal_info"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_personal_info"
+                        app:tint="@color/blue_sky" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_personal_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_32dp"
+                        android:text="@string/personal_info"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/color_on_surface_60"
+                        app:layout_constraintStart_toEndOf="@id/shape_circle1"
+                        app:layout_constraintTop_toBottomOf="@id/text_done_sessions" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/title_personal_info"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_personal_info"
+                        app:layout_constraintTop_toTopOf="@id/title_personal_info" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/phone_number"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_personal_info"
+                        app:layout_constraintTop_toBottomOf="@id/title_personal_info" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_phone_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_phone_number"
+                        app:layout_constraintTop_toTopOf="@id/title_phone_number"
+                        tools:text="06-02-01-45-78" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_consultation_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/consultation_date"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_personal_info"
+                        app:layout_constraintTop_toBottomOf="@id/text_phone_number" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_consultation_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_consultation_date"
+                        app:layout_constraintTop_toTopOf="@id/title_consultation_date"
+                        tools:text="12/12/2023" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/gender"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_personal_info"
+                        app:layout_constraintTop_toBottomOf="@id/text_consultation_date" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_gender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_gender"
+                        app:layout_constraintTop_toTopOf="@id/title_gender"
+                        tools:text="Male" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/age"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_personal_info"
+                        app:layout_constraintTop_toBottomOf="@id/text_gender" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_age"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_age"
+                        app:layout_constraintTop_toTopOf="@id/title_age"
+                        tools:text="29 y.o" />
+
+                    <!--Medical info section...............-->
+                    <ImageView
+                        android:id="@+id/shape_circle2"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:src="@drawable/shape_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_medical_info"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_medical_info"
+                        app:tint="@color/blue_sky" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_medical_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/medical_info"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/color_on_surface_60"
+                        app:layout_constraintStart_toEndOf="@id/shape_circle2"
+                        app:layout_constraintTop_toBottomOf="@id/title_age" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/title_medical_info"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_medical_info"
+                        app:layout_constraintTop_toTopOf="@id/title_medical_info" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_treating_doctor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/treating_doctor"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_medical_info"
+                        app:layout_constraintTop_toBottomOf="@id/title_medical_info" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_treating_doctor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_treating_doctor"
+                        app:layout_constraintTop_toTopOf="@id/title_treating_doctor"
+                        tools:text="Rachid Salim" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_diagnosis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/diagnosis"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_medical_info"
+                        app:layout_constraintTop_toBottomOf="@id/text_treating_doctor" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_diagnosis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_diagnosis"
+                        app:layout_constraintTop_toTopOf="@id/title_diagnosis"
+                        tools:text="Back pain" />
+
+                    <!--Treatment plan section...............-->
+                    <ImageView
+                        android:id="@+id/shape_circle3"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:src="@drawable/shape_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_treatment_plan"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_treatment_plan"
+                        app:tint="@color/blue_sky" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_treatment_plan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/treatment_plan"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/color_on_surface_60"
+                        app:layout_constraintStart_toEndOf="@id/shape_circle3"
+                        app:layout_constraintTop_toBottomOf="@id/text_diagnosis" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/title_treatment_plan"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_treatment_plan"
+                        app:layout_constraintTop_toTopOf="@id/title_treatment_plan" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_session_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/session_count"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_treatment_plan"
+                        app:layout_constraintTop_toBottomOf="@id/title_treatment_plan" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_session_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_session_count"
+                        app:layout_constraintTop_toTopOf="@id/title_session_count"
+                        tools:text="20 sessions" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_frequency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/frequency"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_treatment_plan"
+                        app:layout_constraintTop_toBottomOf="@id/text_session_count" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_frequency"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_frequency"
+                        app:layout_constraintTop_toTopOf="@id/title_frequency"
+                        tools:text="twice a week" />
+
+                    <!--Payment info section...............-->
+                    <ImageView
+                        android:id="@+id/shape_circle4"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:src="@drawable/shape_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_payment_info"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_payment_info"
+                        app:tint="@color/blue_sky" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_payment_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/payment_info"
+                        android:textAppearance="?attr/textAppearanceSubtitle2"
+                        android:textColor="@color/color_on_surface_60"
+                        app:layout_constraintStart_toEndOf="@id/shape_circle4"
+                        app:layout_constraintTop_toBottomOf="@id/text_frequency" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/size_thickness_divider"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/title_payment_info"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_payment_info"
+                        app:layout_constraintTop_toTopOf="@id/title_payment_info" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_social_coverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/social_coverage"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_payment_info"
+                        app:layout_constraintTop_toBottomOf="@id/title_payment_info" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_social_coverage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_social_coverage"
+                        app:layout_constraintTop_toTopOf="@id/title_social_coverage"
+                        tools:text="CNSS" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_session_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/session_price"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_payment_info"
+                        app:layout_constraintTop_toBottomOf="@id/text_social_coverage" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_session_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_session_price"
+                        app:layout_constraintTop_toTopOf="@id/title_session_price"
+                        tools:text="200 DH" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/total"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/light_midnight"
+                        app:layout_constraintStart_toStartOf="@id/title_payment_info"
+                        app:layout_constraintTop_toBottomOf="@id/text_session_price" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/dark_midnight"
+                        android:textStyle="bold"
+                        app:profileInfo="@{viewModel.patientDetails}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/title_total"
+                        app:layout_constraintTop_toTopOf="@id/title_total"
+                        tools:text="4000 DH" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.core.widget.NestedScrollView>
 
+        <!--    Buttons for printing quotation or invoice-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/receipt_section"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_receipt_section"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="@dimen/margin_5dp"
+            android:background="@drawable/gradient_white">
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/quotation_card"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_profile_card"
+                android:layout_marginHorizontal="@dimen/padding_8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onReceiptQuotationClicked(patientId)}"
+                app:cardElevation="@dimen/card_elevation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/invoice_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/cerulean"
+                app:strokeWidth="@dimen/width_stroke_card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/quotation_image_bg"
+                        android:layout_width="@dimen/size_image_bg_40dp"
+                        android:layout_height="@dimen/size_image_bg_40dp"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:alpha="@dimen/opacity_20"
+                        android:background="@drawable/shape_circle"
+                        android:backgroundTint="@color/cerulean"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/quotation_img"
+                        android:layout_width="@dimen/size_image_20dp"
+                        android:layout_height="@dimen/size_image_20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_quotation"
+                        app:layout_constraintBottom_toBottomOf="@+id/quotation_image_bg"
+                        app:layout_constraintEnd_toEndOf="@+id/quotation_image_bg"
+                        app:layout_constraintStart_toStartOf="@+id/quotation_image_bg"
+                        app:layout_constraintTop_toTopOf="@+id/quotation_image_bg" />
+
+                    <TextView
+                        android:id="@+id/quotation_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quotation"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/cerulean"
+                        app:layout_constraintBottom_toBottomOf="@id/quotation_image_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/quotation_image_bg"
+                        app:layout_constraintTop_toTopOf="@id/quotation_image_bg"
+
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/invoice_card"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_profile_card"
+                android:layout_marginHorizontal="@dimen/padding_8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onReceiptInvoiceClicked(patientId)}"
+                app:cardElevation="@dimen/card_elevation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/quotation_card"
+                app:layout_constraintTop_toTopOf="parent"
+                app:cardBackgroundColor="@color/sunrise_orange"
+                app:strokeColor="@color/expenses_coral"
+                app:strokeWidth="@dimen/width_stroke_card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/invoice_image_bg"
+                        android:layout_width="@dimen/size_image_bg_40dp"
+                        android:layout_height="@dimen/size_image_bg_40dp"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:background="@drawable/shape_circle"
+                        android:backgroundTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/invoice_img"
+                        android:layout_width="@dimen/size_image_25dp"
+                        android:layout_height="@dimen/size_image_25dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_invoice"
+                        app:layout_constraintBottom_toBottomOf="@+id/invoice_image_bg"
+                        app:layout_constraintEnd_toEndOf="@+id/invoice_image_bg"
+                        app:layout_constraintStart_toStartOf="@+id/invoice_image_bg"
+                        app:layout_constraintTop_toTopOf="@+id/invoice_image_bg"
+                        app:tint="@color/sunrise_orange" />
+
+                    <TextView
+                        android:id="@+id/invoice_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoice"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/invoice_image_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/invoice_image_bg"
+                        app:layout_constraintTop_toTopOf="@id/invoice_image_bg"
+
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </layout>

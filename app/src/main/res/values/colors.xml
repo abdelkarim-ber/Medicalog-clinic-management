@@ -11,6 +11,7 @@
     <color name="yellow">#F8C95E</color>
     <color name="sunrise_orange">#F07167</color>
     <color name="white">#ffffff</color>
+    <color name="white_transparent_80">#80FFFFFF</color>
     <color name="black">#001122</color>
     <color name="charcoal_black">#333333</color>
     <color name="grey">#F5F5F5</color>

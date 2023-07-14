@@ -22,13 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginHorizontal="@dimen/margin_5dp"
         android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{(view)->patientClickListener.onClick(view,patientId)}"
         android:transitionName="@{@string/patients_list_item_transition_name(patientId)}"
         app:cardCornerRadius="0dp"
-        app:cardElevation="1dp">
+        app:cardElevation="@dimen/card_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,7 +60,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_full_name"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/height_container_text_35dp"
+                android:layout_height="@dimen/height_container_text_subtitle1"
                 android:layout_marginStart="@dimen/margin_5dp"
                 android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_marginEnd="@dimen/margin_16dp"

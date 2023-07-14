@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import com.example.android.clinicmanagement.data.datasources.PatientDataSource
 import com.example.android.clinicmanagement.data.models.Patient
+import com.example.android.clinicmanagement.data.models.PatientDetails
 import com.example.android.clinicmanagement.data.models.PatientStatus
 import com.example.android.clinicmanagement.patientsList.FilterDataState
 import kotlinx.coroutines.Dispatchers
@@ -74,4 +75,9 @@ class PatientRepository(private val patientDataSource: PatientDataSource) {
             filterDataState.sessionsCompletionState
             )
     }
+
+
+
+
+    fun loadPatientDetailsWithId(patientId: Long):Flow<PatientDetails> = patientDataSource.loadPatientDetailsWithId(patientId)
 }

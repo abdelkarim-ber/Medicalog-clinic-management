@@ -95,10 +95,3 @@ fun TextInputEditText.setPreviousValue(uiState: UiState) {
         }
     }
 }
-//app:specialCharDisabled="@{layoutLastName}"
-//@BindingAdapter("saveFieldOnTextChange")
-//fun TextInputEditText.setFieldOnTextChange(field: String) {
-//    this.doOnTextChanged { text, start, before, count ->
-//        field =
-//    }
-//}

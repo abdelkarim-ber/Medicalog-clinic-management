@@ -5,10 +5,11 @@
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_72dp">72dp</dimen>
+    <dimen name="padding_5dp">5dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="size_icon_24dp">24dp</dimen>
-    <dimen name="size_thickness_divider">0.5dp</dimen>
+    <dimen name="size_thickness_divider">1dp</dimen>
     <dimen name="size_icon_32dp">32dp</dimen>
     <dimen name="height_chart_card">300dp</dimen>
     <dimen name="size_image_40dp">40dp</dimen>
@@ -26,8 +27,9 @@
     <dimen name="height_blue_container">400dp</dimen>
     <dimen name="height_statistics_card">100dp</dimen>
     <dimen name="height_expenditures_card">110dp</dimen>
-    <dimen name="height_container_text_40dp">40dp</dimen>
-    <dimen name="height_container_text_35dp">35dp</dimen>
+    <dimen name="height_container_text_headline5">40dp</dimen>
+    <dimen name="height_container_text_subtitle1">35dp</dimen>
+    <dimen name="height_container_text_body2">25dp</dimen>
     <dimen name="width_expenditures_card">250dp</dimen>
     <dimen name="width_stroke_card">1dp</dimen>
     <dimen name="width_button_min">140dp</dimen>
@@ -35,16 +37,21 @@
     <dimen name="height_front_layer_title">55dp</dimen>
     <dimen name="size_selection_card">90dp</dimen>
     <dimen name="height_small_blue_container">316dp</dimen>
-    <dimen name="size_image_bg_50dp">50dp</dimen>
-    <dimen name="size_profile_card">108dp</dimen>
+    <dimen name="size_image_bg_40dp">40dp</dimen>
+    <dimen name="size_profile_card">70dp</dimen>
+    <dimen name="size_image_20dp">20dp</dimen>
     <dimen name="size_image_25dp">25dp</dimen>
     <dimen name="height_receipt">500dp</dimen>
     <item name="opacity_20" format="float" type="dimen">0.2</item>
     <item name="opacity_40" format="float" type="dimen">0.4</item>
+    <item name="opacity_60" type="dimen" format="float">0.6</item>
     <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="material_input_text_to_prefix_suffix_padding" tools:override="true">5dp</dimen>
     <dimen name="padding_32dp">32dp</dimen>
     <dimen name="size_circle_background">70dp</dimen>
     <dimen name="size_icon_16dp">16dp</dimen>
+    <dimen name="card_elevation">1.5dp</dimen>
+    <dimen name="height_receipt_section">100dp</dimen>
+    <dimen name="height_receipt_section_plus">108dp</dimen>
 </resources>

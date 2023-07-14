@@ -3,8 +3,10 @@ package com.example.android.clinicmanagement.data.datasources
 import androidx.paging.PagingSource
 import com.example.android.clinicmanagement.data.dao.PatientDao
 import com.example.android.clinicmanagement.data.models.Patient
+import com.example.android.clinicmanagement.data.models.PatientDetails
 import com.example.android.clinicmanagement.data.models.PatientStatus
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class PatientDataSource(private val patientDao: PatientDao) {
@@ -83,5 +85,8 @@ class PatientDataSource(private val patientDao: PatientDao) {
             )
         }
     }
+
+    fun loadPatientDetailsWithId(patientId: Long): Flow<PatientDetails> = patientDao.loadPatientDetailsWithId(patientId)
+
 
 }
