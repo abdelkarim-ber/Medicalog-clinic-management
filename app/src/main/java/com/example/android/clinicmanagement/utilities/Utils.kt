@@ -139,11 +139,18 @@ fun View.scaleUp() {
         .setListener(null)
 }
 
-fun convertDpToPixels(context: Context, dp: Int) =
-    (dp * context.resources.displayMetrics.density).toInt()
+fun View.scaleDown() {
+    animate()
+        .alpha(0f)
+        .scaleX(0f).scaleY(0f)
+        .setDuration(resources.getInteger(R.integer.clinicmanagement_motion_duration_medium).toLong())
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                visibility = View.GONE
+            }
+        })
+}
 
-fun convertPixelsToDp(context: Context, pixels: Int) =
-    (pixels / context.resources.displayMetrics.density).toInt()
 
 sealed class UiState {
     data class Loading(@StringRes val messageResource:Int) : UiState()
@@ -176,6 +183,22 @@ fun convertDateSecondsToDateString(dateInSeconds:Long):String{
     val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     return dateFormat.format(dateInSeconds*1000)
 }
+
+/**
+ * This method converts a date time in format  dd/MM/yyyy HH:mm to date in seconds for
+ * use in persisting date and time in database as one single dateInSeconds field.
+ * @param dateString must be in format dd/MM/yyyy
+ * @param timeString must be in format HH:mm
+ */
+fun convertDateTimeStringToDateSeconds(dateString:String,timeString:String):Long{
+    val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+
+    val date = dateTimeFormat.parse("$dateString $timeString") as Date
+    return date.time.div(1000)
+}
+
+
+
 
 /**
  * This method checks if the passed string argument is not blank

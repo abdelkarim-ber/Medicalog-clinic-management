@@ -23,9 +23,9 @@ import com.google.android.material.transition.MaterialElevationScale
 
 class PatientProfileFragment : Fragment() {
 
-    val args: PatientProfileFragmentArgs by navArgs()
-    lateinit var binding: FragmentPatientProfileBinding
-    lateinit var patientProfileViewModel: PatientProfileViewModel
+    private val args: PatientProfileFragmentArgs by navArgs()
+    private lateinit var binding: FragmentPatientProfileBinding
+    private lateinit var patientProfileViewModel: PatientProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,27 +123,10 @@ class PatientProfileFragment : Fragment() {
         }
         // Add an Observer on the state variable for Navigating to New Session screen to
         // add patient's done session info when the add session fab button is clicked.
-        patientProfileViewModel.navigateToAddNewSession.observe(viewLifecycleOwner) { fabInfo ->
-            fabInfo?.let {
-                val fabView = fabInfo.first
-                val patientId = fabInfo.second
-
-                exitTransition = MaterialElevationScale(false).apply {
-                    duration =
-                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
-                            .toLong()
-                }
-                reenterTransition = MaterialElevationScale(true).apply {
-                    duration =
-                        resources.getInteger(R.integer.clinicmanagement_motion_duration_medium)
-                            .toLong()
-                }
-                val newSessionTransitionName = getString(R.string.new_session_transition_name)
-                val extras = FragmentNavigatorExtras(fabView to newSessionTransitionName)
-
+        patientProfileViewModel.navigateToAddNewSession.observe(viewLifecycleOwner) { patientId ->
+            patientId?.let {
                 this.findNavController().navigate(
-                    PatientProfileFragmentDirections.actionPatientProfileToNewSession(patientId),
-                    extras
+                    PatientProfileFragmentDirections.actionPatientProfileToNewSession(patientId)
                 )
                 patientProfileViewModel.onAddNewSessionNavigated()
             }

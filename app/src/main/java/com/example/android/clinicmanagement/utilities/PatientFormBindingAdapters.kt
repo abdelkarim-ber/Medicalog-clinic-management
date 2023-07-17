@@ -11,21 +11,9 @@ import com.example.android.clinicmanagement.patientForm.PatientRegistrationEvent
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-//
-//@BindingAdapter("specialCharDisabled")
-//fun TextInputEditText.setSpecialChar(associatedLayout: TextInputLayout) {
-//    this.doOnTextChanged { text, start, before, count ->
-//        associatedLayout.error = text?.let {
-//            if (text.any { !it.isLetter() && !it.isWhitespace() }) {
-//                "no special characters allowed"
-//            } else
-//                null
-//        }
-//    }
-//}
 
-@BindingAdapter("context", "errorTextResource")
-fun TextInputLayout.setErrorText(context: Context, errorTextResource: Int?) {
+@BindingAdapter("errorTextResource")
+fun TextInputLayout.setErrorText(errorTextResource: Int?) {
     this.error = errorTextResource?.let { context.getString(it) }
 }
 

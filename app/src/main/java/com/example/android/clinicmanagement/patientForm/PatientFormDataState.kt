@@ -26,5 +26,4 @@ data class PatientFormDataState(
     val sessionPrice: String = "",
     val errorSessionPrice: MutableLiveData<Int?>? = MutableLiveData(null),
     val socialCoverage: String = "",
-    val errorSocialCoverage: MutableLiveData<Int?>? = MutableLiveData(null)
 )

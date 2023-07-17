@@ -104,7 +104,7 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/newSession"
         android:name="com.example.android.clinicmanagement.session.NewSessionFragment"
         tools:layout="@layout/fragment_new_session"
@@ -112,5 +112,5 @@
         <argument
             android:name="patientKey"
             app:argType="long" />
-    </fragment>
+    </dialog>
 </navigation>

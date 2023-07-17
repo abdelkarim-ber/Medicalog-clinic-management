@@ -1,155 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:transitionName="@string/new_session_transition_name"
-    >
-
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.session.NewSessionViewModel" />
+    </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_sheet_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/padding_32dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/padding_16dp"
+            android:background="@drawable/shape_bottom_sheet"
             tools:context=".session.NewSessionFragment">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tool_bar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_close"
-                app:title="@string/add_session" />
-
             <TextView
-                android:id="@+id/text_title_date"
+                android:id="@+id/title_bottom_sheet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginTop="@dimen/margin_72dp"
-                android:text="@string/date"
-                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:text="@string/add_session"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_date"
-                style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet"
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:layout_marginEnd="@dimen/margin_16dp"
-                app:hintEnabled="false"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_calendar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title_date">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/text_field_date"
-                    android:hint="@string/helper_date_selection"
-                    android:textAlignment="center"
-                    android:enabled="false"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColorHint="@color/color_primary_70"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/text_title_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:text="@string/time"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_layout_date" />
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_time"
-                style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:layout_marginEnd="@dimen/margin_16dp"
-                app:hintEnabled="false"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_watch"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title_time" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/text_field_time"
-                    android:layout_width="match_parent"
-                    android:textAlignment="center"
-                    android:enabled="false"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColorHint="@color/color_primary_70"
-                    android:hint="@string/helper_time_selection"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            <TextView
-                android:id="@+id/text_title_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:text="@string/amount"
-                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_layout_time" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_bottom_sheet"
+                />
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_layout_amount"
+                android:id="@+id/layout_date"
                 style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:layout_marginTop="@dimen/margin_8dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
-                app:hintEnabled="false"
-                app:suffixText="@string/moroccan_currency"
+                app:endIconMode="custom"
+                app:errorEnabled="true"
+                app:errorTextResource="@{viewModel.newSessionDataState.errorDate}"
+                android:hint="@string/date"
+                app:helperText="@string/helper_date_selection"
+                app:startIconDrawable="@drawable/ic_calendar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title_amount">
+                app:layout_constraintTop_toBottomOf="@id/divider">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/text_field_amount"
+                    android:id="@+id/text_date"
+                    android:textAlignment="center"
+                    android:enabled="false"
+                    app:onNewSessionDataChanged="@{viewModel}"
+                    android:textColorHint="@color/color_primary_70"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_time"
+                style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:endIconMode="custom"
+                app:errorEnabled="true"
+                app:errorTextResource="@{viewModel.newSessionDataState.errorTime}"
+                android:hint="@string/time"
+                app:helperText="@string/helper_time_selection"
+                app:startIconDrawable="@drawable/ic_watch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_date" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_time"
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:enabled="false"
+                    app:onNewSessionDataChanged="@{viewModel}"
+                    android:textColorHint="@color/color_primary_70"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_amount_payed"
+                style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                app:suffixText="@string/moroccan_currency"
+                android:hint="@string/amount_payed"
+                app:helperText="@string/helper_session_amount_payed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_time">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_amount_payed"
                     android:layout_width="match_parent"
                     android:textAlignment="center"
                     android:inputType="number"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:onNewSessionDataChanged="@{viewModel}"
                     android:textColorHint="@color/color_primary_70"
-                    android:hint="@string/hint_session_amount"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_save"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16dp"
-                android:layout_marginEnd="@dimen/margin_16dp"
-                android:layout_marginBottom="@dimen/margin_16dp"
+                style="@style/Widget.clinicManagement.Button"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
                 android:text="@string/save"
-                android:textSize="19sp"
+                android:onClick="@{() -> viewModel.submit()}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_layout_amount" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_amount_payed" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:translationZ="3dp"
+                app:trackCornerRadius="4dp"
+                app:indicatorSize="@dimen/size_button_circular_progress"
+                app:trackColor="#00000000"
+                app:indicatorColor="@color/blue_sky"
+                app:layout_constraintEnd_toEndOf="@id/button_save"
+                app:layout_constraintTop_toTopOf="@id/button_save"
+                app:layout_constraintBottom_toBottomOf="@id/button_save"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView></layout>
+</layout>

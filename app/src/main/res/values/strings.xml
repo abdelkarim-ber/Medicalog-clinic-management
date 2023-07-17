@@ -20,7 +20,6 @@
     <string name="month_year_dialog_title">%1$s, %2$s</string>
     <string name="select_category">Select a category :</string>
     <string name="amount">Amount</string>
-    <string name="add_amount">Add amount</string>
     <string name="save">save</string>
     <string name="update">update</string>
     <string name="add_patient">Add patient</string>
@@ -34,7 +33,7 @@
     <string name="patients_list_item_transition_name">patient item :%1$d</string>
     <string name="new_patient_form_transition_name">patient form</string>
     <string name="fab_add_patient_transition_name">add patient fab</string>
-    <string name="new_session_transition_name">new session</string>
+
     <string name="fab_add_session_transition_name">add session fab</string>
     <string name="chart_no_data_message">\'Sorry, not enough data to display\'</string>
 
@@ -79,13 +78,11 @@
     <string name="doctor_short">Dr.</string>
     <string name="doctor_short_with_text">Dr. %1$s</string>
     <string name="sessions">sessions</string>
+
     <string name="time">Time</string>
-    <string name="hour">Hour</string>
-    <string name="minutes">Minutes</string>
+
     <string name="add_session">Add session</string>
 
-    <string name="hint_session_amount">Enter amount</string>
-    <string name="session_time_selection_title">Select Session time</string>
 <!--    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>-->
     <string name="expenditures_of">Expenditures Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
@@ -97,6 +94,7 @@
     <string name="helper_date_selection">Select date by clicking the icon</string>
     <string name="helper_time_selection">Select time by clicking the icon</string>
     <string name="helper_date_range_selection">Select date range by clicking the icon</string>
+    <string name="helper_session_amount_payed">Optional if the payment is delayed or paid in advance</string>
 
     <string name="form_error_no_special_char">Special characters are not permitted</string>
     <string name="form_error_field_required">Required field</string>
@@ -127,11 +125,11 @@
         <item quantity="other">%1$d sessions</item>
     </plurals>
 
+    <string name="new_session_add">New session info was added successfully</string>
 
 
 
-
-
+    <string name="dialog_time_picker_title">Select time</string>
     <string name="dialog_month_picker_title">Select month</string>
     <string name="dialog_date_picker_title">Select date</string>
     <string name="dialog_date_range_picker_title">Select date range</string>

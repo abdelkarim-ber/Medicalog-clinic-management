@@ -6,8 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
-import androidx.core.content.ContextCompat
+
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -15,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.DialogFragmentMonthPickerBinding
-import com.example.android.clinicmanagement.utilities.convertDpToPixels
+
 import java.text.SimpleDateFormat
 import java.util.*
 

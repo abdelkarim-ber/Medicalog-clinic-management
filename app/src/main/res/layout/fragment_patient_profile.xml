@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:backgroundTint="@color/light_blue_sky"
-                        android:onClick="@{(view) -> viewModel.onAddNewSessionClicked(view,patientId) }"
+                        android:onClick="@{(view) -> viewModel.onAddNewSessionClicked(patientId) }"
                         android:src="@drawable/ic_add_session"
                         android:transitionName="@string/fab_add_session_transition_name"
                         app:elevation="1dp"

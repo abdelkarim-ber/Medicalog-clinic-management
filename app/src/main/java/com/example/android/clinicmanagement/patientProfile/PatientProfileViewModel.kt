@@ -23,10 +23,9 @@ class PatientProfileViewModel(
 
     /**
      * Variable that tells the fragment to navigate to [NewSessionFragment]
-     * It takes the patient Id as a Long value and the view that is clicked
-     * for Material container transformation purposes.
+     * It takes the patient Id as a Long value.
      */
-    private val _navigateToAddNewSession = MutableLiveData<Pair<View, Long>?>()
+    private val _navigateToAddNewSession = MutableLiveData<Long?>()
 
     /**
      * Variable that tells the fragment to navigate to [ReceiptFragment]
@@ -50,7 +49,7 @@ class PatientProfileViewModel(
     /**
      * The immutable and exposed version of [_navigateToAddNewSession].
      */
-    val navigateToAddNewSession: LiveData<Pair<View, Long>?>
+    val navigateToAddNewSession: LiveData<Long?>
         get() = _navigateToAddNewSession
 
     /**
@@ -127,8 +126,8 @@ class PatientProfileViewModel(
     /**
      * Called when we click Add new session button.
      */
-    fun onAddNewSessionClicked(view: View, id: Long) {
-        _navigateToAddNewSession.value = view to id
+    fun onAddNewSessionClicked(id: Long) {
+        _navigateToAddNewSession.value = id
     }
 
     /**
