@@ -1,32 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".patientHistory.PatientHistoryFragment">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:title="@string/history" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_patient_history"
-        tools:listitem="@layout/list_item_patient_history"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/tool_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.patientHistory.PatientHistoryViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context=".patientHistory.PatientHistoryFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="@string/history" />
+
+        <include
+            android:id="@+id/emptyView"
+            layout="@layout/screen_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:visibility="gone"
+            app:showPlaceHolder="@{viewModel.patientHistoryUIState}"
+            bind:failureData="@{viewModel.patientHistoryUIState}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_patient_history"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar"
+            app:showContent="@{viewModel.patientHistoryUIState}"
+            tools:listitem="@layout/list_item_patient_history" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

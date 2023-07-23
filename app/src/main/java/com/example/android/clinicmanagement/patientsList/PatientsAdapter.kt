@@ -14,7 +14,7 @@ import com.example.android.clinicmanagement.data.models.PatientStatus
 import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
 import com.example.android.clinicmanagement.expenditures.ExpenditureCategoryAdapter.ViewHolder.Companion.recyclerView
 
-class PatientsAdapter(val patientClickListener: PatientClickListener) :
+class PatientsAdapter(private val patientClickListener: PatientClickListener) :
     PagingDataAdapter<PatientStatus, PatientsAdapter.ViewHolder>(PATIENT_STATUS_DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,7 +54,6 @@ class PatientsAdapter(val patientClickListener: PatientClickListener) :
         private val PATIENT_STATUS_DIFF_CALLBACK = object : DiffUtil.ItemCallback<PatientStatus>() {
             override fun areItemsTheSame(oldItem: PatientStatus, newItem: PatientStatus): Boolean {
                 return oldItem.id == newItem.id
-//                return false
             }
 
             override fun areContentsTheSame(
@@ -62,7 +61,6 @@ class PatientsAdapter(val patientClickListener: PatientClickListener) :
                 newItem: PatientStatus
             ): Boolean {
                 return oldItem == newItem
-//                return false
             }
         }
     }

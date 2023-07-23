@@ -1,12 +1,12 @@
 package com.example.android.clinicmanagement.data.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.android.clinicmanagement.data.models.Session
 import com.example.android.clinicmanagement.data.models.TotalByMonth
-import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -18,19 +18,20 @@ interface SessionsDao {
     suspend fun delete(session: Session)
 
     @Query("SELECT * FROM session_table "+
-            "WHERE patient_id = :patientId "
+            "WHERE patient_id = :patientId " +
+            "ORDER BY date_in_seconds DESC"
     )
-    fun loadSessionsWithPatientID(patientId:Int):Flow<List<Session>>
+    fun loadSessionsWithPatientID(patientId:Long): PagingSource<Int,Session>
 
     @Query("SELECT count(*) FROM session_table "+
             "WHERE patient_id = :patientId "
     )
-    suspend fun countSessionsWithPatientID(patientId:Int):Int
+    suspend fun countSessionsWithPatientID(patientId:Long):Int
 
     @Query("SELECT sum(amount_payed) FROM session_table "+
             "WHERE patient_id = :patientId "
     )
-    suspend fun getAmountPayedByPatientWithID(patientId:Int):Int
+    suspend fun getAmountPayedByPatientWithID(patientId: Long):Int
 
     @Query("SELECT sum(amount_payed) FROM session_table "+
             "WHERE strftime('%Y-%m', date_in_seconds, 'unixepoch') = :month "

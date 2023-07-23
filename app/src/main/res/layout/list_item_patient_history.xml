@@ -1,64 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/white"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:text="05 Sep 2022"
-        android:textAppearance="?attr/textAppearanceSubtitle1"
-        android:textColor="@color/dark_midnight"
-        app:layout_constraintBottom_toTopOf="@id/text_time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+    <data>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="01:22 PM"
-        android:layout_marginBottom="@dimen/margin_16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textAppearance="?attr/textAppearanceSubtitle2"
-        android:textColor="@color/color_primary_70"
-        app:layout_constraintStart_toStartOf="@id/text_date"
-        app:layout_constraintTop_toBottomOf="@id/text_date" />
+        <variable
+            name="session"
+            type="com.example.android.clinicmanagement.data.models.Session" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_amount_payed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_16dp"
-        android:text="2000 DH"
-        android:textAppearance="?attr/textAppearanceSubtitle1"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/text_payment_type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_date"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <variable
+            name="sessionDeleteClickListener"
+            type="com.example.android.clinicmanagement.patientHistory.PatientHistoryAdapter.SessionDeleteClickListener" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_payment_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cash"
-        android:textAppearance="?attr/textAppearanceSubtitle2"
-        android:textColor="@color/color_primary_70"
-        app:layout_constraintBottom_toBottomOf="@id/text_time"
-        app:layout_constraintEnd_toEndOf="@id/text_amount_payed"
-        app:layout_constraintTop_toBottomOf="@id/text_amount_payed" />
+    </data>
 
-    <com.google.android.material.divider.MaterialDivider
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@color/white">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="@dimen/size_thickness_divider"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:background="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/shape_circle_blue"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/shape_circle"
+            android:translationZ="3dp"
+            app:layout_constraintEnd_toEndOf="@id/divider"
+            app:layout_constraintStart_toStartOf="@id/divider"
+            app:layout_constraintTop_toTopOf="@id/card"
+            app:layout_constraintBottom_toTopOf="@id/card"
+            app:tint="@color/blue_sky" />
+
+        <ImageView
+            android:id="@+id/shape_circle_white"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/shape_circle"
+            app:layout_constraintBottom_toBottomOf="@id/shape_circle_blue"
+            app:layout_constraintEnd_toEndOf="@id/shape_circle_blue"
+            app:layout_constraintStart_toStartOf="@id/shape_circle_blue"
+            app:layout_constraintTop_toTopOf="@id/shape_circle_blue"
+            app:tint="@color/white" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_32dp"
+            android:layout_marginTop="@dimen/margin_24dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:layout_marginBottom="@dimen/margin_24dp"
+            app:cardBackgroundColor="@color/grey_transparent_80"
+            app:shapeAppearance="@style/ShapeAppearance.clinicManagement.historyCard"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="@color/blue_sky"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/img_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:background="?attr/actionBarItemBackground"
+                    android:onClick="@{() -> sessionDeleteClickListener.onClick(session)}"
+                    android:src="@drawable/ic_delete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/dark_blue_sky" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/black"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintEnd_toStartOf="@id/img_delete"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sessionInfo="@{session}"
+                    tools:text="Monday, 05 September 2022" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:textColor="@color/color_primary_70"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:text="@string/at"
+                    app:layout_constraintStart_toStartOf="@id/text_date"
+                    app:layout_constraintTop_toBottomOf="@id/text_date"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8dp"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/color_primary_70"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/title_time"
+                    app:layout_constraintTop_toTopOf="@id/title_time"
+                    app:sessionInfo="@{session}"
+                    tools:text="16:00" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:layout_marginBottom="@dimen/margin_8dp"
+                    android:text="@string/paid"
+                    android:textColor="@color/midnight"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_time"
+                    app:layout_constraintTop_toBottomOf="@id/text_time"
+                    app:tint="@color/color_primary_70" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_amount_payed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8dp"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/midnight"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/title_money"
+                    app:layout_constraintTop_toTopOf="@id/title_money"
+                    app:sessionInfo="@{session}"
+                    tools:text="200 DH" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

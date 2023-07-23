@@ -3,27 +3,18 @@ package com.example.android.clinicmanagement.patientHistory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
+import com.example.android.clinicmanagement.data.models.PatientStatus
+import com.example.android.clinicmanagement.data.models.Session
 import com.example.android.clinicmanagement.databinding.ListItemPatientHistoryBinding
+import com.example.android.clinicmanagement.patientsList.PatientsAdapter
 
-class PatientHistoryAdapter  : RecyclerView.Adapter<PatientHistoryAdapter.ViewHolder>() {
-    var data = listOf(
-        PatientHistory("02 Sep 2023", "01:22 PM", 2000,"Cash"),
-        PatientHistory("02 Sep 2023", "04:22 PM", 3500, "Check"),
-        PatientHistory("02 Sep 2023", "09:22 AM", 800, "Cash"),
-        PatientHistory("02 Sep 2023", "01:22 PM", 0, "Payment delayed"),
-        PatientHistory("02 Sep 2023", "11:22 AM", 2000, "Check"),
-        PatientHistory("02 Sep 2023", "05:22 PM", 0, "Payment delayed"),
-        PatientHistory("02 Sep 2023", "12:22 PM", 8500, "Cash"),
-        PatientHistory("02 Sep 2023", "12:22 PM", 8500, "Cash"),
-        PatientHistory("02 Sep 2023", "12:22 PM", 8500, "Cash"),
-        PatientHistory("02 Sep 2023", "12:22 PM", 8500, "Cash"),
-        PatientHistory("02 Sep 2023", "12:22 PM", 8500, "Cash")
-    )
+class PatientHistoryAdapter(private val sessionDeleteClickListener: SessionDeleteClickListener) :
+    PagingDataAdapter<Session, PatientHistoryAdapter.ViewHolder>(SESSION_DIFF_CALLBACK) {
 
-
-    override fun getItemCount() = data.size
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,19 +22,19 @@ class PatientHistoryAdapter  : RecyclerView.Adapter<PatientHistoryAdapter.ViewHo
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        val item = getItem(position)
+        if (item != null) {
+            holder.bind(item , sessionDeleteClickListener)
+        }
     }
 
 
     class ViewHolder private constructor(val binding: ListItemPatientHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: PatientHistory) {
-            data.apply {
-               binding.textDate.text  = date
-               binding.textTime.text  = time
-               binding.textAmountPayed.text  = "$amount DH"
-               binding.textPaymentType.text  = paymentType
-            }
+        fun bind(data: Session, sessionDeleteClickListener: SessionDeleteClickListener) {
+            binding.session = data
+            binding.sessionDeleteClickListener = sessionDeleteClickListener
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -58,11 +49,23 @@ class PatientHistoryAdapter  : RecyclerView.Adapter<PatientHistoryAdapter.ViewHo
 
     }
 
-    data class PatientHistory(
-        val date: String,
-        val time: String,
-        val amount: Int,
-        val paymentType: String
-    )
+    companion object {
+        private val SESSION_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Session>() {
+            override fun areItemsTheSame(oldItem: Session, newItem: Session): Boolean {
+                return oldItem.id == newItem.id
+            }
 
+            override fun areContentsTheSame(
+                oldItem: Session,
+                newItem: Session
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
+
+    fun interface SessionDeleteClickListener {
+        fun onClick(session: Session)
+    }
 }

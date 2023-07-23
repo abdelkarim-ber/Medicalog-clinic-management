@@ -15,6 +15,7 @@
     <color name="black">#001122</color>
     <color name="charcoal_black">#333333</color>
     <color name="grey">#F5F5F5</color>
+    <color name="grey_transparent_80">#80F5F5F5</color>
     <color name="dark_grey">#686C7D</color>
     <color name="bluish_white">#F2FBFF</color>
 

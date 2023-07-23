@@ -21,7 +21,7 @@
             android:layout_width="250dp"
             android:layout_height="200dp"
             app:emptyStateIcon="@{failureData}"
-            tools:src="@drawable/img_placeholder_data_processing"
+            tools:src="@drawable/img_placeholder_empty_data"
             app:layout_constraintBottom_toTopOf="@id/tagline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

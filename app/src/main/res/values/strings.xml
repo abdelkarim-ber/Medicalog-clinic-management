@@ -126,7 +126,10 @@
     </plurals>
 
     <string name="new_session_add">New session info was added successfully</string>
+    <string name="patient_session_deletion">The session was successfully removed</string>
 
+    <string name="patient_session_empty_state_tagline">No sessions yet</string>
+    <string name="patient_session_empty_state_message">Start adding patient sessions to view history.</string>
 
 
     <string name="dialog_time_picker_title">Select time</string>
@@ -137,6 +140,11 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
 
+    <string name="dialog_deletion_confirmation_title">Confirm deletion</string>
+    <string name="dialog_deletion_confirmation_message">Are you sure you want to delete this session?</string>
+
+
+    <string name="dialog_confirm">confirm</string>
     <string name="dialog_ok">ok</string>
     <string name="dialog_cancel">cancel</string>
     <string name="sessions_completion">Sessions completion :</string>
@@ -147,5 +155,7 @@
     <string name="medical_info">Medical informations</string>
     <string name="treatment_plan">Treatment plan</string>
     <string name="payment_info">Payment informations</string>
+    <string name="at">At</string>
+    <string name="paid">Paid :</string>
 
 </resources>

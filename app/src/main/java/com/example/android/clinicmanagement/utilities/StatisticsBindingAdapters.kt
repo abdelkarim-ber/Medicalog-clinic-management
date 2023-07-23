@@ -26,49 +26,55 @@ enum class ChartType {
 }
 
 @BindingAdapter("showLoading")
-fun View.showLoading(uiState: UiState) {
-    if (uiState is UiState.Loading) {
-        if (visibility == View.GONE) crossFadeIn()
-    } else {
-        if (visibility == View.VISIBLE) crossFadeOut()
+fun View.showLoading(uiState: UiState?) {
+    uiState?.let {
+        if (uiState is UiState.Loading) {
+            if (visibility == View.GONE) crossFadeIn()
+        } else {
+            if (visibility == View.VISIBLE) crossFadeOut()
+        }
     }
 }
 
 @BindingAdapter("showPlaceHolder")
-fun View.showPlaceHolder(uiState: UiState) {
-    if (uiState is UiState.Failure) {
-        if (visibility == View.GONE) scaleUp()
-    } else {
-        if (visibility == View.VISIBLE) crossFadeOut()
+fun View.showPlaceHolder(uiState: UiState?) {
+    uiState?.let {
+        if (uiState is UiState.Failure) {
+            if (visibility == View.GONE) scaleUp()
+        } else {
+            if (visibility == View.VISIBLE) crossFadeOut()
+        }
     }
 }
 
 @BindingAdapter("showContent")
-fun View.showContent(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        if (visibility == View.GONE)
-            crossFadeIn()
-    } else {
-        if (visibility == View.VISIBLE)
-            crossFadeOut()
+fun View.showContent(uiState: UiState?) {
+    uiState?.let {
+        if (uiState is UiState.Success<*>) {
+            if (visibility == View.GONE)
+                crossFadeIn()
+        } else {
+            if (visibility == View.VISIBLE)
+                crossFadeOut()
+        }
     }
 }
 //Binding Adapters for empty State Screen items
 @BindingAdapter("emptyStateIcon")
-fun ImageView.setEmptyStateIcon(uiState: UiState) {
+fun ImageView.setEmptyStateIcon(uiState: UiState?) {
     if (uiState is UiState.Failure) {
         this.setImageResource(uiState.imageDrawableRes)
     }
 }
 @BindingAdapter("tagLineText")
-fun TextView.setTagLineText(uiState: UiState) {
+fun TextView.setTagLineText(uiState: UiState?) {
     if (uiState is UiState.Failure) {
         text = context.getString(uiState.tagLineResource)
     }
 }
 
 @BindingAdapter("messageText")
-fun TextView.setMessageText(uiState: UiState) {
+fun TextView.setMessageText(uiState: UiState?) {
     if (uiState is UiState.Failure) {
         text = context.getString(uiState.messageResource)
     }
@@ -76,7 +82,7 @@ fun TextView.setMessageText(uiState: UiState) {
 
 //binding adapter for  loading screen
 @BindingAdapter("loadingMessageText")
-fun TextView.setLoadingMessageText(uiState: UiState) {
+fun TextView.setLoadingMessageText(uiState: UiState?) {
     if (uiState is UiState.Loading) {
         text = context.getString(uiState.messageResource)
     }

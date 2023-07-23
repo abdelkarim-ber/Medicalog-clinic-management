@@ -104,4 +104,13 @@
         <item name="chipStrokeColor">@color/blue_sky</item>
         <item name="checkedIconVisible">false</item>
     </style>
+
+
+    <style name="ShapeAppearance.clinicManagement.historyCard" parent="ShapeAppearance.clinicManagement.MediumComponent">
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">@dimen/size_corner_32dp</item>
+        <item name="cornerSizeBottomRight">@dimen/size_corner_8dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/size_corner_8dp</item>
+
+    </style>
 </resources>

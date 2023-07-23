@@ -1,6 +1,5 @@
 package com.example.android.clinicmanagement.patientsList
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -220,7 +219,7 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
                 _patientsUIState.value = UiState.Failure(
                     R.string.patients_list_empty_state_tagline,
                     R.string.patients_list_empty_state_message,
-                    R.drawable.img_placeholder_patients_filter
+                    R.drawable.img_placeholder_no_results
                 )
                 //Otherwise we load the actual Patients list data
             } else {
