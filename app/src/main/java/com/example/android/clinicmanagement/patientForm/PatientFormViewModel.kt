@@ -150,6 +150,21 @@ class PatientFormViewModel(
                     errorSessionPrice?.value = sessionPriceResult.errorMessage
                 }
             } else {
+                //Remove the error indicators if there are any.
+                with(patientFormDataState) {
+                    errorFirstName?.value = null
+                    errorLastName?.value = null
+                    errorAge?.value = null
+                    errorGender?.value = null
+                    errorPhoneNumber?.value = null
+                    errorConsultationDate?.value = null
+                    errorDoctorFullName?.value = null
+                    errorDiagnosis?.value = null
+                    errorFrequency?.value = null
+                    errorSessionCount?.value = null
+                    errorSessionPrice?.value = null
+                }
+
                 _patientFormUIState.value = UiState.Loading(R.string.form_persisting_patient_info)
                 delay(800L)
                 //add new patient or update an existing patient info in case of patientId != -1L

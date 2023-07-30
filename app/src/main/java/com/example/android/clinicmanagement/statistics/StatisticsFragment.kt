@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding
-import com.example.android.clinicmanagement.expenditures.Expenditure
 import com.example.android.clinicmanagement.monthPicker.MonthPickerDialog
 import java.text.SimpleDateFormat
 import java.util.*
@@ -70,7 +69,7 @@ class StatisticsFragment : Fragment() {
         binding.toolBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.calendar -> monthPicker.showMonthPicker(childFragmentManager, "tag")
-                R.id.addExpenditure -> findNavController().navigate(StatisticsFragmentDirections.actionStatisticsToExpenditures())
+                R.id.addExpenditure -> findNavController().navigate(StatisticsFragmentDirections.actionStatisticsToExpenses())
             }
             true
         }

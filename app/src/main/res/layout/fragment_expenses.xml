@@ -3,10 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.expenses.ExpensesViewModel" />
+
+
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".expenditures.ExpendituresFragment">
+        tools:context=".expenses.ExpensesFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -51,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_16dp"
-                    android:text="@string/expenditures_of"
+                    android:text="@string/expenses_of"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textColor="@color/light_blue_sky"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +73,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginBottom="@dimen/margin_32dp"
-                    android:text="May, 2020"
+                    tools:text="May, 2020"
+                    android:text="@{viewModel.selectedDateFormatted}"
                     android:textAppearance="?attr/textAppearanceHeadline4"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toTopOf="@id/container"
@@ -88,7 +98,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/text_title_selection"
+                            android:id="@+id/title_type_selection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_16dp"
@@ -105,56 +115,100 @@
                             android:layout_marginStart="@dimen/margin_16dp"
                             android:layout_marginTop="@dimen/margin_8dp"
                             android:layout_marginEnd="@dimen/margin_16dp"
+                            android:background="@{viewModel.expensesDataState.errorExpensesNumber ? @drawable/shape_red_square : null}"
                             android:overScrollMode="never"
-                            app:layout_constraintBottom_toTopOf="@id/text_title_amount"
+                            android:paddingHorizontal="@dimen/padding_5dp"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/text_title_selection" />
+                            app:layout_constraintTop_toBottomOf="@id/title_type_selection"
+                            app:spanCount="3"
+                            tools:itemCount="8"
+                            tools:listitem="@layout/list_item_expenditure_category_selection" />
 
                         <TextView
-                            android:id="@+id/text_title_amount"
+                            android:id="@+id/selection_error_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceCaption"
+                            android:textColor="?colorError"
+                            android:visibility="@{viewModel.expensesDataState.errorExpensesNumber ? View.VISIBLE : View.INVISIBLE}"
+                            app:layout_constraintTop_toBottomOf="@id/list_expenditure_category"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="@string/form_error_field_required"
+                            android:layout_marginStart="@dimen/margin_16dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/title_amount_payed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_16dp"
-                            android:layout_marginTop="@dimen/margin_16dp"
-                            android:text="@string/amount"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:text="@string/amount_payed"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/list_expenditure_category" />
+                            app:layout_constraintTop_toBottomOf="@id/selection_error_text" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/text_layout_amount"
+                            android:id="@+id/layout_amount_payed"
                             style="@style/Widget.clinicManagement.TextInputLayout.OutlinedBox.BottomSheet"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_16dp"
                             android:layout_marginTop="@dimen/margin_8dp"
                             android:layout_marginEnd="@dimen/margin_16dp"
+                            app:errorEnabled="true"
+                            app:errorTextResource="@{viewModel.expensesDataState.errorAmountPayed}"
                             app:hintEnabled="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/text_title_amount"
+                            app:layout_constraintTop_toBottomOf="@id/title_amount_payed"
                             app:suffixText="@string/moroccan_currency">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/text_field_amount"
-                                android:hint="@string/hint_expenditure_amount"
+                                android:id="@+id/text_amount_payed"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:textAlignment="center"
+                                app:OnExpensesAmountChanged="@{viewModel}"
+                                android:hint="@string/hint_expenditure_amount" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/button_save"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/margin_16dp"
                             android:layout_marginTop="@dimen/margin_16dp"
-                            android:layout_marginEnd="@dimen/margin_16dp"
                             android:layout_marginBottom="@dimen/margin_16dp"
+                            android:onClick="@{() -> viewModel.submit()}"
                             android:text="@string/save"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/text_layout_amount" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/layout_amount_payed" />
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progress_circular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_16dp"
+                            android:indeterminate="true"
+                            android:visibility="gone"
+                            tools:visibility="visible"
+                            android:translationZ="3dp"
+                            app:trackCornerRadius="4dp"
+                            app:indicatorSize="@dimen/size_button_circular_progress"
+                            app:trackColor="#00000000"
+                            app:indicatorColor="@color/blue_sky"
+                            app:layout_constraintEnd_toEndOf="@id/button_save"
+                            app:layout_constraintTop_toTopOf="@id/button_save"
+                            app:layout_constraintBottom_toBottomOf="@id/button_save"
+                            />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

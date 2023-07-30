@@ -1,18 +1,15 @@
 package com.example.android.clinicmanagement.patientsList
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.PatientStatus
 import com.example.android.clinicmanagement.databinding.ListItemPatientsBinding
-import com.example.android.clinicmanagement.expenditures.ExpenditureCategoryAdapter.ViewHolder.Companion.recyclerView
 
 class PatientsAdapter(private val patientClickListener: PatientClickListener) :
     PagingDataAdapter<PatientStatus, PatientsAdapter.ViewHolder>(PATIENT_STATUS_DIFF_CALLBACK) {

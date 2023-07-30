@@ -113,12 +113,12 @@ class NewSessionFragment : BottomSheetDialogFragment() {
 
 
         binding.layoutTime.setStartIconOnClickListener {
-            // Respond to end icon presses
+            // Respond to start icon presses
             timePicker.show(childFragmentManager, "tag1")
         }
 
         binding.layoutDate.setStartIconOnClickListener {
-            // Respond to end icon presses
+            // Respond to start icon presses
             datePicker.show(childFragmentManager, "tag2")
         }
         // Add an Observer on the state variable for whether to show the circular indicator,
@@ -129,7 +129,6 @@ class NewSessionFragment : BottomSheetDialogFragment() {
                     progressCircular.crossFadeIn()
                 } else {
                     viewLifecycleOwner.lifecycleScope.launch {
-                        //textFilterFirstName
                         progressCircular.crossFadeOut()
                         delay(700L)
                         Snackbar.make(

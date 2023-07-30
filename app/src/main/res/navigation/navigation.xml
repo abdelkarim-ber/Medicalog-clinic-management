@@ -6,10 +6,10 @@
     app:startDestination="@id/statistics">
 
     <fragment
-        android:id="@+id/expenditures"
-        android:name="com.example.android.clinicmanagement.expenditures.ExpendituresFragment"
-        android:label="fragment_expenditures"
-        tools:layout="@layout/fragment_expenditures" />
+        android:id="@+id/expenses"
+        android:name="com.example.android.clinicmanagement.expenses.ExpensesFragment"
+        android:label="fragment_expenses"
+        tools:layout="@layout/fragment_expenses" />
     <fragment
         android:id="@+id/patients"
         android:name="com.example.android.clinicmanagement.patientsList.PatientsFragment"
@@ -97,8 +97,8 @@
         tools:layout="@layout/fragment_statistics"
         >
         <action
-            android:id="@+id/action_statistics_to_expenditures"
-            app:destination="@id/expenditures"
+            android:id="@+id/action_statistics_to_expenses"
+            app:destination="@id/expenses"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"

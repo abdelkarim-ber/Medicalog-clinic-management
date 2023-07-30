@@ -43,6 +43,8 @@ class StatisticsViewModel(
 
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, -1)
+        //To avoid gaps for ex when it is the month of february
+        calendar.set(Calendar.DAY_OF_MONTH, 10)
         val previousMonth = monthFormat.format(calendar.time)
         _selectedDateInMillis.value = calendar.timeInMillis
         loadStatisticsForMonth(previousMonth)

@@ -19,7 +19,7 @@
     <string name="title_age_range">Age range %1$d y.o - %2$d y.o </string>
     <string name="month_year_dialog_title">%1$s, %2$s</string>
     <string name="select_category">Select a category :</string>
-    <string name="amount">Amount</string>
+<!--    <string name="amount">Amount</string>-->
     <string name="save">save</string>
     <string name="update">update</string>
     <string name="add_patient">Add patient</string>
@@ -84,7 +84,7 @@
     <string name="add_session">Add session</string>
 
 <!--    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>-->
-    <string name="expenditures_of">Expenditures Of :</string>
+    <string name="expenses_of">Expenses Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
 
     <string name="statistics_empty_state_message">For the selected month, no statistics can be shown.</string>
@@ -125,6 +125,7 @@
         <item quantity="other">%1$d sessions</item>
     </plurals>
 
+    <string name="new_expense_add">New expense info was added successfully</string>
     <string name="new_session_add">New session info was added successfully</string>
     <string name="patient_session_deletion">The session was successfully removed</string>
 

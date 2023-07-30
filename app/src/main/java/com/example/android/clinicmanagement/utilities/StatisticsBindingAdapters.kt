@@ -14,6 +14,7 @@ import com.example.android.clinicmanagement.barChart.RoundedBarChart
 import com.example.android.clinicmanagement.barChart.RoundedBarChartBuilder
 import com.example.android.clinicmanagement.data.models.TotalByMonth
 import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
+import com.example.android.clinicmanagement.expenses.ExpensesType
 import com.example.android.clinicmanagement.statistics.ExpenditureListAdapter
 import com.example.android.clinicmanagement.statistics.StatisticsScreenData
 import com.github.mikephil.charting.data.BarEntry
@@ -277,74 +278,30 @@ fun RecyclerView.setExpensesList(uiState: UiState,expensesTitle:View) {
 
 @BindingAdapter("expensesBgColor")
 fun View.setExpensesBgColor(totalSpentByCategory: TotalSpentByCategory) {
-    val color =  when (totalSpentByCategory.expendCategory) {
-            0 -> R.color.expenses_bright_pink_crayola
-            1 -> R.color.expenses_coral
-            2 -> R.color.expenses_blue_ncs
-            3 -> R.color.expenses_emerald
-            4 -> R.color.expenses_mantis
-            5 -> R.color.expenses_light_sea_green
-            6 -> R.color.expenses_midnight_green
-            else -> R.color.expenses_sunglow
-        }
-    this.setBackgroundColor(ContextCompat.getColor(context,color))
+    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    this.setBackgroundColor(ContextCompat.getColor(context,expensesType!!.colorRes))
 }
 
 @BindingAdapter("expensesTintColor")
 fun ImageView.setExpensesTintColor(totalSpentByCategory: TotalSpentByCategory) {
-    val color = when (totalSpentByCategory.expendCategory) {
-        0 -> R.color.expenses_bright_pink_crayola
-        1 -> R.color.expenses_coral
-        2 -> R.color.expenses_blue_ncs
-        3 -> R.color.expenses_emerald
-        4 -> R.color.expenses_mantis
-        5 -> R.color.expenses_light_sea_green
-        6 -> R.color.expenses_midnight_green
-        else -> R.color.expenses_sunglow
-    }
-    this.setColorFilter(ContextCompat.getColor(context,color))
+    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    this.setColorFilter(ContextCompat.getColor(context,expensesType!!.colorRes))
 }
 @BindingAdapter("expensesTintColor")
 fun View.setExpensesTintColor(totalSpentByCategory: TotalSpentByCategory) {
-    val color = when (totalSpentByCategory.expendCategory) {
-        0 -> R.color.expenses_bright_pink_crayola
-        1 -> R.color.expenses_coral
-        2 -> R.color.expenses_blue_ncs
-        3 -> R.color.expenses_emerald
-        4 -> R.color.expenses_mantis
-        5 -> R.color.expenses_light_sea_green
-        6 -> R.color.expenses_midnight_green
-        else -> R.color.expenses_sunglow
-    }
-    this.background.setTint(ContextCompat.getColor(context,color))
+    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    this.background.setTint(ContextCompat.getColor(context,expensesType!!.colorRes))
 }
 
 @BindingAdapter("expensesCategoryIcon")
 fun ImageView.setExpensesCategoryIcon(totalSpentByCategory: TotalSpentByCategory) {
-    val icon = when (totalSpentByCategory.expendCategory) {
-        0    -> R.drawable.ic_expenditure_receipt
-        1    -> R.drawable.ic_expenditure_home
-        2    -> R.drawable.ic_expenditure_home_repair
-        3    -> R.drawable.ic_expenditure_insurance
-        4    -> R.drawable.ic_expenditure_wallet
-        5    -> R.drawable.ic_expenditure_tax
-        6    -> R.drawable.ic_expenditure_medical_supplies
-        else -> R.drawable.ic_expenditure_divers
-    }
-    this.setImageResource(icon)
+    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    this.setImageResource(expensesType!!.iconResource)
 }
 
 @BindingAdapter("expensesCategoryName")
 fun TextView.setExpensesCategoryName(totalSpentByCategory: TotalSpentByCategory) {
-    this.text = when (totalSpentByCategory.expendCategory) {
-        0    -> context.getString(R.string.utilities)
-        1    -> context.getString(R.string.rent)
-        2    -> context.getString(R.string.repair)
-        3    -> context.getString(R.string.insurance)
-        4    -> context.getString(R.string.wages)
-        5    -> context.getString(R.string.tax)
-        6    -> context.getString(R.string.supplies)
-        else -> context.getString(R.string.divers)
-    }
+    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    this.text = context.getString(expensesType!!.stringResource)
 
 }

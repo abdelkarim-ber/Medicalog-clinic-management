@@ -148,7 +148,8 @@ class MonthPickerDialog : DialogFragment() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.MONTH, binding.pickerMonth.value)
         calendar.set(Calendar.YEAR, years[binding.pickerYear.value].toInt())
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        //To avoid gaps for ex when it is the month of february.
+        calendar.set(Calendar.DAY_OF_MONTH, 10)
         return calendar.timeInMillis / 1000
     }
 }
