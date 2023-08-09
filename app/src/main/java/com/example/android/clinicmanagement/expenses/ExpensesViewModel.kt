@@ -74,6 +74,19 @@ class ExpensesViewModel(
         monthYearFormat.format(it)
     }
 
+    /**
+     * Variable that tells the fragment to show the snack bar.
+     */
+    private val _showSnackBarEvent = MutableLiveData<Boolean>()
+
+    /**
+     * The immutable and exposed version of [_showSnackBarEvent].
+     */
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackBarEvent
+
+
+
     init {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, -1)
@@ -138,6 +151,7 @@ class ExpensesViewModel(
 
                 // To hide the circular progress indicator
                 _showCircularProgress.value = false
+                _showSnackBarEvent.value = true
 
             }
         }
@@ -158,4 +172,15 @@ class ExpensesViewModel(
         _previousCardSelected.value = _currentCardSelected.value
         expensesDataState = expensesDataState.copy(expensesNumber = -1)
     }
+
+
+    /**
+     * Called to clear the request of showing the snack bar.
+     */
+    fun doneShowingSnackBar() {
+        _showSnackBarEvent.value = false
+    }
+
+
+
 }

@@ -58,6 +58,7 @@
 
         <item name="bottomNavigationStyle">@style/Widget.clinicManagement.BottomNavigationView</item>
         <item name="chipStyle">@style/Widget.clinicManagement.Chip</item>
+        <item name="radioButtonStyle">@style/Widget.clinicManagement.RadioButton</item>
 
     </style>
 
@@ -73,6 +74,11 @@
     <style name="ThemeOverlay.ClinicManagement.Picker" parent="" >
         <item name="android:fontFamily">@font/dosis</item>
         <item name="android:textSize">23sp</item>
+    </style>
+
+    <style name="ThemeOverlay.ClinicManagement.MaterialDialog" parent="">
+        <item name="colorControlNormal">@color/dark_blue_sky</item>
+        <item name="colorControlActivated">@color/dark_blue_sky</item>
     </style>
 
 </resources>

@@ -144,6 +144,15 @@
     <string name="dialog_deletion_confirmation_title">Confirm deletion</string>
     <string name="dialog_deletion_confirmation_message">Are you sure you want to delete this session?</string>
 
+    <string name="dialog_order_title">Order by</string>
+    <string name="recently_added">Recently added</string>
+
+    <string name="expense_history_deletion">The expense was successfully removed</string>
+
+    <string name="expenses_history_empty_state_tagline">No expenses</string>
+    <string name="expenses_history_empty_state_message">Start adding expenses to view history.</string>
+    <string name="expenses_history_loading_message">Loading expenses history list…</string>
+
 
     <string name="dialog_confirm">confirm</string>
     <string name="dialog_ok">ok</string>

@@ -121,27 +121,24 @@ class NewSessionFragment : BottomSheetDialogFragment() {
             // Respond to start icon presses
             datePicker.show(childFragmentManager, "tag2")
         }
-        // Add an Observer on the state variable for whether to show the circular indicator,
-        // or hide it and dismiss the dialog.
-        newSessionViewModel.showCircularProgress.observe(viewLifecycleOwner) { isProgressIndicVisible ->
-            with(binding) {
-                if (isProgressIndicVisible) {
-                    progressCircular.crossFadeIn()
-                } else {
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        progressCircular.crossFadeOut()
-                        delay(700L)
-                        Snackbar.make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.new_session_add),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        dismiss()
-                    }
 
-                }
+        // Add an Observer on the state variable for showing the snack bar when we add a patient's session.
+        newSessionViewModel.showSnackBarEvent.observe(viewLifecycleOwner) { isShowingSnackBar ->
+            if (isShowingSnackBar) {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.new_session_add),
+                    Snackbar.LENGTH_LONG
+                ).show()
+                // Reset state to make sure the snackBar is only shown once, even if the device
+                // has a configuration change.
+                newSessionViewModel.doneShowingSnackBar()
+                dismiss()
             }
         }
+
+
+
 
     }
 }

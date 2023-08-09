@@ -1,5 +1,6 @@
 package com.example.android.clinicmanagement.utilities
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
@@ -18,6 +19,19 @@ fun TextInputEditText.setOnExpensesAmountChanged(viewModel: ExpensesViewModel) {
 }
 
 @BindingAdapter("expensesIcon")
-fun ImageView.setExpensesIcon(iconResource:Int){
+fun ImageView.setExpensesIcon(iconResource: Int) {
     this.setImageResource(iconResource)
 }
+
+@BindingAdapter("showProgressIndic")
+fun View.showProgressIndic(isShown: Boolean) {
+    if (isShown) {
+        if (visibility == View.GONE) crossFadeIn()
+    } else {
+        if (visibility == View.VISIBLE) crossFadeOut()
+    }
+}
+
+
+
+

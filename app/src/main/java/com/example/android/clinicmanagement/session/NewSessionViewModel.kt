@@ -31,10 +31,22 @@ class NewSessionViewModel
     val showCircularProgress: LiveData<Boolean> = _showCircularProgress
 
     /**
+     * Variable that tells the fragment to show the snack bar.
+     */
+    private val _showSnackBarEvent = MutableLiveData<Boolean>()
+
+    /**
+     * The immutable and exposed version of [_showSnackBarEvent].
+     */
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackBarEvent
+
+    /**
      * Variable that store the values of the textInputEditTexts
      * and the states of the error values of those textInputEditTexts.
      */
     var newSessionDataState = NewSessionDataState()
+
 
     /**
      * Called whenever we made a change in the textInputEditTexts
@@ -86,8 +98,18 @@ class NewSessionViewModel
                 }
                 // To hide the circular progress indicator
                 _showCircularProgress.value = false
+                _showSnackBarEvent.value = true
             }
         }
 
     }
+
+
+    /**
+     * Called to clear the request of showing the snack bar.
+     */
+    fun doneShowingSnackBar() {
+        _showSnackBarEvent.value = false
+    }
+
 }

@@ -57,7 +57,7 @@ class PatientHistoryViewModel(patientId: Long, private val sessionsRepository: S
      * Called after we delete the desired session to
      * confirm that the deletion was done successfully.
      */
-    fun showSnackBar() {
+    private fun showSnackBar() {
         _showSnackBarEvent.value = true
     }
     /**

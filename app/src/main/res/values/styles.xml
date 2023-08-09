@@ -111,6 +111,17 @@
         <item name="cornerSizeTopRight">@dimen/size_corner_32dp</item>
         <item name="cornerSizeBottomRight">@dimen/size_corner_8dp</item>
         <item name="cornerSizeBottomLeft">@dimen/size_corner_8dp</item>
+    </style>
+
+    <style name="Widget.clinicManagement.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="colorAccent">@color/light_midnight</item>
+        <item name="colorControlHighlight">@color/light_blue_sky</item>
+        <item name="android:colorPressedHighlight">@color/light_blue_sky</item>
+        <item name="colorPrimaryDark">@color/midnight</item>
+        <item name="colorPrimary">@color/midnight</item>
+        <item name="colorControlActivated">@color/midnight</item>
 
     </style>
+
+
 </resources>

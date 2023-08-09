@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
@@ -77,6 +78,7 @@ class ExpensesFragment : Fragment() {
         binding.toolBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.calendar -> monthPicker.showMonthPicker(childFragmentManager, "tag")
+                R.id.history ->  findNavController().navigate(ExpensesFragmentDirections.actionExpensesToExpensesHistoryFragment())
             }
             true
         }
@@ -87,31 +89,23 @@ class ExpensesFragment : Fragment() {
         binding.listExpenditureCategory.adapter = adapter
 
 
-
-
-
-        // Add an Observer on the state variable for whether to show the circular indicator,
-        // or hide it and dismiss the dialog.
-        expensesViewModel.showCircularProgress.observe(viewLifecycleOwner) { isProgressIndicVisible ->
-            with(binding) {
-                if (isProgressIndicVisible) {
-                    progressCircular.crossFadeIn()
-                } else {
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        progressCircular.crossFadeOut()
-                        delay(700L)
-                        Snackbar.make(
-                            requireActivity().findViewById(android.R.id.content),
-                            getString(R.string.new_expense_add),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                        binding.textAmountPayed.text?.clear()
-                        expensesViewModel.clearExpensesTypeSelection()
-                    }
-
-                }
+        // Add an Observer on the state variable for showing the snack bar when we add an expense.
+        expensesViewModel.showSnackBarEvent.observe(viewLifecycleOwner) { isShowingSnackBar ->
+            if (isShowingSnackBar) {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.new_expense_add),
+                    Snackbar.LENGTH_LONG
+                ).show()
+                binding.textAmountPayed.text?.clear()
+                expensesViewModel.clearExpensesTypeSelection()
+                // Reset state to make sure the snackBar is only shown once, even if the device
+                // has a configuration change.
+                expensesViewModel.doneShowingSnackBar()
             }
+
         }
+
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
         val bluishWhiteColor = ContextCompat.getColor(requireContext(), R.color.bluish_white)
         val midnightColor = ContextCompat.getColor(requireContext(), R.color.midnight)

@@ -148,6 +148,7 @@
                 android:translationZ="3dp"
                 app:trackCornerRadius="4dp"
                 app:indicatorSize="@dimen/size_button_circular_progress"
+                app:showProgressIndic="@{viewModel.showCircularProgress}"
                 app:trackColor="#00000000"
                 app:indicatorColor="@color/blue_sky"
                 app:layout_constraintEnd_toEndOf="@id/button_save"

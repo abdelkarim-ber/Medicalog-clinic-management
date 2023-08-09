@@ -34,6 +34,7 @@ class ExpensesCategoryAdapter(private val expensesTypeClickListener: ExpensesTyp
             binding.expensesType = data
             binding.expensesTypeClickListener = expensesTypeClickListener
             binding.itemPosition = position
+            binding.executePendingBindings()
         }
 
         companion object {

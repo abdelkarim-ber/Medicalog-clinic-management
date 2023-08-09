@@ -204,6 +204,7 @@
                             app:trackCornerRadius="4dp"
                             app:indicatorSize="@dimen/size_button_circular_progress"
                             app:trackColor="#00000000"
+                            app:showProgressIndic="@{viewModel.showCircularProgress}"
                             app:indicatorColor="@color/blue_sky"
                             app:layout_constraintEnd_toEndOf="@id/button_save"
                             app:layout_constraintTop_toTopOf="@id/button_save"
