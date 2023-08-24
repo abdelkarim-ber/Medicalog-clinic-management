@@ -109,7 +109,8 @@ class PatientFormFragment : Fragment() {
         view.doOnPreDraw {
             startPostponedEnterTransition()
         }
-
+        // Add an Observer on the state variable for showing the snack bar when
+        // we add a new patient info or update an existing patient info successfully.
         patientFormViewModel.showSnackBarEvent.observe(viewLifecycleOwner) {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
@@ -122,6 +123,18 @@ class PatientFormFragment : Fragment() {
                 patientFormViewModel.doneShowingSnackBar()
             }
         }
+        // Add an Observer on the state variable for showing a toast message to inform the user
+        // that there is an error when trying to save an invalid patient info.
+        patientFormViewModel.showToastEvent.observe(viewLifecycleOwner) {
+            if (it == true) {
+                Toast.makeText(context, R.string.form_error_toast, Toast.LENGTH_LONG).show()
+                patientFormViewModel.doneShowingToastMessage()
+            }
+        }
+
+
+        // Add an Observer on the state variable for clearing all input fields after
+        // we successfully save the patient info.
         patientFormViewModel.clearFormEvent.observe(viewLifecycleOwner) { isClearState ->
             if (isClearState) {
                 with(binding) {
@@ -186,7 +199,10 @@ class PatientFormFragment : Fragment() {
         setTotalCalculation()
     }
 
-
+    /**
+     * Called to set onTextChanged listeners on both session count & session price
+     * to calculate the total each time we change their content.
+     */
     private fun setTotalCalculation() {
         with(binding) {
             textSessionCount.doOnTextChanged { text, start, before, count ->

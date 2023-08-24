@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +12,6 @@ import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding
 import com.example.android.clinicmanagement.monthPicker.MonthPickerDialog
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class StatisticsFragment : Fragment() {
@@ -32,8 +29,7 @@ class StatisticsFragment : Fragment() {
 
         val statisticsViewModelFactory = StatisticsViewModelFactory(
             appContainer.sessionsRepository,
-            appContainer.expenditureRepository,
-            application
+            appContainer.expenditureRepository
         )
 
         val viewModel = ViewModelProvider(
@@ -63,7 +59,7 @@ class StatisticsFragment : Fragment() {
 
         val monthPicker = MonthPickerDialog()
         monthPicker.addOnPositiveButtonClickListener { dateInSeconds ->
-            statisticsViewModel.setSelectedMonth(dateInSeconds * 1000)
+            statisticsViewModel.loadStatsForMonth(dateInSeconds * 1000)
         }
 
         binding.toolBar.setOnMenuItemClickListener {

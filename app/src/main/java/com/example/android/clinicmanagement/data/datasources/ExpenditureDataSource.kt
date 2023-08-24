@@ -6,6 +6,7 @@ import com.example.android.clinicmanagement.data.models.Expenditure
 import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
 import com.example.android.clinicmanagement.data.models.TotalByMonth
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class ExpenditureDataSource(private val expenditureDao: ExpenditureDao) {
@@ -26,22 +27,16 @@ class ExpenditureDataSource(private val expenditureDao: ExpenditureDao) {
         expenditureDao.loadExpensesOrderedBy(order)
 
 
-    suspend fun loadTotalByCategoryForMonth(month: String): Array<TotalSpentByCategory>? {
-        return withContext(Dispatchers.IO) {
-            expenditureDao.loadTotalByCategoryForMonth(month)
-        }
-    }
+    fun loadExpensesByCategoryForMonth(month: String): Flow<Array<TotalSpentByCategory>?> =
+            expenditureDao.loadExpensesByCategoryForMonth(month)
 
-    suspend fun getExpensesForMonth(month: String): Int? {
-        return withContext(Dispatchers.IO) {
+
+    fun getExpensesForMonth(month: String): Flow<Int?> =
             expenditureDao.getExpensesForMonth(month)
-        }
-    }
 
-    suspend fun loadExpenditureStatsForMonthAndNeighbors(month: String): Array<TotalByMonth>? {
-        return withContext(Dispatchers.IO) {
+
+    fun loadExpenditureStatsForMonthAndNeighbors(month: String): Flow<Array<TotalByMonth>?> =
             expenditureDao.loadExpenditureStatsForMonthAndNeighbors(month)
-        }
-    }
+
 
 }

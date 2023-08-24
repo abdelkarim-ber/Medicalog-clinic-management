@@ -34,7 +34,7 @@ class MonthPickerDialog : DialogFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            com.example.android.clinicmanagement.R.layout.dialog_fragment_month_picker,
+            R.layout.dialog_fragment_month_picker,
             container,
             false
         )
@@ -92,9 +92,9 @@ class MonthPickerDialog : DialogFragment() {
         val currentDate = Calendar.getInstance()
 
         val locale = Locale.getDefault()
-        val monthFormatter = SimpleDateFormat("MMM", locale)
+        val monthFormatter = SimpleDateFormat("MMMM", locale)
         val currentMonth = monthFormatter.format(currentDate.time)
-        _selectedMonth.value = currentMonth
+        _selectedMonth.value = currentMonth.take(3)
 
         val months = mutableListOf<String>()
         for (i in Calendar.JANUARY..Calendar.DECEMBER) {
@@ -110,7 +110,7 @@ class MonthPickerDialog : DialogFragment() {
 
         binding.pickerMonth.setOnValueChangedListener { picker, oldVal, newVal ->
             val selectedMonthValue = binding.pickerMonth.value
-            _selectedMonth.value = months[selectedMonthValue]
+            _selectedMonth.value = months[selectedMonthValue].take(3)
         }
 
     }

@@ -1,94 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="totalSpentByCategory"
             type="com.example.android.clinicmanagement.data.models.TotalSpentByCategory" />
     </data>
 
-<com.google.android.material.card.MaterialCardView
-    android:layout_width="@dimen/width_expenditures_card"
-    android:layout_height="@dimen/height_expenditures_card"
-    android:layout_marginEnd="@dimen/margin_16dp"
-    android:layout_marginBottom="@dimen/margin_16dp"
-    app:strokeColor="@color/dark_midnight"
-    app:strokeWidth="@dimen/width_stroke_card"
-    app:cardElevation="0dp"
-    >
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/width_expenditures_card"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/size_corner_8dp"
+        app:strokeColor="@color/dark_midnight"
+        app:strokeWidth="@dimen/width_stroke_card">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/circle"
-            android:layout_width="@dimen/size_circle_background"
-            android:layout_height="@dimen/size_circle_background"
-            app:expensesTintColor="@{totalSpentByCategory}"
-            android:alpha="@dimen/opacity_20"
-            android:background="@drawable/shape_circle"
-            android:layout_marginStart="@dimen/margin_16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/card_bar"
-            app:layout_constraintTop_toTopOf="parent" />
-        <View
-            android:id="@+id/card_bar"
-            android:layout_width="8dp"
-            android:layout_height="0dp"
-            app:expensesBgColor="@{totalSpentByCategory}"
-            tools:background="@color/light_blue_sky"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/circle"
+                android:layout_width="@dimen/size_image_40dp"
+                android:layout_height="@dimen/size_image_40dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:background="@drawable/shape_circle"
+                app:expensesTintColor="@{totalSpentByCategory}"
+                app:layout_constraintBottom_toBottomOf="@id/text_expenditure_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_expenditure_category"
+                tools:tint="@color/expenses_coral" />
 
-        <ImageView
-            android:id="@+id/image_icon"
-            android:scaleType="fitCenter"
-            android:layout_width="@dimen/size_image_40dp"
-            android:layout_height="@dimen/size_image_40dp"
-            app:expensesTintColor="@{totalSpentByCategory}"
-            app:expensesCategoryIcon="@{totalSpentByCategory}"
-            android:src="@drawable/ic_expenditure_home_repair"
-            app:layout_constraintBottom_toBottomOf="@+id/circle"
-            app:layout_constraintEnd_toEndOf="@+id/circle"
-            app:layout_constraintStart_toStartOf="@+id/circle"
-            app:layout_constraintTop_toTopOf="@+id/circle" />
+            <ImageView
+                android:id="@+id/image_icon"
+                android:layout_width="@dimen/size_image_20dp"
+                android:layout_height="@dimen/size_image_20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_expenditure_home_repair"
+                app:expensesCategoryIcon="@{totalSpentByCategory}"
+                app:layout_constraintBottom_toBottomOf="@+id/circle"
+                app:layout_constraintEnd_toEndOf="@+id/circle"
+                app:layout_constraintStart_toStartOf="@+id/circle"
+                app:layout_constraintTop_toTopOf="@+id/circle"
+                app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/text_expenditure_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16dp"
-            app:expensesCategoryName="@{totalSpentByCategory}"
-            app:layout_constraintBottom_toTopOf="@id/text_expenditure_amount"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@color/light_midnight"
-            app:layout_constraintStart_toEndOf="@+id/circle"
-            app:layout_constraintTop_toTopOf="@+id/circle"
-            tools:text="@string/tax" />
+            <TextView
+                android:id="@+id/text_expenditure_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/light_midnight"
+                app:expensesCategoryName="@{totalSpentByCategory}"
+                app:layout_constraintBottom_toTopOf="@id/text_expenditure_amount"
+                app:layout_constraintStart_toEndOf="@+id/circle"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/tax" />
 
-        <TextView
-            android:id="@+id/text_expenditure_amount"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_container_text_headline5"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textColor="@color/black"
-            android:layout_marginEnd="@dimen/margin_8dp"
-            app:autoSizeMaxTextSize="25sp"
-            app:autoSizeMinTextSize="17sp"
-            app:autoSizeStepGranularity="1sp"
-            app:autoSizeTextType="uniform"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:text="@{totalSpentByCategory.total+` DH`}"
-            app:layout_constraintBottom_toBottomOf="@+id/circle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_expenditure_category"
-            app:layout_constraintTop_toBottomOf="@+id/text_expenditure_category"
-            tools:text="200000 DH" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/text_expenditure_amount"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_container_text_subtitle1"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:gravity="center_vertical"
+                android:text="@{@string/moroccan_currency_with_number(totalSpentByCategory.total)}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="17sp"
+                app:autoSizeMinTextSize="13sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_expenditure_category"
+                app:layout_constraintTop_toBottomOf="@+id/text_expenditure_category"
+                tools:text="20000 DH" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

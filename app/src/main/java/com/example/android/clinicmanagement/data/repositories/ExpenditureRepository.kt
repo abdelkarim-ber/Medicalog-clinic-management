@@ -9,6 +9,7 @@ import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
 import com.example.android.clinicmanagement.data.models.TotalByMonth
 import com.example.android.clinicmanagement.expensesHistory.ExpensesHistoryViewModel.OrderType
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 private const val ITEMS_PER_PAGE = 10
 private const val MAX_ITEMS = 50
@@ -37,12 +38,12 @@ class ExpenditureRepository(private val expenditureDataSource: ExpenditureDataSo
     }
 
 
-    suspend fun loadTotalByCategoryForMonth(month: String): Array<TotalSpentByCategory>? =
-        expenditureDataSource.loadTotalByCategoryForMonth(month)
+    fun loadExpensesByCategoryForMonth(month: String): Flow<List<TotalSpentByCategory>?> =
+        expenditureDataSource.loadExpensesByCategoryForMonth(month).map { it?.toList() }
 
-    suspend fun getExpensesForMonth(month: String):Int? =
+    fun getExpensesForMonth(month: String):Flow<Int?> =
         expenditureDataSource.getExpensesForMonth(month)
 
-    suspend fun loadExpenditureStatsForMonthAndNeighbors(month: String): Array<TotalByMonth>? =
-        expenditureDataSource.loadExpenditureStatsForMonthAndNeighbors(month)
+    fun loadExpenditureStatsForMonthAndNeighbors(month: String): Flow<List<TotalByMonth>?> =
+        expenditureDataSource.loadExpenditureStatsForMonthAndNeighbors(month).map { it?.toList() }
 }

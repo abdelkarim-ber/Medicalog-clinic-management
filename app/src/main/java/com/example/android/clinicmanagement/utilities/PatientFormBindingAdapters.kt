@@ -50,19 +50,14 @@ fun AutoCompleteTextView.setOnTextChangedAction(viewModel: PatientFormViewModel)
 }
 
 @BindingAdapter("previousValue")
-fun AutoCompleteTextView.setPreviousValue(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        val patientData = (uiState.content as? PatientFormDataState)
+fun AutoCompleteTextView.setPreviousValue(patientData: PatientFormDataState?) {
         if (patientData != null) {
             this.setText(adapter.getItem(patientData.gender).toString(),false)
         }
-    }
 }
 
 @BindingAdapter("previousValue")
-fun TextInputEditText.setPreviousValue(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        val patientData = (uiState.content as? PatientFormDataState)
+fun TextInputEditText.setPreviousValue(patientData: PatientFormDataState?) {
         if (patientData != null) {
             this.setText(
                 when (this.id) {
@@ -80,6 +75,5 @@ fun TextInputEditText.setPreviousValue(uiState: UiState) {
                     else -> throw java.lang.Exception("No Edittext Id matches")
                 }
             )
-        }
     }
 }

@@ -3,10 +3,6 @@ package com.example.android.clinicmanagement.barChart
 
 import android.content.Context
 import android.graphics.*
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.RelativeSizeSpan
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -15,9 +11,9 @@ import com.github.mikephil.charting.animation.ChartAnimator
 import com.github.mikephil.charting.buffer.BarBuffer
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.Chart
+import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.highlight.Range
@@ -28,7 +24,6 @@ import com.github.mikephil.charting.renderer.BarChartRenderer
 import com.github.mikephil.charting.utils.Transformer
 import com.github.mikephil.charting.utils.Utils
 import com.github.mikephil.charting.utils.ViewPortHandler
-import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 
@@ -50,13 +45,13 @@ class RoundedBarChart : BarChart {
 
 
     private fun styleChart() {
-        val comfortaTypeFace: Typeface? = ResourcesCompat.getFont(context, R.font.nunito)
+        val nunitoTypeFace: Typeface? = ResourcesCompat.getFont(context, R.font.nunito)
         val paint: Paint = getPaint(Chart.PAINT_INFO)
 
         paint.fontFeatureSettings
         paint.textSize = 25f
         paint.color = ContextCompat.getColor(context, R.color.blue_sky)
-        paint.typeface = comfortaTypeFace
+        paint.typeface = nunitoTypeFace
 
         setNoDataText(context.getString(R.string.chart_no_data_message))
 
@@ -67,7 +62,12 @@ class RoundedBarChart : BarChart {
             setDrawAxisLine(true)
             setDrawGridLines(false)
             position = XAxis.XAxisPosition.BOTTOM
-            typeface = comfortaTypeFace
+            typeface = nunitoTypeFace
+            textSize = 12f
+            textColor = ContextCompat.getColor(context, R.color.black)
+            axisLineColor = ContextCompat.getColor(context, R.color.grey)
+            axisLineWidth = 3f
+
         }
         axisLeft.apply {
 
@@ -75,13 +75,21 @@ class RoundedBarChart : BarChart {
             isEnabled = true
             setDrawAxisLine(true)
             setDrawGridLines(true)
-            typeface = comfortaTypeFace
+            typeface = nunitoTypeFace
+            textSize = 11f
+            textColor = ContextCompat.getColor(context, R.color.black)
             valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
-                    return if (value != axisMinimum) "${value.roundToInt()} DH" else ""
+                    return if (value != axisMinimum) context.getString(R.string.moroccan_currency_with_number,value.roundToInt()) else ""
 
                 }
             }
+
+            axisLineColor = ContextCompat.getColor(context, R.color.grey)
+            axisLineWidth = 2f
+            gridColor = ContextCompat.getColor(context, R.color.grey)
+            gridLineWidth = 0.7f
+
         }
         setDrawBarShadow(true)
         setFitBars(true)// make the x-axis fit exactly all bars
@@ -91,6 +99,7 @@ class RoundedBarChart : BarChart {
         setPinchZoom(false)
         description = null
         legend.isEnabled = false
+        minOffset = 22f
     }
 
 

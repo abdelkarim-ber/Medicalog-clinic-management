@@ -123,7 +123,7 @@ class ExpensesHistoryViewModel(private val expenditureRepository: ExpenditureRep
      * Called when we actually have some data to show to the user.
      */
     fun showContent() {
-        _expensesHistoryUIState.value = UiState.Success(null)
+        _expensesHistoryUIState.value = UiState.Success
     }
 
     /**

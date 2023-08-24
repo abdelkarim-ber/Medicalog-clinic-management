@@ -2,6 +2,7 @@ package com.example.android.clinicmanagement.data.datasources
 
 import androidx.paging.PagingSource
 import com.example.android.clinicmanagement.data.dao.SessionsDao
+import com.example.android.clinicmanagement.data.models.IncomeAndExpenses
 import com.example.android.clinicmanagement.data.models.Session
 import com.example.android.clinicmanagement.data.models.TotalByMonth
 import kotlinx.coroutines.Dispatchers
@@ -31,15 +32,15 @@ class SessionsDataSource (private val sessionsDao: SessionsDao) {
 //            sessionsDao.getAmountPayedByPatientWithID(patientId)
 //        }
 //    }
-    suspend fun getIncomeForMonth(month: String):Int?{
-        return withContext(Dispatchers.IO){
+    fun getIncomeForMonth(month: String):Flow<Int?> =
             sessionsDao.getIncomeForMonth(month)
-        }
-    }
-    suspend fun loadIncomeStatsForMonthAndNeighbors(month: String):Array<TotalByMonth>?{
-        return withContext(Dispatchers.IO){
-            sessionsDao.loadIncomeStatsForMonthAndNeighbors(month)
-        }
-    }
 
+    fun loadIncomeStatsForMonthAndNeighbors(month: String):Flow<Array<TotalByMonth>?> =
+            sessionsDao.loadIncomeStatsForMonthAndNeighbors(month)
+
+    suspend fun loadFinancesForMonth(month: String): IncomeAndExpenses {
+        return withContext(Dispatchers.IO){
+            sessionsDao.loadFinancesForMonth(month)
+        }
+    }
 }

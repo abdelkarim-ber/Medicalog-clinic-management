@@ -85,7 +85,7 @@ class PatientHistoryViewModel(patientId: Long, private val sessionsRepository: S
      * Called when we actually have some data to show to the user.
      */
     fun showContent() {
-        _patientHistoryUIState.value = UiState.Success(null)
+        _patientHistoryUIState.value = UiState.Success
     }
 
 }

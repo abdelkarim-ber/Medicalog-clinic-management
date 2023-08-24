@@ -154,10 +154,11 @@ fun View.scaleDown() {
 
 sealed class UiState {
     data class Loading(@StringRes val messageResource:Int) : UiState()
-    data class Success<T>(val content: T) : UiState()
+    object Success : UiState()
     data class Failure(@StringRes val tagLineResource: Int,
                        @StringRes val messageResource: Int,
-                       @DrawableRes val imageDrawableRes:Int
+                       @DrawableRes val imageDrawableRes:Int,
+                       val formatArg:String? = null
                        ) : UiState()
 }
 

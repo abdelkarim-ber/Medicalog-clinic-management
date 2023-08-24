@@ -669,8 +669,8 @@
 
                     <View
                         android:id="@+id/quotation_image_bg"
-                        android:layout_width="@dimen/size_image_bg_40dp"
-                        android:layout_height="@dimen/size_image_bg_40dp"
+                        android:layout_width="@dimen/size_image_40dp"
+                        android:layout_height="@dimen/size_image_40dp"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:alpha="@dimen/opacity_20"
                         android:background="@drawable/shape_circle"
@@ -733,8 +733,8 @@
 
                     <View
                         android:id="@+id/invoice_image_bg"
-                        android:layout_width="@dimen/size_image_bg_40dp"
-                        android:layout_height="@dimen/size_image_bg_40dp"
+                        android:layout_width="@dimen/size_image_40dp"
+                        android:layout_height="@dimen/size_image_40dp"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:background="@drawable/shape_circle"
                         android:backgroundTint="@color/white"

@@ -12,7 +12,7 @@
         android:id="@+id/addExpenditure"
         android:enabled="true"
         android:icon="@drawable/ic_add_circle"
-        android:title="@string/expenditure"
+        android:title="@string/expenses"
         android:visible="true"
         app:showAsAction="ifRoom" />
 </menu>

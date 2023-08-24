@@ -72,7 +72,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="textCapWords"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +97,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="textCapCharacters"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -123,7 +123,7 @@
                         android:inputType="number"
                         android:maxLength="3"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -171,7 +171,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="phone"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -199,7 +199,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="date"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -225,7 +225,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="textCapWords"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -257,7 +257,7 @@
                         android:scrollbarStyle="insideInset"
                         android:scrollbars="vertical"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -284,7 +284,7 @@
                         android:inputType="textCapSentences"
                         android:maxLength="81"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -310,7 +310,7 @@
                         android:inputType="number"
                         android:textAlignment="textEnd"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -337,7 +337,7 @@
                         android:inputType="number"
                         android:textAlignment="textEnd"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -382,7 +382,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="textCapSentences"
                         app:onTextChangedEvent="@{viewModel}"
-                        app:previousValue="@{viewModel.patientFormUIState}" />
+                        app:previousValue="@{viewModel.oldUserInfo}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button

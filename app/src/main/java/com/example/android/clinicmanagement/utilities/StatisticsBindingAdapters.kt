@@ -1,11 +1,11 @@
 package com.example.android.clinicmanagement.utilities
 
-import android.content.Context
-import android.util.Log
+
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +16,6 @@ import com.example.android.clinicmanagement.data.models.TotalByMonth
 import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
 import com.example.android.clinicmanagement.expenses.ExpensesType
 import com.example.android.clinicmanagement.statistics.ExpenditureListAdapter
-import com.example.android.clinicmanagement.statistics.StatisticsScreenData
 import com.github.mikephil.charting.data.BarEntry
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,38 +27,39 @@ enum class ChartType {
 
 @BindingAdapter("showLoading")
 fun View.showLoading(uiState: UiState?) {
-    uiState?.let {
-        if (uiState is UiState.Loading) {
-            if (visibility == View.GONE) crossFadeIn()
-        } else {
-            if (visibility == View.VISIBLE) crossFadeOut()
-        }
+
+    if (uiState is UiState.Loading) {
+        if (visibility == View.GONE) crossFadeIn()
+    } else {
+        if (visibility == View.VISIBLE) crossFadeOut()
     }
+
 }
 
 @BindingAdapter("showPlaceHolder")
 fun View.showPlaceHolder(uiState: UiState?) {
-    uiState?.let {
-        if (uiState is UiState.Failure) {
-            if (visibility == View.GONE) scaleUp()
-        } else {
-            if (visibility == View.VISIBLE) crossFadeOut()
-        }
+
+    if (uiState is UiState.Failure) {
+        if (visibility == View.GONE) scaleUp()
+    } else {
+        if (visibility == View.VISIBLE) crossFadeOut()
     }
+
 }
 
 @BindingAdapter("showContent")
 fun View.showContent(uiState: UiState?) {
-    uiState?.let {
-        if (uiState is UiState.Success<*>) {
-            if (visibility == View.GONE)
-                crossFadeIn()
-        } else {
-            if (visibility == View.VISIBLE)
-                crossFadeOut()
-        }
+
+    if (uiState is UiState.Success) {
+        if (visibility == View.GONE)
+            crossFadeIn()
+    } else {
+        if (visibility == View.VISIBLE)
+            crossFadeOut()
     }
+
 }
+
 //Binding Adapters for empty State Screen items
 @BindingAdapter("emptyStateIcon")
 fun ImageView.setEmptyStateIcon(uiState: UiState?) {
@@ -67,6 +67,7 @@ fun ImageView.setEmptyStateIcon(uiState: UiState?) {
         this.setImageResource(uiState.imageDrawableRes)
     }
 }
+
 @BindingAdapter("tagLineText")
 fun TextView.setTagLineText(uiState: UiState?) {
     if (uiState is UiState.Failure) {
@@ -77,7 +78,13 @@ fun TextView.setTagLineText(uiState: UiState?) {
 @BindingAdapter("messageText")
 fun TextView.setMessageText(uiState: UiState?) {
     if (uiState is UiState.Failure) {
-        text = context.getString(uiState.messageResource)
+
+        text = uiState.formatArg?.let { argument ->
+
+            context.getString(uiState.messageResource, argument)
+
+        } ?: context.getString(uiState.messageResource)
+
     }
 }
 
@@ -97,8 +104,8 @@ fun ImageButton.setSwitchButtonImage(chartType: ChartType) {
     }
 }
 
-@BindingAdapter("chartTitleIcon")
-fun ImageView.setChartTitleIcon(chartType: ChartType) {
+@BindingAdapter("chartTypeIcon")
+fun ImageView.setChartTypeIcon(chartType: ChartType) {
     when (chartType) {
         ChartType.NET_INCOME -> this.setImageResource(R.drawable.ic_arrowcircle_down)
         ChartType.EXPENDITURE -> this.setImageResource(R.drawable.ic_arrowcircle_up)
@@ -108,200 +115,155 @@ fun ImageView.setChartTitleIcon(chartType: ChartType) {
 @BindingAdapter("chartTitle")
 fun TextView.setChartTitle(chartType: ChartType) {
     when (chartType) {
-        ChartType.NET_INCOME -> this.setText(R.string.title_chart_net_income_dh)
-        ChartType.EXPENDITURE -> this.setText(R.string.title_chart_expenditure_dh)
+        ChartType.NET_INCOME -> this.setText(R.string.title_chart_net_income)
+        ChartType.EXPENDITURE -> this.setText(R.string.title_chart_expenses)
     }
 }
 
 
-@BindingAdapter("expensesPercentage")
-fun TextView.setExpensesPercentage(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        val statisticsData = (uiState.content as StatisticsScreenData)
-        val income = statisticsData.income
-        val expenses = statisticsData.expenses
+@BindingAdapter("incomeOperand", "expensesOperand")
+fun TextView.setExpensesPercentage(incomeOperand: Int?, expensesOperand: Int?) {
 
-        if (income != null && income != 0) {
-            text = expenses?.let {
-                if (income <= expenses) {
-                    context.getString(R.string.statistics_spending_all)
-                } else if (expenses == 0) {
-                    context.getString(R.string.statistics_spending_nothing)
-                } else {
-                    val percentage = ((expenses.toFloat() / income) * 100).toInt()
-                    context.getString(
-                        R.string.statistics_spending_percentage,
-                        percentage
-                    )
-                }
-            } ?: context.getString(R.string.statistics_spending_nothing)
-        } else {
-            this.visibility = View.INVISIBLE
-        }
-
+    text = if (incomeOperand != null && incomeOperand != 0) {
+         expensesOperand?.let {
+            if (incomeOperand <= expensesOperand) {
+                context.getString(R.string.statistics_spending_all)
+            } else if (expensesOperand == 0) {
+                context.getString(R.string.statistics_spending_nothing)
+            } else {
+                val percentage = ((expensesOperand.toFloat() / incomeOperand) * 100).toInt()
+                context.getString(
+                    R.string.statistics_spending_percentage,
+                    percentage
+                )
+            }
+        } ?: context.getString(R.string.statistics_spending_nothing)
+    } else {
+        ""
     }
+
+
 }
 
 @BindingAdapter("incomeData")
-fun TextView.setIncomeData(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        val statisticsData = (uiState.content as StatisticsScreenData)
-        val income = statisticsData.income
-        val incomeText = income ?: 0
-
-        this.text = "$incomeText DH"
-    }
+fun TextView.setIncomeData(income: Int?) {
+    this.text = context.getString(R.string.moroccan_currency_with_number, income ?: 0)
 }
 
 @BindingAdapter("netIncomeData")
-fun TextView.setNetIncomeData(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        val statisticsData = (uiState.content as StatisticsScreenData)
-        val income = statisticsData.income
-        val expenses = statisticsData.expenses
-
-        val netIncome = income?.let {
-            expenses?.let {
-                if (income <= expenses) {
-                    0
-                } else {
-                    income - expenses
-                }
-            } ?: income
-        } ?: 0
-
-        this.text = "$netIncome DH"
-    }
+fun TextView.setNetIncomeData(netIncome: Int?) {
+    this.text = context.getString(R.string.moroccan_currency_with_number, netIncome ?: 0)
 }
 
 @BindingAdapter("expensesData")
-fun TextView.setExpensesData(uiState: UiState) {
-    if (uiState is UiState.Success<*>) {
-        val statisticsData = (uiState.content as StatisticsScreenData)
-        val expenses = statisticsData.expenses
-        val expensesText = expenses ?: 0
-
-        this.text = "$expensesText DH"
-    }
+fun TextView.setExpensesData(expenses: Int?) {
+    this.text = context.getString(R.string.moroccan_currency_with_number, expenses ?: 0)
 }
 
 
-@BindingAdapter("uiState", "context", "chartType", "selectedMonth")
+@BindingAdapter("netIncomeStatsList", "expensesStatsList", "chartType", "selectedMonthForQuery")
 fun RoundedBarChart.setChartData(
-    uiState: UiState,
-    context: Context,
+    netIncomeStatsList: List<TotalByMonth>?,
+    expensesStatsList: List<TotalByMonth>?,
     chartType: ChartType,
-    selectedMonth: Long
+    selectedMonthForQuery: String?
 ) {
-    val loadedList: List<TotalByMonth>?
     val entries = mutableListOf<BarEntry>()
     val months = mutableListOf<String>()
-    val inputFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
-    val outputFormat = SimpleDateFormat("MMM", Locale.getDefault())
-    val selectedMonthFormatted = inputFormat.format(selectedMonth)
+    val yearMonthFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
+    val shortMonthFormat = SimpleDateFormat("MMM", Locale.getDefault())
 
 
-    val secondaryBarColor = when (chartType) {
+    val mainBarColor = when (chartType) {
         ChartType.NET_INCOME -> ContextCompat.getColor(context, R.color.cerulean)
         ChartType.EXPENDITURE -> ContextCompat.getColor(context, R.color.sunrise_orange)
     }
-    val mainBarColor = when (chartType) {
+    val secondaryBarColor = when (chartType) {
         ChartType.NET_INCOME -> ContextCompat.getColor(context, R.color.green)
         ChartType.EXPENDITURE -> ContextCompat.getColor(context, R.color.yellow)
     }
 
+    val loadedList: List<TotalByMonth>? = when (chartType) {
+        ChartType.NET_INCOME -> {
+            netIncomeStatsList
+        }
+        ChartType.EXPENDITURE -> {
+            expensesStatsList
+        }
+    }
+
+
     val chartColorList: IntArray
 
     var date: Date
-    var monthFormatted: String
-
-    if (uiState is UiState.Success<*>) {
-
-        val statisticsData = (uiState.content as StatisticsScreenData)
-
-        when (chartType) {
-            ChartType.NET_INCOME -> {
-                loadedList = statisticsData.netIncomeByMonthList
-            }
-            ChartType.EXPENDITURE -> {
-                loadedList = statisticsData.expensesByMonthList
-            }
-        }
 
 
-        if (loadedList != null && loadedList.size >= 4) {
+
+    if (loadedList != null && loadedList.size >= 3) {
+
+        chartColorList = IntArray(loadedList.size) { mainBarColor }
+
+        if (selectedMonthForQuery != null) {
             val indexMainBar =
-                loadedList.indexOfFirst { item -> item.month == selectedMonthFormatted }
-            chartColorList = IntArray(loadedList.size) { secondaryBarColor }
-
+                loadedList.indexOfFirst { item -> item.month == selectedMonthForQuery }
             if (indexMainBar != -1) {
-                chartColorList[indexMainBar] = mainBarColor
+                chartColorList[indexMainBar] = secondaryBarColor
             }
-
-            loadedList.forEachIndexed { index, item ->
-                entries.add(BarEntry(index.toFloat(), item.total.toFloat()))
-                date = inputFormat.parse(item.month) as Date
-                monthFormatted = outputFormat.format(date)
-                months.add(monthFormatted)
-            }
-
-            val roundedBarChartBuilder = RoundedBarChartBuilder(context)
-            roundedBarChartBuilder.buildChart(this, entries, months, chartColorList)
-
-        } else {
-            this.clear()
         }
+
+        loadedList.forEachIndexed { index, item ->
+            entries.add(BarEntry(index.toFloat(), item.total.toFloat()))
+            date = yearMonthFormat.parse(item.month) as Date
+            months.add(shortMonthFormat.format(date))
+        }
+
+        val roundedBarChartBuilder = RoundedBarChartBuilder(context)
+        roundedBarChartBuilder.buildChart(this, entries, months, chartColorList)
+
+    } else {
+        this.clear()
     }
+
 
 }
 
-@BindingAdapter("expensesList","expensesTitle")
-fun RecyclerView.setExpensesList(uiState: UiState,expensesTitle:View) {
-    if (uiState is UiState.Success<*>) {
-        val statisticsData = (uiState.content as StatisticsScreenData)
-        val expensesByCategoryList = statisticsData.expensesByCategoryList
+@BindingAdapter("expensesByCategoryList")
+fun RecyclerView.setExpensesList(expensesByCategoryList: List<TotalSpentByCategory>?) {
+
+    if (expensesByCategoryList != null ) {
         val adapter = ExpenditureListAdapter()
         this.adapter = adapter
-
-       if(expensesByCategoryList != null){
-            adapter.data = expensesByCategoryList
-            expensesTitle.visibility = View.VISIBLE
-        } else {
-           expensesTitle.visibility = View.GONE
-       }
-
+        adapter.data = expensesByCategoryList
     }
+
+}
+@BindingAdapter("expensesListTitleVisibility")
+fun View.setExpensesListTitleVisibility(expensesByCategoryList: List<TotalSpentByCategory>?) {
+    if (expensesByCategoryList != null && expensesByCategoryList.isNotEmpty()) {
+       this.visibility = View.VISIBLE
+    }else{
+        this.visibility = View.GONE
+    }
+
 }
 
 
 /// binding adapters for expenditures by category list------------------------
 
-@BindingAdapter("expensesBgColor")
-fun View.setExpensesBgColor(totalSpentByCategory: TotalSpentByCategory) {
-    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
-    this.setBackgroundColor(ContextCompat.getColor(context,expensesType!!.colorRes))
-}
-
-@BindingAdapter("expensesTintColor")
-fun ImageView.setExpensesTintColor(totalSpentByCategory: TotalSpentByCategory) {
-    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
-    this.setColorFilter(ContextCompat.getColor(context,expensesType!!.colorRes))
-}
 @BindingAdapter("expensesTintColor")
 fun View.setExpensesTintColor(totalSpentByCategory: TotalSpentByCategory) {
-    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
-    this.background.setTint(ContextCompat.getColor(context,expensesType!!.colorRes))
+    val expensesType = ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    this.background.setTint(ContextCompat.getColor(context, expensesType!!.colorRes))
 }
 
 @BindingAdapter("expensesCategoryIcon")
 fun ImageView.setExpensesCategoryIcon(totalSpentByCategory: TotalSpentByCategory) {
-    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    val expensesType = ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
     this.setImageResource(expensesType!!.iconResource)
 }
 
 @BindingAdapter("expensesCategoryName")
 fun TextView.setExpensesCategoryName(totalSpentByCategory: TotalSpentByCategory) {
-    val expensesType =  ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
+    val expensesType = ExpensesType.findExpensesTypeWithNumber(totalSpentByCategory.expendCategory)
     this.text = context.getString(expensesType!!.stringResource)
-
 }

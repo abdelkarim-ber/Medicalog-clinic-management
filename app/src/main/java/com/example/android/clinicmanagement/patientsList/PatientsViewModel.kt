@@ -146,7 +146,7 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
         // to avoid hiding the failure screen if the current
         // UI state is the failure state.
         if (_patientsUIState.value is UiState.Loading) {
-            _patientsUIState.value = UiState.Success(null)
+            _patientsUIState.value = UiState.Success
         }
     }
 

@@ -2,10 +2,10 @@
     <string name="app_name">ClinicManagement</string>
     <string name="statistics">Statistics</string>
     <string name="net_income">Net Income</string>
-    <string name="expenditure">Expenditure</string>
-    <string name="title_chart_expenditure_dh">Expenditure (DH)</string>
-    <string name="title_chart_net_income_dh">Net Income (DH)</string>
-    <string name="expenditures_by_categories">Expenditures by categories</string>
+    <string name="expenses">Expenses</string>
+    <string name="title_chart_expenses">Expenses by month</string>
+    <string name="title_chart_net_income">Net Income by month</string>
+    <string name="expenses_by_category">Expenses by category</string>
     <string name="utilities">Utilities</string>
     <string name="rent">Rent</string>
     <string name="repair">Repair</string>
@@ -87,7 +87,7 @@
     <string name="expenses_of">Expenses Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
 
-    <string name="statistics_empty_state_message">For the selected month, no statistics can be shown.</string>
+    <string name="statistics_empty_state_message">For the selected month: \'%1$s\', no statistics can be shown.</string>
     <string name="statistics_empty_state_tagline">No Data Available</string>
     <string name="statistics_loading_message">Retrieving your financial data…</string>
 
@@ -98,6 +98,7 @@
 
     <string name="form_error_no_special_char">Special characters are not permitted</string>
     <string name="form_error_field_required">Required field</string>
+    <string name="form_error_toast">Check your inputs</string>
     <string name="form_helper_optional">Optional</string>
     <string name="form_error_age">Invalid age</string>
 

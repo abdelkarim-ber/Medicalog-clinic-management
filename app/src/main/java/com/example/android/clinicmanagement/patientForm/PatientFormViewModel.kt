@@ -18,34 +18,79 @@ class PatientFormViewModel(
     private val validateAgeUseCase: ValidateAgeUseCase = ValidateAgeUseCase()
 ) : ViewModel() {
 
-    var patientFormDataState = PatientFormDataState()
 
+    /**
+     * Variable to set the current state of the screen to either show a loading animation
+     * in the case of patient info update or show the actual form.
+     */
     private val _patientFormUIState: MutableLiveData<UiState> =
-        MutableLiveData(UiState.Success(null))
+        MutableLiveData(UiState.Success)
+    /**
+     * The immutable and exposed version of [_patientFormUIState].
+     */
     val patientFormUIState: LiveData<UiState> = _patientFormUIState
-
+    /**
+     * Variable that tells the fragment to show the snack bar.
+     */
     private val _showSnackBarEvent = MutableLiveData<Boolean>()
+    /**
+     * The immutable and exposed version of [_showSnackBarEvent].
+     */
     val showSnackBarEvent: LiveData<Boolean> = _showSnackBarEvent
+    /**
+     * Variable that tells the fragment to show a toast message in case of an input error.
+     */
+    private val _showToastEvent = MutableLiveData<Boolean>()
+    /**
+     * The immutable and exposed version of [_showToastEvent].
+     */
+    val showToastEvent: LiveData<Boolean> = _showToastEvent
 
+    /**
+     * Variable that tells the fragment to clear all input fields.
+     */
     private val _clearFormEvent = MutableLiveData<Boolean>()
+    /**
+     * The immutable and exposed version of [_clearFormEvent].
+     */
     val clearFormEvent: LiveData<Boolean> = _clearFormEvent
 
+    /**
+     * Variable where we store the user info to display
+     * in case of a patient info update.
+     */
+    private val _oldUserInfo= MutableLiveData<PatientFormDataState?>()
+
+    /**
+     * The immutable and exposed version of [_oldUserInfo].
+     */
+    val oldUserInfo : LiveData<PatientFormDataState?> = _oldUserInfo
+
+    /**
+     * Variable that store the values of the input fields
+     * and the states of their error values.
+     */
+    var patientFormDataState = PatientFormDataState()
 
     init {
         if (patientId != -1L) {
             viewModelScope.launch {
                 _patientFormUIState.value = UiState.Loading(R.string.form_loading_patient_info)
-                delay(1000L)
                 patientFormDataState = loadPatientInfoUseCase(patientId, patientFormDataState)
-                _patientFormUIState.value = UiState.Success(patientFormDataState)
-                //to keep the fields text changes after a configuration change
+                _oldUserInfo.value = patientFormDataState
+                //Delay is for giving enough time for values to be set into their corresponding fields.
                 delay(2000L)
-                _patientFormUIState.value = UiState.Success(null)
+                //To not re-assign previous values after a configuration change
+                _oldUserInfo.value = null
+                _patientFormUIState.value = UiState.Success
             }
         }
 
     }
-
+    /**
+     * Called whenever we made a change in the input fields
+     * to save the changes in [patientFormDataState].
+     */
     fun onEvent(event: PatientRegistrationEvent) {
         when (event) {
             is PatientRegistrationEvent.FirstNameChanged -> patientFormDataState =
@@ -75,7 +120,10 @@ class PatientFormViewModel(
 
         }
     }
-
+    /**
+     * Called when we click the save button to persist the entered data after
+     * we check that it is valid.
+     */
     fun submit() {
         viewModelScope.launch {
             _patientFormUIState.value = UiState.Loading(R.string.form_validating_patient_info)
@@ -134,7 +182,7 @@ class PatientFormViewModel(
             ).any { !it.isSuccessful }
             if (hasError) {
                 //to let the forms be visible to show the errors
-                _patientFormUIState.value = UiState.Success(null)
+                _patientFormUIState.value = UiState.Success
 
                 with(patientFormDataState) {
                     errorFirstName?.value = firstNameResult.errorMessage
@@ -149,6 +197,9 @@ class PatientFormViewModel(
                     errorSessionCount?.value = sessionCountResult.errorMessage
                     errorSessionPrice?.value = sessionPriceResult.errorMessage
                 }
+                //To show a toast message to the user indicating that there is an error.
+                _showToastEvent.value = true
+
             } else {
                 //Remove the error indicators if there are any.
                 with(patientFormDataState) {
@@ -169,27 +220,38 @@ class PatientFormViewModel(
                 delay(800L)
                 //add new patient or update an existing patient info in case of patientId != -1L
                 submitPatientInfoUseCase(patientFormDataState, patientId)
-                _patientFormUIState.value = UiState.Success(null)
+                _patientFormUIState.value = UiState.Success
                 //Show the snackBar
                 _showSnackBarEvent.value = true
                 delay(800L)
                 //After a delay we clear all the fields
                 clearFormFields()
             }
-
         }
-
-
     }
 
+    /**
+     * Called to clear the request of showing the snack bar.
+     */
     fun doneShowingSnackBar() {
         _showSnackBarEvent.value = false
     }
-
+    /**
+     * Called to clear the request of showing the toast message.
+     */
+    fun doneShowingToastMessage() {
+        _showToastEvent.value = false
+    }
+    /**
+     * Called to clear the request of clearing the input fields.
+     */
     fun formFieldsCleared() {
         _clearFormEvent.value = false
     }
 
+    /**
+     * Called to clear the input fields.
+     */
     private fun clearFormFields() {
         patientFormDataState = patientFormDataState.copy(gender = -1)
         _clearFormEvent.value = true
