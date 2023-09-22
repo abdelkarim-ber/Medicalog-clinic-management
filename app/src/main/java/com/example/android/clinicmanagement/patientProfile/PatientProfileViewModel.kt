@@ -1,20 +1,22 @@
 package com.example.android.clinicmanagement.patientProfile
 
-import android.view.View
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.android.clinicmanagement.data.repositories.PatientRepository
+import com.example.android.clinicmanagement.patientReceipt.ReceiptType
 
-const val RECEIPT_TYPE_QUOTATION = 1
-const val RECEIPT_TYPE_INVOICE = 2
 
 class PatientProfileViewModel(
     patientId: Long, patientRepository: PatientRepository
 ) : ViewModel() {
 
-
+    companion object {
+        const val MIN_PATIENT_DONE_SESSIONS = 1
+    }
     /**
      * Variable that tells the fragment to navigate to [PatientHistoryFragment]
      * It takes the patient Id as a value.
@@ -70,6 +72,20 @@ class PatientProfileViewModel(
      */
     val patientDetails = patientRepository.loadPatientDetailsWithId(patientId).asLiveData()
 
+    /**
+     * Variable for whether to display or not the invoice button according to
+     * the patient done sessions number.
+     */
+    val invoiceAvailable = Transformations.map(patientDetails){
+        it.doneSessions >= MIN_PATIENT_DONE_SESSIONS
+    }
+
+    /**
+     * Variable for preventing the user to add session for the current patient if
+     * his invoice data exists in the database.
+     */
+    val invoiceGenerated = patientRepository.invoiceExistsForPatientWithId(patientId).asLiveData()
+
 
     /**
      * Called when we click patient history button.
@@ -105,14 +121,14 @@ class PatientProfileViewModel(
      * Called when we click Invoice button.
      */
     fun onReceiptInvoiceClicked(id: Long) {
-        _navigateToReceipt.value = RECEIPT_TYPE_INVOICE to id
+        _navigateToReceipt.value = ReceiptType.INVOICE.number to id
     }
 
     /**
      * Called when we click Quotation button.
      */
     fun onReceiptQuotationClicked(id: Long) {
-        _navigateToReceipt.value = RECEIPT_TYPE_QUOTATION to id
+        _navigateToReceipt.value = ReceiptType.QUOTATION.number to id
     }
 
     /**

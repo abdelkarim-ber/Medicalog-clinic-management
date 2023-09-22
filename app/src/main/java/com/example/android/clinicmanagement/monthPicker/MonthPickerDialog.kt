@@ -93,14 +93,14 @@ class MonthPickerDialog : DialogFragment() {
 
         val locale = Locale.getDefault()
         val monthFormatter = SimpleDateFormat("MMMM", locale)
-        val currentMonth = monthFormatter.format(currentDate.time)
+        val currentMonth = monthFormatter.format(currentDate.time).replaceFirstChar { it.uppercase(Locale.ROOT) }
         _selectedMonth.value = currentMonth.take(3)
 
         val months = mutableListOf<String>()
         for (i in Calendar.JANUARY..Calendar.DECEMBER) {
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.MONTH, i)
-            months.add(monthFormatter.format(calendar.time))
+            months.add(monthFormatter.format(calendar.time).replaceFirstChar { it.uppercase(Locale.ROOT) })
         }
         binding.pickerMonth.displayedValues = months.toTypedArray()
         binding.pickerMonth.maxValue = 11

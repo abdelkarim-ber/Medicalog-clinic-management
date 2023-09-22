@@ -13,7 +13,7 @@ fun TextView.setSessionInfo(session: Session?){
     if(session != null){
         this.text = with(session){
             when(id){
-                R.id.text_date -> SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(dateInSeconds*1000)
+                R.id.text_date -> SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(dateInSeconds*1000).replaceFirstChar { it.uppercase(Locale.ROOT) }
                 R.id.text_time -> SimpleDateFormat("HH:mm", Locale.getDefault()).format(dateInSeconds*1000)
                 R.id.text_amount_payed -> context.getString(R.string.moroccan_currency_with_number,amountPayed)
                 else -> throw java.lang.Exception("No sessions list item TextView Id matches")

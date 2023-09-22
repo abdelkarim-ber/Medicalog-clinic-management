@@ -46,9 +46,7 @@ fun ImageView.setAvatarImage(patientStatus: PatientStatus?) {
 @BindingAdapter("patientFullName")
 fun TextView.setPatientFullName(patientStatus: PatientStatus?) {
     if (patientStatus != null) {
-        val firstName = patientStatus.firstName.lowercase(Locale.ROOT)
-        val lastName = patientStatus.lastName.uppercase(Locale.ROOT)
-        this.setText("$lastName $firstName")
+        this.text = getFormattedFullName(patientStatus.firstName,patientStatus.lastName)
     }else{
         this.text ="--"
     }

@@ -92,6 +92,10 @@ interface PatientDao {
     )
     fun loadPatientDetailsWithId(patientId: Long): Flow<PatientDetails>
 
-
+    @Query(
+        "SELECT count(*) FROM invoice_track_table " +
+                "WHERE patient_id = :patientId "
+    )
+    fun invoiceExistsForPatientWithId(patientId: Long): Flow<Int>
 
 }

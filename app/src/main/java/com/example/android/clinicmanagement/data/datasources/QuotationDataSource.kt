@@ -3,6 +3,7 @@ package com.example.android.clinicmanagement.data.datasources
 import com.example.android.clinicmanagement.data.dao.QuotationDao
 import com.example.android.clinicmanagement.data.models.Quotation
 import com.example.android.clinicmanagement.data.models.QuotationTrack
+import com.example.android.clinicmanagement.data.models.Receipt
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,7 +19,7 @@ class QuotationDataSource (private val quotationDao: QuotationDao) {
         }
     }
 
-    suspend fun getQuotationWithPatientId(patientId:Long): Quotation {
+    suspend fun getQuotationWithPatientId(patientId:Long): Receipt? {
        return withContext(Dispatchers.IO){
             quotationDao.getQuotationWithPatientId(patientId)
         }

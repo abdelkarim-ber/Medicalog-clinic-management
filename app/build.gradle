@@ -59,9 +59,11 @@ dependencies {
 
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$version_room"
-//    //Kotlin Symbol Processing (KSP)
-//    ksp "androidx.room:room-compiler:$version_room"
+    // iTextPDF library
+    implementation 'com.itextpdf:itextg:5.5.10'
 
+    //ICU4J international Unicode component library
+    implementation 'com.ibm.icu:icu4j:51.1'
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$version_room"
 

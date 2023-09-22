@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import com.example.android.clinicmanagement.R
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -25,22 +26,32 @@ class RoundedBarChartBuilder(val context: Context) {
     fun buildChart(
         barChart: BarChart,
         entries: List<BarEntry>,
-        XAxisMonths: List<String>,
+        xAxisLabels: List<String>,
         barColors: IntArray
     ) {
 
-        barChart.xAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return XAxisMonths[value.toInt()]
+        val barDataSet = BarDataSet(entries, "BarDataSet")
+        val barData = BarData(barDataSet)
+        styleBarDataSet(barDataSet, barColors)
+        barData.barWidth = 0.7f // set custom bar width
+        with(barChart) {
+            animateY(1500, Easing.EaseOutBack)
+            data = barData
+            xAxis.labelCount = entries.size
+            xAxis.valueFormatter = object : ValueFormatter() {
+                override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+                    val index = value.toInt()
+                    return if ( index in xAxisLabels.indices){
+                        xAxisLabels[index]
+                    }else{
+                        ""
+                    }
+
+                }
             }
         }
-        barChart.animateY(1500, Easing.EaseOutBack);
-        val barDataSet: BarDataSet = BarDataSet(entries, "BarDataSet")
-        val barData: BarData = BarData(barDataSet)
-        styleBarDataSet(barDataSet, barColors)
-        barData.setBarWidth(0.7f); // set custom bar width
-        barChart.setData(barData);
-        barChart.invalidate();
-    }
 
+        barChart.invalidate()
+
+    }
 }

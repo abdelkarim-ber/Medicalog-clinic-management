@@ -2,12 +2,12 @@ package com.example.android.clinicmanagement.data.models
 
 import androidx.room.ColumnInfo
 
-data class Quotation(
-    @ColumnInfo(name = "quotation_number")
-    val quoteNumber: Int,
+data class Receipt (
+
+    val receiptNumber: Int,
 
     @ColumnInfo(name = "date_in_seconds")
-    val dateInSeconds: Long ,
+    val receiptDateInSeconds: Long ,
 
     @ColumnInfo(name = "first_name")
     val firstName: String,
@@ -23,11 +23,11 @@ data class Quotation(
     val frequency: String,
 
     @ColumnInfo(name = "session_count")
-    val plannedSessions: Int,
+    val sessionCount: Int,
 
     @ColumnInfo(name = "session_price")
     val sessionPrice: Int,
 
     val total:Int
 
-)
+    )

@@ -3,6 +3,7 @@ package com.example.android.clinicmanagement.data.datasources
 import com.example.android.clinicmanagement.data.dao.InvoiceDao
 import com.example.android.clinicmanagement.data.models.Invoice
 import com.example.android.clinicmanagement.data.models.InvoiceTrack
+import com.example.android.clinicmanagement.data.models.Receipt
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,7 +19,7 @@ class InvoiceDataSource (private val invoiceDao: InvoiceDao) {
         }
     }
 
-    suspend fun getInvoiceWithPatientId(patientId:Long): Invoice? {
+    suspend fun getInvoiceWithPatientId(patientId:Long): Receipt? {
         return withContext(Dispatchers.IO){
             invoiceDao.getInvoiceWithPatientId(patientId)
         }

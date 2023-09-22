@@ -3,7 +3,6 @@ package com.example.android.clinicmanagement.utilities
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
-import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,8 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.drawToBitmap
 import com.example.android.clinicmanagement.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ibm.icu.text.RuleBasedNumberFormat
+import com.itextpdf.text.pdf.BaseFont
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -210,7 +211,64 @@ fun getStringOrNull(str: String): String? {
     return str.takeIf { it.isNotBlank() }
 }
 
+/**
+ * This method takes the receipt date and its number to return
+ * the receipt number in year like this ex '# 1/2020'.
+ * @param receiptNumber the receipt number.
+ * @param receiptDateInSeconds the receipt date in seconds.
+ */
+fun getReceiptNumberInYear(receiptNumber:Int,receiptDateInSeconds:Long):String{
+    val yearFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+   return "# ${receiptNumber}/${yearFormat.format(receiptDateInSeconds*1000)}"
+}
 
+/**
+ * This method takes the receipt date in seconds to convert it
+ * to a format like "January 20, 2020".
+ * @param receiptDateInSeconds the receipt date in seconds.
+ */
+fun getReceiptFormattedDate(receiptDateInSeconds:Long):String{
+    val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+   return dateFormat.format(receiptDateInSeconds*1000).replaceFirstChar { it.uppercase(Locale.ROOT) }
+}
+
+/**
+ * This method returns a new BaseFont object based on the passed fontPath.
+ * @param fontPath is the path of font in the app files.
+ */
+fun getBaseFont(fontPath: String): BaseFont {
+    return BaseFont.createFont(
+        fontPath,
+        BaseFont.IDENTITY_H,
+        BaseFont.EMBEDDED
+    )
+}
+
+/**
+ * This method takes the patient first and last name to combine them in
+ * one nice form for display.
+ */
+fun getFormattedFullName(firstName: String, lastName: String): String {
+    return "${lastName.uppercase(Locale.ROOT)} ${firstName.lowercase(Locale.ROOT)}"
+}
+
+/**
+ *This method converts any number to its word match.
+ */
+fun convertNumberToLetters(number: Int): String {
+    val local = Locale.getDefault()
+    val ruleBasedNumberFormat = RuleBasedNumberFormat(local, RuleBasedNumberFormat.SPELLOUT);
+    return ruleBasedNumberFormat.format(number).replace("-"," ")
+        .replaceFirstChar { it.uppercase(local) }
+
+}
+
+/**
+ * Convert a date in milliseconds to a format like "January, 2023"
+ */
+fun getMonthYearFormat(dateInMillis: Long):String{
+    return SimpleDateFormat("MMMM, yyyy", Locale.getDefault()).format(dateInMillis).replaceFirstChar { it.uppercase(Locale.ROOT) }
+}
 
 const val MALE_CHARACTER = 'M'
 const val FEMALE_CHARACTER = 'F'

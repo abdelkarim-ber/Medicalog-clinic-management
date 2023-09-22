@@ -6,8 +6,8 @@ import com.example.android.clinicmanagement.data.repositories.ExpenditureReposit
 import com.example.android.clinicmanagement.data.repositories.SessionsRepository
 import com.example.android.clinicmanagement.domain.GetNetIncomeStatsUseCase
 import com.example.android.clinicmanagement.domain.GetNetIncomeUseCase
-import com.example.android.clinicmanagement.utilities.ChartType
 import com.example.android.clinicmanagement.utilities.UiState
+import com.example.android.clinicmanagement.utilities.getMonthYearFormat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -44,11 +44,6 @@ class StatisticsViewModel(
      */
     private val queryMonthFormat = SimpleDateFormat("yyyy-MM", Locale.getDefault())
 
-    /**
-     * Variable that formats the selected date to a convenient format to display on the screen.
-     */
-    private val screenMonthFormat = SimpleDateFormat("MMMM, yyyy", Locale.getDefault())
-
 
     /**
      * Variable to set the month and year in form of date in milliseconds.
@@ -57,7 +52,7 @@ class StatisticsViewModel(
 
 
     val selectedMonthForScreen = Transformations.map(_selectedDateInMillis) {
-        screenMonthFormat.format(it)
+        getMonthYearFormat(it)
     }
     val selectedMonthForQuery = Transformations.map(_selectedDateInMillis) {
         queryMonthFormat.format(it)
@@ -104,9 +99,11 @@ class StatisticsViewModel(
      * Called when we click on the switch button to change the type of chart.
      */
     fun switchChart() {
-        when (_chartType.value) {
-            ChartType.NET_INCOME -> _chartType.value = ChartType.EXPENDITURE
-            else -> _chartType.value = ChartType.NET_INCOME
+        // _chartType.value will never begin by null value, cause we must initiate it with one
+        // for statistics screen purposes.
+        _chartType.value = when (_chartType.value!!) {
+            ChartType.NET_INCOME ->  ChartType.EXPENDITURE
+            ChartType.EXPENDITURE -> ChartType.NET_INCOME
         }
     }
 
@@ -129,7 +126,7 @@ class StatisticsViewModel(
                     R.string.statistics_empty_state_tagline,
                     R.string.statistics_empty_state_message,
                     R.drawable.img_placeholder_empty_wallet,
-                    screenMonthFormat.format(dateInMillis)
+                    getMonthYearFormat(dateInMillis)
                 )
             }
         }

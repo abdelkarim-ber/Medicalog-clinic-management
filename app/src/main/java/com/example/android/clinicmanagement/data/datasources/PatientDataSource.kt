@@ -88,5 +88,5 @@ class PatientDataSource(private val patientDao: PatientDao) {
 
     fun loadPatientDetailsWithId(patientId: Long): Flow<PatientDetails> = patientDao.loadPatientDetailsWithId(patientId)
 
-
+    fun invoiceExistsForPatientWithId(patientId: Long): Flow<Int> = patientDao.invoiceExistsForPatientWithId(patientId)
 }

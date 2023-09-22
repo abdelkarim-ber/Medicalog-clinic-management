@@ -9,6 +9,7 @@ import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.Expenditure
 import com.example.android.clinicmanagement.data.repositories.ExpenditureRepository
 import com.example.android.clinicmanagement.domain.ValidateTextUseCase
+import com.example.android.clinicmanagement.utilities.getMonthYearFormat
 import com.github.mikephil.charting.utils.Utils.init
 import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.delay
@@ -60,7 +61,6 @@ class ExpensesViewModel(
      */
     var expensesDataState = ExpensesDataState()
 
-    private val monthYearFormat = SimpleDateFormat("MMMM, yyyy", Locale.getDefault())
 
     /**
      * Variable that store the selected month and year in form of date in milliseconds.
@@ -71,7 +71,7 @@ class ExpensesViewModel(
      * Each time we set a value on [_selectedDateInMillis] this variable value gets updated.
      */
     val selectedDateFormatted = Transformations.map(_selectedDateInMillis) {
-        monthYearFormat.format(it)
+        getMonthYearFormat(it)
     }
 
     /**

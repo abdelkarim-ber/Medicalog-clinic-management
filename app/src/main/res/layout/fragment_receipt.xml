@@ -3,7 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="receiptType"
+            type="com.example.android.clinicmanagement.patientReceipt.ReceiptType" />
+
+        <variable
+            name="viewModel"
+            type="com.example.android.clinicmanagement.patientReceipt.ReceiptViewModel" />
+    </data>
+
     <FrameLayout
+        android:id="@+id/receipt_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".patientProfile.PatientProfileFragment">
@@ -12,281 +24,258 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/receipt"
-            app:navigationIcon="@drawable/ic_arrow_back" />
+            app:navigationIcon="@drawable/ic_arrow_back"
+            />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize">
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@color/dark_midnight"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/padding_8dp"
+            android:paddingVertical="@dimen/padding_16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/receipt_shape"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/height_receipt"
+                app:cardBackgroundColor="@color/dark_midnight"
+                app:cardElevation="0dp">
 
-                <View
-                    android:id="@+id/blue_container"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:background="@drawable/shape_card_container"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/receipt_shape"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height_receipt"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/shape_receipt"
-                    app:layout_constraintBottom_toBottomOf="@id/blue_container"
-                    app:layout_constraintEnd_toEndOf="@id/blue_container"
-                    app:layout_constraintStart_toStartOf="@id/blue_container"
-                    app:layout_constraintTop_toBottomOf="@id/blue_container" />
+                    android:paddingBottom="@dimen/padding_72dp">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_receipt_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_32dp"
-                    android:text="@string/quotation"
-                    android:textAppearance="?attr/textAppearanceHeadline5"
-                    android:textColor="@color/cerulean"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toTopOf="@id/receipt_shape" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_receipt_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_72dp"
+                        android:textAppearance="?attr/textAppearanceHeadline4"
+                        tools:textColor="@color/cerulean"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:receiptTitle="@{receiptType}"
+                        tools:text="@string/quotation" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_receipt_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/number"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@id/title_receipt_type"
-                    app:layout_constraintTop_toBottomOf="@id/title_receipt_type" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_receipt_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_5dp"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="@id/title_receipt_type"
+                        app:layout_constraintTop_toBottomOf="@id/title_receipt_type"
+                        app:receiptDetails="@{viewModel.receiptDetails}"
+                        tools:text="# 1/2023" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_receipt_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:text="1/2020"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="@color/dark_midnight"
-                    app:layout_constraintBottom_toBottomOf="@id/title_receipt_number"
-                    app:layout_constraintStart_toEndOf="@+id/title_receipt_number"
-                    app:layout_constraintTop_toTopOf="@id/title_receipt_number" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_receipt_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="@+id/text_receipt_number"
+                        app:layout_constraintTop_toBottomOf="@id/text_receipt_number"
+                        app:receiptDetails="@{viewModel.receiptDetails}"
+                        tools:text="September 11, 2023" />
 
-                <ImageView
-                    android:id="@+id/image_logo"
-                    android:layout_width="60dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/img_logo_main"
-                    app:layout_constraintBottom_toBottomOf="@id/title_receipt_type"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintTop_toTopOf="@+id/title_receipt_type" />
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:backgroundTint="@color/light_blue_sky"
+                        android:src="@drawable/ic_printer"
+                        android:onClick="@{() -> viewModel.printReceipt()}"
+                        app:layout_behavior="com.google.android.material.behavior.FloatingActionButtonBehavior"
+                        app:layout_constraintBottom_toBottomOf="@id/title_receipt_type"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_receipt_type"
+                        app:tint="@color/midnight" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_full_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_32dp"
-                    android:text="@string/full_name"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/title_receipt_number" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_full_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:text="@string/for_patient"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/color_primary_70"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/text_patient_full_name"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_full_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jonathan Barry"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/dark_midnight"
-                    app:layout_constraintStart_toStartOf="@id/title_full_name"
-                    app:layout_constraintTop_toBottomOf="@id/title_full_name" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_patient_full_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_32dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:fontFamily="@font/dosis"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@color/midnight"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/title_full_name"
+                        app:layout_constraintTop_toBottomOf="@id/text_receipt_date"
+                        app:receiptDetails="@{viewModel.receiptDetails}"
+                        tools:text="BARRY jonathan" />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/text_full_name" />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_patient_full_name" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="@string/date"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider1" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_sessions_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/color_primary_70"
+                        app:layout_constraintBaseline_toBaselineOf="@id/text_session_count"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:receiptSessionCount="@{receiptType}"
+                        tools:text="@string/planned_sessions"
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:text="11 September 2020"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="@color/dark_midnight"
-                    app:layout_constraintBottom_toBottomOf="@+id/title_date"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider1" />
+                        />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/title_date" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_done_sessions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="@string/done_sessions"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider2" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_session_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/midnight"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/title_sessions_count"
+                        app:layout_constraintTop_toBottomOf="@+id/divider1"
+                        app:receiptDetails="@{viewModel.receiptDetails}"
+                        tools:text="40 sessions" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_done_sessions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:text="11 sessions"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="@color/dark_midnight"
-                    app:layout_constraintBottom_toBottomOf="@+id/title_done_sessions"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider2" />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_session_count" />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/title_done_sessions" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_unit_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:text="@string/unit_price"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/color_primary_70"
+                        app:layout_constraintBaseline_toBaselineOf="@id/text_unit_price"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="@string/total"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider3" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_unit_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="@color/midnight"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/title_unit_price"
+                        app:layout_constraintTop_toBottomOf="@+id/divider2"
+                        app:receiptDetails="@{viewModel.receiptDetails}"
+                        tools:text="150 DH" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:text="2000 dihams"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="@color/dark_midnight"
-                    app:layout_constraintBottom_toBottomOf="@+id/title_total"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider3" />
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_unit_price" />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/title_total" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:text="@string/total"
+                        android:textAllCaps="true"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textColor="@color/light_midnight"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/text_total"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_total_in_letters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_8dp"
-                    android:text="@string/total_in_letters"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@color/color_primary_70"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/divider4" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginEnd="@dimen/margin_16dp"
+                        android:fontFamily="@font/dosis"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceHeadline4"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/title_total"
+                        app:layout_constraintTop_toBottomOf="@id/divider3"
+                        app:receiptDetails="@{viewModel.receiptDetails}"
+                        tools:text="2000 DH" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text_total_in_letters"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:gravity="center"
-                    android:text="Two thousand three hundred sixty two dirhams"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="@color/dark_midnight"
-                    app:layout_constraintEnd_toEndOf="@id/receipt_shape"
-                    app:layout_constraintStart_toStartOf="@id/receipt_shape"
-                    app:layout_constraintTop_toBottomOf="@id/title_total_in_letters" />
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progress_circular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:translationZ="3dp"
+                        app:trackCornerRadius="4dp"
+                        app:indicatorSize="68dp"
+                        app:showProgressIndic="@{viewModel.showCircularProgress}"
+                        app:trackColor="#00000000"
+                        app:indicatorColor="@color/midnight"
+                        app:layout_constraintEnd_toEndOf="@id/fab"
+                        app:layout_constraintTop_toTopOf="@id/fab"
+                        app:layout_constraintBottom_toBottomOf="@id/fab"
+                        app:layout_constraintStart_toStartOf="@id/fab"
+                        />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_share"
-                    style="@style/Widget.clinicManagement.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
-                    android:layout_marginBottom="@dimen/margin_16dp"
-                    android:text="@string/share"
-                    app:icon="@drawable/ic_share"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/button_printer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/receipt_shape" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_printer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_16dp"
-                    android:text="@string/print"
-                    app:icon="@drawable/ic_printer"
-                    app:layout_constraintBottom_toBottomOf="@id/button_share"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/button_share"
-                    app:layout_constraintTop_toTopOf="@id/button_share" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
     </FrameLayout>

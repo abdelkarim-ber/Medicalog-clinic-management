@@ -60,7 +60,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
             android:visibility="gone"
-            tools:visibility="visible"
+            tools:visibility="gone"
             app:showPlaceHolder="@{viewModel.statisticsUIState}"
             bind:failureData="@{viewModel.statisticsUIState}" />
 
@@ -71,7 +71,7 @@
             android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:showContent="@{viewModel.statisticsUIState}"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

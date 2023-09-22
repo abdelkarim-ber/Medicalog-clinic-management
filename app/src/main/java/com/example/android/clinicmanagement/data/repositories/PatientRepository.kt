@@ -11,6 +11,7 @@ import com.example.android.clinicmanagement.data.models.PatientStatus
 import com.example.android.clinicmanagement.patientsList.FilterDataState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 
@@ -76,8 +77,7 @@ class PatientRepository(private val patientDataSource: PatientDataSource) {
             )
     }
 
-
-
-
     fun loadPatientDetailsWithId(patientId: Long):Flow<PatientDetails> = patientDataSource.loadPatientDetailsWithId(patientId)
+
+    fun invoiceExistsForPatientWithId(patientId: Long): Flow<Boolean> = patientDataSource.invoiceExistsForPatientWithId(patientId).map { it == 1 }
 }

@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientProfileBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialElevationScale
 
 
 class PatientProfileFragment : Fragment() {
@@ -59,7 +59,7 @@ class PatientProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate<FragmentPatientProfileBinding?>(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_patient_profile, container, false
         )
         binding.apply {
@@ -80,12 +80,30 @@ class PatientProfileFragment : Fragment() {
         binding.iconReturn.setOnClickListener { findNavController().navigateUp() }
 
 
+        //Set a clickListener on the invoice generating button to show an alert
+        //to the user if he attempts to generate an invoice for the current patient
+        //for the first time as this action is irreversible.
+        binding.invoiceCard.setOnClickListener {
+            if (binding.fabAddSession.isVisible){
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(resources.getString(R.string.dialog_invoice_confirmation_title))
+                    .setMessage(resources.getString(R.string.dialog_invoice_confirmation_message))
+                    .setPositiveButton(resources.getString(R.string.dialog_confirm)) { dialog, which ->
+                        patientProfileViewModel.onReceiptInvoiceClicked(args.patientKey)
+                    }
+                    .setNegativeButton(resources.getString(R.string.dialog_cancel)) { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }else{
+                patientProfileViewModel.onReceiptInvoiceClicked(args.patientKey)
+            }
 
+        }
         // Add an Observer on the state variable for Navigating to patient form screen to
         // update patient informations when the update button is clicked.
         patientProfileViewModel.navigateToPatientInfoUpdate.observe(viewLifecycleOwner) { patientId ->
             patientId?.let {
-                resetTransitions()
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToPatientForm(
                         patientId
@@ -98,7 +116,6 @@ class PatientProfileFragment : Fragment() {
         // show patient's list of done sessions info when the history button is clicked.
         patientProfileViewModel.navigateToPatientHistory.observe(viewLifecycleOwner) { patientId ->
             patientId?.let {
-                resetTransitions()
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToPatientHistory(
                         patientId
@@ -111,7 +128,6 @@ class PatientProfileFragment : Fragment() {
         // generating a Quotation or an Invoice , when the quotation or invoice button is clicked.
         patientProfileViewModel.navigateToReceipt.observe(viewLifecycleOwner) { receiptInfo ->
             receiptInfo?.let {
-                resetTransitions()
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToReceipt(
                         receiptInfo.first,
@@ -134,12 +150,4 @@ class PatientProfileFragment : Fragment() {
 
     }
 
-    /**
-     * Reset transitions to the ones set in navigation graph
-     */
-    private fun resetTransitions() {
-        if (exitTransition != null || reenterTransition != null)
-            exitTransition = null
-            reenterTransition = null
-    }
 }

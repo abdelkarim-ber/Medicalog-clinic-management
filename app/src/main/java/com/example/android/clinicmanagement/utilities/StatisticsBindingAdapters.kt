@@ -15,15 +15,14 @@ import com.example.android.clinicmanagement.barChart.RoundedBarChartBuilder
 import com.example.android.clinicmanagement.data.models.TotalByMonth
 import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
 import com.example.android.clinicmanagement.expenses.ExpensesType
+import com.example.android.clinicmanagement.statistics.ChartType
 import com.example.android.clinicmanagement.statistics.ExpenditureListAdapter
 import com.github.mikephil.charting.data.BarEntry
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-enum class ChartType {
-    NET_INCOME, EXPENDITURE
-}
+
 
 @BindingAdapter("showLoading")
 fun View.showLoading(uiState: UiState?) {
@@ -214,7 +213,7 @@ fun RoundedBarChart.setChartData(
         loadedList.forEachIndexed { index, item ->
             entries.add(BarEntry(index.toFloat(), item.total.toFloat()))
             date = yearMonthFormat.parse(item.month) as Date
-            months.add(shortMonthFormat.format(date))
+            months.add(shortMonthFormat.format(date).replaceFirstChar { it.uppercase(Locale.ROOT) })
         }
 
         val roundedBarChartBuilder = RoundedBarChartBuilder(context)

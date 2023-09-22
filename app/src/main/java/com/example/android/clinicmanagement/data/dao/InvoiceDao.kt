@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.android.clinicmanagement.data.models.InvoiceTrack
 import com.example.android.clinicmanagement.data.models.Invoice
+import com.example.android.clinicmanagement.data.models.Receipt
 
 @Dao
 interface InvoiceDao {
@@ -25,18 +26,27 @@ interface InvoiceDao {
     suspend fun generateInvoiceTrackNumberForCurrentYear() = generateInvoiceTrackNumber() ?: 1
 
     @Query(
-        "SELECT I.date_in_seconds,I.invoice_number,P.first_name,P.last_name,sum(S.amount_payed) AS total,count(S.id) AS doneSessions " +
+        "SELECT invoice_number AS receiptNumber," +
+                "I.date_in_seconds," +
+                "P.first_name," +
+                "P.last_name," +
+                "P.doctor_full_name," +
+                "P.diagnosis," +
+                "P.frequency," +
+                "count(S.id) AS session_count," +
+                "P.session_price," +
+                "sum(S.amount_payed) AS total " +
                 "FROM invoice_track_table AS I " +
                 "JOIN patient_table AS P ON I.patient_id = P.id " +
                 "JOIN session_table AS S ON S.patient_id = P.id " +
                 "WHERE I.patient_id = :patientId " +
-                "GROUP BY P.first_name"
+                "GROUP BY P.id"
     )
-    suspend fun getInvoiceWithPatientId(patientId: Long): Invoice?
+    suspend fun getInvoiceWithPatientId(patientId: Long): Receipt?
 
 
     @Query(
-        "SELECT count(*) > 0 FROM invoice_track_table " +
+        "SELECT count(*) FROM invoice_track_table " +
                 "WHERE patient_id = :patientId "
     )
     suspend fun searchForPatientWithId(patientId: Long): Int

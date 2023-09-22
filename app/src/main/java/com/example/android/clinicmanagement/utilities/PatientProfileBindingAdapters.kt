@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.PatientDetails
-import com.example.android.clinicmanagement.data.models.PatientStatus
 import java.util.*
 
 //Binding Adapters for PatientsListItems
@@ -38,7 +37,7 @@ fun TextView.setProfileInfo(patientDetails: PatientDetails?) {
 
             when (id) {
 
-                R.id.text_patient_full_name -> "${lastName.uppercase(Locale.ROOT)} ${firstName.lowercase(Locale.ROOT)}"
+                R.id.text_patient_full_name -> getFormattedFullName(firstName,lastName)
 
 
                 R.id.text_done_sessions -> resources.getQuantityString(R.plurals.done_sessions_field, doneSessions, doneSessions)
@@ -60,7 +59,7 @@ fun TextView.setProfileInfo(patientDetails: PatientDetails?) {
 
                 R.id.text_age -> context.getString(R.string.years_old_with_number,age)
 
-                R.id.text_treating_doctor -> context.getString(R.string.doctor_short_with_text,doctorFullName)
+                R.id.text_treating_doctor -> context.getString(R.string.doctor_prefix_with_text,doctorFullName)
 
                 R.id.text_diagnosis -> diagnosis
 

@@ -46,10 +46,10 @@
         <action
             android:id="@+id/action_patientProfile_to_receipt"
             app:destination="@id/receipt"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_patientProfile_to_patientForm"
             app:destination="@id/patientForm"
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/receipt"
-        android:name="com.example.android.clinicmanagement.receipt.ReceiptFragment"
+        android:name="com.example.android.clinicmanagement.patientReceipt.ReceiptFragment"
         android:label="ReceiptFragment"
         tools:layout="@layout/fragment_receipt"
         >

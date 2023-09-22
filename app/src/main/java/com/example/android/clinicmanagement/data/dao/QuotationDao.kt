@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.android.clinicmanagement.data.models.Quotation
 import com.example.android.clinicmanagement.data.models.QuotationTrack
+import com.example.android.clinicmanagement.data.models.Receipt
 
 @Dao
 interface QuotationDao {
@@ -25,15 +26,24 @@ interface QuotationDao {
     suspend fun generateQuotationTrackNumberForCurrentYear() = generateQuotationTrackNumber() ?: 1
 
     @Query(
-        "SELECT date_in_seconds,quotation_number,first_name,last_name, (session_count*session_price) AS total, session_count " +
+        "SELECT quotation_number AS receiptNumber," +
+                " Q.date_in_seconds," +
+                " P.first_name," +
+                " P.last_name," +
+                " P.doctor_full_name," +
+                "P.diagnosis," +
+                "P.frequency," +
+                "P.session_count," +
+                "P.session_price," +
+                " (session_count*session_price) AS total " +
                 "FROM quotation_track_table AS Q " +
                 "JOIN patient_table AS P ON Q.patient_id = P.id " +
                 "WHERE Q.patient_id = :patientId "
     )
-    suspend fun getQuotationWithPatientId(patientId: Long): Quotation
+    suspend fun getQuotationWithPatientId(patientId: Long): Receipt?
 
     @Query(
-        "SELECT count(*) > 0 FROM quotation_track_table " +
+        "SELECT count(*) FROM quotation_track_table " +
                 "WHERE patient_id = :patientId "
     )
     suspend fun searchForPatientWithId(patientId: Long): Int

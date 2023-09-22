@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.example.android.clinicmanagement.patientProfile.PatientProfileViewModel" />
@@ -197,7 +197,7 @@
                         app:layout_constraintTop_toBottomOf="@id/divider_full_name" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/fab"
+                        android:id="@+id/fab_add_session"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
@@ -205,6 +205,7 @@
                         android:onClick="@{(view) -> viewModel.onAddNewSessionClicked(patientId) }"
                         android:src="@drawable/ic_add_session"
                         android:transitionName="@string/fab_add_session_transition_name"
+                        android:visibility="@{viewModel.invoiceGenerated ? View.INVISIBLE : View.VISIBLE}"
                         app:elevation="1dp"
                         app:layout_constraintBottom_toTopOf="@id/divider_full_name"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -475,7 +476,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_5dp"
                         android:layout_marginTop="@dimen/margin_8dp"
-                        android:text="@string/session_count"
+                        android:text="@string/planned_sessions"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="@color/light_midnight"
                         app:layout_constraintStart_toStartOf="@id/title_treatment_plan"
@@ -586,7 +587,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_5dp"
                         android:layout_marginTop="@dimen/margin_8dp"
-                        android:text="@string/session_price"
+                        android:text="@string/unit_price"
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="@color/light_midnight"
                         app:layout_constraintStart_toStartOf="@id/title_payment_info"
@@ -660,7 +661,8 @@
                 app:layout_constraintEnd_toStartOf="@id/invoice_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/cerulean"
+                app:cardBackgroundColor="@color/cerulean"
+                app:strokeColor="@color/expenses_zomp"
                 app:strokeWidth="@dimen/width_stroke_card">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -672,9 +674,8 @@
                         android:layout_width="@dimen/size_image_40dp"
                         android:layout_height="@dimen/size_image_40dp"
                         android:layout_marginStart="@dimen/margin_16dp"
-                        android:alpha="@dimen/opacity_20"
                         android:background="@drawable/shape_circle"
-                        android:backgroundTint="@color/cerulean"
+                        android:backgroundTint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -699,7 +700,7 @@
                         android:textAllCaps="true"
                         android:textStyle="bold"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="@color/cerulean"
+                        android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="@id/quotation_image_bg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/quotation_image_bg"
@@ -717,14 +718,14 @@
                 android:layout_marginHorizontal="@dimen/padding_8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="@{()->viewModel.onReceiptInvoiceClicked(patientId)}"
                 app:cardElevation="@dimen/card_elevation"
+                android:visibility="@{viewModel.invoiceAvailable ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/quotation_card"
                 app:layout_constraintTop_toTopOf="parent"
                 app:cardBackgroundColor="@color/sunrise_orange"
-                app:strokeColor="@color/expenses_coral"
+                app:strokeColor="@color/expenses_orange_crayola"
                 app:strokeWidth="@dimen/width_stroke_card">
 
                 <androidx.constraintlayout.widget.ConstraintLayout

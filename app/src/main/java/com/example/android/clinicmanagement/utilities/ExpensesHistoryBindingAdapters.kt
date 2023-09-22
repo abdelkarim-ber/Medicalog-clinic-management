@@ -19,7 +19,7 @@ fun TextView.setExpensesHistoryInfo(expenditure: Expenditure?){
     if(expenditure != null){
         this.text = with(expenditure){
             when(id){
-                R.id.text_date -> SimpleDateFormat("MMMM, yyyy", Locale.getDefault()).format(dateInSeconds*1000)
+                R.id.text_date -> getMonthYearFormat(dateInSeconds*1000)
                 R.id.title_expenses_type -> context.getString(ExpensesType.findExpensesTypeWithNumber(expendCategory)!!.stringResource)
                 R.id.text_amount_payed -> context.getString(R.string.moroccan_currency_with_number,amountSpent)
                 else -> throw Exception("No expenses history list item TextView Id matches")
