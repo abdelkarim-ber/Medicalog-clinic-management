@@ -25,9 +25,7 @@ import com.example.android.clinicmanagement.databinding.FragmentPatientsBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.transition.MaterialElevationScale
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,7 +39,6 @@ class PatientsFragment : Fragment() {
     private lateinit var patientsViewModel: PatientsViewModel
 
     private lateinit var resetMenuItem: MenuItem
-    private var previousCollectionProcess: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,18 +149,16 @@ class PatientsFragment : Fragment() {
         }
 
 
-        val adapter = PatientsAdapter { view, id ->
+        val patientsListAdapter = PatientsAdapter { view, id ->
             patientsViewModel.onPatientClicked(view, id)
         }
 
         //Display the load state for the initial patients list data load
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                adapter.loadStateFlow.collect { loadStates ->
+                patientsListAdapter.loadStateFlow.collect { loadStates ->
                     //we check if it's the initial load
-                    val isLoading = loadStates.refresh is LoadState.Loading
-                    // Show or hide the loading animation based on `isLoading`
-                    if(isLoading){
+                    if( loadStates.refresh is LoadState.Loading){
                         patientsViewModel.showLoadingScreen()
                         //Here we delay for a second to give the animations of showing/hiding loading
                         // and showing/hiding content enough time to run.
@@ -171,35 +166,34 @@ class PatientsFragment : Fragment() {
                         //After each refresh we scroll to position zero either when we change filter infos
                         // or when there is a change in the underlying data of the current patients list.
                         binding.listPatients.scrollToPosition(0)
-                    }else{
-                            patientsViewModel.hideLoadingScreen()
                     }
+
+                    //We check if the list has finished loading
+                    //Then corresponding to the list item count we either show the place holder screen
+                    // or the actual content.
+                    if (loadStates.refresh is LoadState.NotLoading) {
+                        if (patientsListAdapter.itemCount == 0) {
+                            patientsViewModel.showEmptyScreen()
+                        } else {
+                            patientsViewModel.showContent()
+                        }
+                    }
+
 
                 }
             }
         }
 
         //Display the load state for Header and footer
-        binding.listPatients.adapter = adapter.withLoadStateHeaderAndFooter(
+        binding.listPatients.adapter = patientsListAdapter.withLoadStateHeaderAndFooter(
             header = LoadStateAdapter(),
             footer = LoadStateAdapter()
         )
 
-        // Add an Observer on the state variable for patients list pager when a new patients list
-        // with a new set of filter informations is requested
-        patientsViewModel.newPatientsListPagerEvent.observe(viewLifecycleOwner) { patientsList ->
-
-            //Here we cancel the previous coroutine when we receive a new pager
-            previousCollectionProcess?.cancel()
-
-            previousCollectionProcess = viewLifecycleOwner.lifecycleScope.launch {
-                    repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        patientsList.collectLatest {
-                            adapter.submitData(it)
-                        }
-                    }
-                }
-
+        // Add an Observer for the patients list when a new list
+        // with a new set of filter informations is requested.
+        patientsViewModel.patientsList.observe(viewLifecycleOwner) { patientsList ->
+            patientsListAdapter.submitData(lifecycle,patientsList)
         }
 
 

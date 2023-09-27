@@ -161,7 +161,7 @@
     <string name="dialog_confirm">confirm</string>
     <string name="dialog_ok">ok</string>
     <string name="dialog_cancel">cancel</string>
-    <string name="sessions_completion">Sessions completion :</string>
+    <string name="treatment_status">Treatment status :</string>
     <string name="diagnosis_double_points">Diagnosis :</string>
     <string name="last_session">Last session :</string>
     <string name="consultation_date_range">Consultation date range</string>

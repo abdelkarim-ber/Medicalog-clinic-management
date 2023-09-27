@@ -84,6 +84,9 @@
         <argument
             android:name="patientKey"
             app:argType="long" />
+        <argument
+            android:name="isInvoiceGenerated"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/receipt"

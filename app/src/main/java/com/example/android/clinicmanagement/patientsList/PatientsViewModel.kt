@@ -1,19 +1,13 @@
 package com.example.android.clinicmanagement.patientsList
 
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
+import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import com.example.android.clinicmanagement.R
-import com.example.android.clinicmanagement.data.models.PatientStatus
 import com.example.android.clinicmanagement.data.repositories.PatientRepository
 import com.example.android.clinicmanagement.utilities.UiState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
@@ -58,16 +52,6 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
 
 
     /**
-     * Variable that tells the adapter to collect from a new pager
-     * in case when we have a new set of filter informations.
-     */
-    private val _newPatientsListPagerEvent = MutableLiveData<Flow<PagingData<PatientStatus>>>()
-    /**
-     * The immutable and exposed version of [_newPatientsListPagerEvent].
-     */
-    val newPatientsListPagerEvent: LiveData<Flow<PagingData<PatientStatus>>> = _newPatientsListPagerEvent
-
-    /**
      * Variable to set the count of results after a filter is applied.
      */
     private val _patientsCount = MutableLiveData<Int?>()
@@ -96,6 +80,20 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
      * to avoid reloading the same data.
      */
     private var lastFilterDataState: FilterDataState? = null
+
+
+    /**
+     * Every time we are ready to see the filter results,
+     * we update this variable value through [loadPatients] method.
+     */
+    private val _patientsFilterInfo = MutableLiveData<FilterDataState>()
+
+    /**
+     * Variable to load the patients list.
+     */
+    val patientsList = _patientsFilterInfo.switchMap {
+        patientRepository.loadPatientsStatusWithFilter(filterDataState).cachedIn(viewModelScope)
+    }
 
     init {
         loadPatientsCount()
@@ -136,19 +134,26 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
     fun showLoadingScreen() {
         _patientsUIState.value = UiState.Loading(R.string.patients_list_loading_message)
     }
+
     /**
-     * Called after we finish the process of loading data
-     * to hide the loading screen and show the content if
-     * there is one.
+     * Called when we actually have some data to show to the user.
      */
-    fun hideLoadingScreen() {
-        // Check if the current state is loading state
-        // to avoid hiding the failure screen if the current
-        // UI state is the failure state.
-        if (_patientsUIState.value is UiState.Loading) {
+    fun showContent() {
             _patientsUIState.value = UiState.Success
-        }
     }
+
+    /**
+     * Called when we have no data to show to the user
+     * to display the place holder screen.
+     */
+    fun showEmptyScreen() {
+        _patientsUIState.value = UiState.Failure(
+            R.string.patients_list_empty_state_tagline,
+            R.string.patients_list_empty_state_message,
+            R.drawable.img_placeholder_no_results
+        )
+    }
+
 
     /**
      * Called when the fab button is clicked
@@ -183,7 +188,7 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
      * for the front layer of the backdrop
      */
     private fun loadPatientsCount() {
-        //canceling previous countingProcessJob if exists
+        //canceling previous countingProcessJob if it exists.
         countingProcessJob?.cancel()
 
         countingProcessJob = viewModelScope.launch {
@@ -202,7 +207,7 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
     }
 
     /**
-     * Load the patients list if the count returned from [loadPatientsCount] is non 0.
+     * Called to load the patients list.
      */
     fun loadPatients() {
         //Here we check if the filterDataState is the same from
@@ -212,23 +217,10 @@ class PatientsViewModel(private val patientRepository: PatientRepository) : View
             return
         }
 
-        viewModelScope.launch {
-            countingProcessJob?.join()
-            //Here if the patientsCount is zero we just show an empty state screen.
-            if (_patientsCount.value == 0) {
-                _patientsUIState.value = UiState.Failure(
-                    R.string.patients_list_empty_state_tagline,
-                    R.string.patients_list_empty_state_message,
-                    R.drawable.img_placeholder_no_results
-                )
-                //Otherwise we load the actual Patients list data
-            } else {
-                _newPatientsListPagerEvent.value =
-                    patientRepository.loadPatientsStatusWithFilter(filterDataState)
-                        .cachedIn(viewModelScope)
-            }
-            lastFilterDataState = filterDataState
-        }
+        _patientsFilterInfo.value = filterDataState
+
+        lastFilterDataState = filterDataState
+
     }
 
 }

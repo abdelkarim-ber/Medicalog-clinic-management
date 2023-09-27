@@ -1,8 +1,10 @@
 package com.example.android.clinicmanagement.data.repositories
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.android.clinicmanagement.data.datasources.SessionsDataSource
 import com.example.android.clinicmanagement.data.models.PatientStatus
 import com.example.android.clinicmanagement.data.models.Session
@@ -24,7 +26,7 @@ class SessionsRepository(private val sessionsDataSource: SessionsDataSource) {
         sessionsDataSource.deleteSession(session)
 
 
-    fun loadSessionsWithPatientID(patientId: Long): Flow<PagingData<Session>> {
+    fun loadSessionsWithPatientID(patientId: Long): LiveData<PagingData<Session>> {
         return Pager(
             config = PagingConfig(
                 initialLoadSize = ITEMS_PER_PAGE * 2,
@@ -36,7 +38,7 @@ class SessionsRepository(private val sessionsDataSource: SessionsDataSource) {
                 sessionsDataSource.loadSessionsWithPatientID(patientId)
 
             }
-        ).flow
+        ).liveData
 
     }
 

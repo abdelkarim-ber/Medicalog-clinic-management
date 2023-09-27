@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="session"
             type="com.example.android.clinicmanagement.data.models.Session" />
@@ -12,7 +12,9 @@
         <variable
             name="sessionDeleteClickListener"
             type="com.example.android.clinicmanagement.patientHistory.PatientHistoryAdapter.SessionDeleteClickListener" />
-
+        <variable
+            name="isInvoiceGenerated"
+            type="boolean"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_8dp"
+                    android:visibility="@{isInvoiceGenerated ? View.INVISIBLE : View.VISIBLE}"
                     android:background="?attr/actionBarItemBackground"
                     android:onClick="@{() -> sessionDeleteClickListener.onClick(session)}"
                     android:src="@drawable/ic_delete"

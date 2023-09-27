@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
@@ -20,12 +19,9 @@ import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentExpensesHistoryBinding
 import com.example.android.clinicmanagement.patientsList.LoadStateAdapter
-import com.example.android.clinicmanagement.expensesHistory.ExpensesHistoryViewModel.OrderType
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -33,7 +29,6 @@ class ExpensesHistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentExpensesHistoryBinding
     private lateinit var expensesHistoryViewModel: ExpensesHistoryViewModel
-    private var previousCollectionProcess: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,10 +72,10 @@ class ExpensesHistoryFragment : Fragment() {
 
 
         val singleItems = arrayOf(
-            resources.getString(OrderType.DATE.textResId),
-            resources.getString(OrderType.RECENTLY_ADDED.textResId)
+            resources.getString(ExpensesOrderType.DATE.textResId),
+            resources.getString(ExpensesOrderType.RECENTLY_ADDED.textResId)
         )
-        var checkedItem = OrderType.DATE.index
+        var checkedItem = ExpensesOrderType.DATE.index
         binding.buttonOrder.setOnClickListener {
             MaterialAlertDialogBuilder(
                 requireContext(),
@@ -92,8 +87,8 @@ class ExpensesHistoryFragment : Fragment() {
                 }
                 .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
                     checkedItem = which
-                    val orderType = OrderType.findOrderTypeWithIndex(which)
-                    orderType?.let { expensesHistoryViewModel.loadExpensesListWithOrder(it) }
+                    val expensesOrderType = ExpensesOrderType.findOrderTypeWithIndex(which)
+                    expensesOrderType?.let { expensesHistoryViewModel.changeExpensesHistoryOrderWith(it) }
                     dialog.dismiss()
                 }
                 .show()
@@ -158,19 +153,10 @@ class ExpensesHistoryFragment : Fragment() {
 
 
 
-        // Add an Observer on the state variable for expenses history list pager when a new expenses history list
+        // Add an Observer for expenses history list when a new list
         // with a new order type is requested.
-        expensesHistoryViewModel.expensesListPagerEvent.observe(viewLifecycleOwner) { expensesHistoryList ->
-            //Here we cancel the previous coroutine when we receive a new pager
-            previousCollectionProcess?.cancel()
-            previousCollectionProcess = viewLifecycleOwner.lifecycleScope.launch {
-                //Collecting the flow of paging data to display the expenses history list.
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    expensesHistoryList.collectLatest {
-                        expensesHistoryAdapter.submitData(it)
-                    }
-                }
-            }
+        expensesHistoryViewModel.expensesList.observe(viewLifecycleOwner) { expensesHistoryList ->
+                expensesHistoryAdapter.submitData(lifecycle,expensesHistoryList)
         }
 
         // Add an Observer on the state variable for showing the snack bar when

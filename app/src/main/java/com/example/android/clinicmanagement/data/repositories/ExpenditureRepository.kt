@@ -1,13 +1,15 @@
 package com.example.android.clinicmanagement.data.repositories
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.android.clinicmanagement.data.datasources.ExpenditureDataSource
 import com.example.android.clinicmanagement.data.models.Expenditure
 import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
 import com.example.android.clinicmanagement.data.models.TotalByMonth
-import com.example.android.clinicmanagement.expensesHistory.ExpensesHistoryViewModel.OrderType
+import com.example.android.clinicmanagement.expensesHistory.ExpensesOrderType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -21,7 +23,7 @@ class ExpenditureRepository(private val expenditureDataSource: ExpenditureDataSo
     suspend fun deleteExpenditure(expenditure: Expenditure) =
         expenditureDataSource.deleteExpenditure(expenditure)
 
-    fun loadExpensesOrderedBy(orderType: OrderType): Flow<PagingData<Expenditure>> {
+    fun loadExpensesOrderedBy(expensesOrderType: ExpensesOrderType): LiveData<PagingData<Expenditure>> {
         return Pager(
             config = PagingConfig(
                 initialLoadSize = ITEMS_PER_PAGE * 2,
@@ -30,10 +32,10 @@ class ExpenditureRepository(private val expenditureDataSource: ExpenditureDataSo
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                expenditureDataSource.loadExpensesOrderedBy(orderType.index)
+                expenditureDataSource.loadExpensesOrderedBy(expensesOrderType.index)
 
             }
-        ).flow
+        ).liveData
 
     }
 

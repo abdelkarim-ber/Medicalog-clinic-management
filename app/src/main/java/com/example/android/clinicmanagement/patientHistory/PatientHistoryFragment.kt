@@ -1,7 +1,6 @@
 package com.example.android.clinicmanagement.patientHistory
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +16,9 @@ import androidx.paging.LoadState
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentPatientHistoryBinding
-import com.example.android.clinicmanagement.patientProfile.PatientProfileFragmentArgs
 import com.example.android.clinicmanagement.patientsList.LoadStateAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -29,7 +26,7 @@ class PatientHistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentPatientHistoryBinding
     private lateinit var patientHistoryViewModel: PatientHistoryViewModel
-    private val args: PatientProfileFragmentArgs by navArgs()
+    private val args: PatientHistoryFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +61,7 @@ class PatientHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val patientHistoryAdapter = PatientHistoryAdapter { session ->
+        val patientHistoryAdapter = PatientHistoryAdapter(args.isInvoiceGenerated) { session ->
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.dialog_deletion_confirmation_title))
                 .setMessage(resources.getString(R.string.dialog_deletion_confirmation_message))
@@ -107,14 +104,11 @@ class PatientHistoryFragment : Fragment() {
         )
 
 
-        //Collecting the flow of paging data to display the patient sessions history list.
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                patientHistoryViewModel.patientSessionsHistoryList.collectLatest {
-                    patientHistoryAdapter.submitData(it)
-                }
-            }
+        // Add an Observer to display the patient history list.
+        patientHistoryViewModel.patientHistoryList.observe(viewLifecycleOwner) { patientHistoryList ->
+            patientHistoryAdapter.submitData(lifecycle,patientHistoryList)
         }
+
 
 
 

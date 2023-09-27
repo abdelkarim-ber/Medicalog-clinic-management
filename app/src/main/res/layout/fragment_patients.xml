@@ -302,7 +302,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_16dp"
                         android:layout_marginTop="@dimen/margin_16dp"
-                        android:text="@string/sessions_completion"
+                        android:text="@string/treatment_status"
                         android:textAppearance="?attr/textAppearanceSubtitle1"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"

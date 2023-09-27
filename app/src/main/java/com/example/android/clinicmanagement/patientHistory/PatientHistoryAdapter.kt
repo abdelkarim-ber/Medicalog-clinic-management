@@ -12,7 +12,10 @@ import com.example.android.clinicmanagement.data.models.Session
 import com.example.android.clinicmanagement.databinding.ListItemPatientHistoryBinding
 import com.example.android.clinicmanagement.patientsList.PatientsAdapter
 
-class PatientHistoryAdapter(private val sessionDeleteClickListener: SessionDeleteClickListener) :
+class PatientHistoryAdapter(
+    private val isInvoiceGenerated: Boolean,
+    private val sessionDeleteClickListener: SessionDeleteClickListener
+) :
     PagingDataAdapter<Session, PatientHistoryAdapter.ViewHolder>(SESSION_DIFF_CALLBACK) {
 
 
@@ -24,16 +27,17 @@ class PatientHistoryAdapter(private val sessionDeleteClickListener: SessionDelet
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.bind(item , sessionDeleteClickListener)
+            holder.bind(item , sessionDeleteClickListener,isInvoiceGenerated)
         }
     }
 
 
     class ViewHolder private constructor(val binding: ListItemPatientHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Session, sessionDeleteClickListener: SessionDeleteClickListener) {
+        fun bind(data: Session, sessionDeleteClickListener: SessionDeleteClickListener,isInvoiceGenerated:Boolean) {
             binding.session = data
             binding.sessionDeleteClickListener = sessionDeleteClickListener
+            binding.isInvoiceGenerated = isInvoiceGenerated
             binding.executePendingBindings()
         }
 

@@ -1,33 +1,17 @@
 package com.example.android.clinicmanagement.expensesHistory
 
-import androidx.annotation.StringRes
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.Expenditure
 import com.example.android.clinicmanagement.data.repositories.ExpenditureRepository
 import com.example.android.clinicmanagement.utilities.UiState
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ExpensesHistoryViewModel(private val expenditureRepository: ExpenditureRepository) :
     ViewModel() {
-
-    /**
-     * Variable that tells the adapter to collect from a new pager
-     * in case we change the expenses list's order type .
-     */
-    private val _expensesListPagerEvent = MutableLiveData<Flow<PagingData<Expenditure>>>()
-    /**
-     * The immutable and exposed version of [_expensesListPagerEvent].
-     */
-    val expensesListPagerEvent: LiveData<Flow<PagingData<Expenditure>>> = _expensesListPagerEvent
-
-
 
 
     /**
@@ -40,17 +24,6 @@ class ExpensesHistoryViewModel(private val expenditureRepository: ExpenditureRep
      * The immutable and exposed version of [_expensesHistoryUIState].
      */
     val expensesHistoryUIState: LiveData<UiState> = _expensesHistoryUIState
-
-
-    /**
-     * Variable to display the current type of order chosen.
-     */
-    private val _orderText = MutableLiveData<Int>()
-    /**
-     * The immutable and exposed version of [_orderText].
-     */
-    val orderText: LiveData<Int>
-            get()= _orderText
 
 
     /**
@@ -75,19 +48,30 @@ class ExpensesHistoryViewModel(private val expenditureRepository: ExpenditureRep
 
 
 
-    init {
-        loadExpensesListWithOrder(OrderType.DATE)
+    /**
+     * Variable to set the current type of order chosen for expenses history list.
+     */
+    private val _expensesOrderType = MutableLiveData(ExpensesOrderType.DATE)
+
+    /**
+     * Variable to display the current type of order chosen as text.
+     */
+    val expensesOrderText = Transformations.map(_expensesOrderType){ orderType ->
+        orderType.textResId
+    }
+    /**
+     * Variable to load the expenses history list.
+     */
+    val expensesList: LiveData<PagingData<Expenditure>> = _expensesOrderType.switchMap { orderType ->
+        expenditureRepository.loadExpensesOrderedBy(orderType).cachedIn(viewModelScope)
     }
 
 
     /**
-     * Called to load the list of expenses ordered by the type passed as an argument.
-     * @param orderType the type of order the expenses list is ordered by.
+     * Called to change the expenses history list order type.
      */
-    fun loadExpensesListWithOrder(orderType: OrderType) {
-        //text to be displayed in order title section.
-        _orderText.value = orderType.textResId
-        _expensesListPagerEvent.value = expenditureRepository.loadExpensesOrderedBy(orderType)
+    fun changeExpensesHistoryOrderWith(expensesOrderType: ExpensesOrderType) {
+        _expensesOrderType.value = expensesOrderType
     }
 
 
@@ -131,8 +115,7 @@ class ExpensesHistoryViewModel(private val expenditureRepository: ExpenditureRep
      * so we can show the user a loading screen.
      */
     fun showLoadingScreen() {
-        if(_expensesHistoryUIState.value !is UiState.Failure)
-            _expensesHistoryUIState.value = UiState.Loading(R.string.expenses_history_loading_message)
+        _expensesHistoryUIState.value = UiState.Loading(R.string.expenses_history_loading_message)
     }
 
 
@@ -144,23 +127,4 @@ class ExpensesHistoryViewModel(private val expenditureRepository: ExpenditureRep
     }
 
 
-    /**
-     * Enum class where we define a set of order types the expenses list can be ordered by.
-     * @param index the number that identifies the Order type.
-     * @param textResId the string resource id for text related to the order type.
-     */
-    enum class OrderType(val index: Int, @StringRes val textResId: Int) {
-        DATE(0, R.string.date), RECENTLY_ADDED(1, R.string.recently_added);
-
-        companion object {
-            /**
-             * Returns the corresponding [OrderType] based on the passed index.
-             *@param index the number that identifies the Order type.
-             */
-            fun findOrderTypeWithIndex(index: Int): OrderType? {
-                return values().find { it.index == index }
-            }
-        }
-
-    }
 }

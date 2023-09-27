@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.Session
 import com.example.android.clinicmanagement.data.repositories.SessionsRepository
@@ -27,7 +28,7 @@ class PatientHistoryViewModel(patientId: Long, private val sessionsRepository: S
     /**
      * Variable to load the patient sessions history from the database.
      */
-    val patientSessionsHistoryList = sessionsRepository.loadSessionsWithPatientID(patientId)
+    val patientHistoryList = sessionsRepository.loadSessionsWithPatientID(patientId).cachedIn(viewModelScope)
 
 
     /**

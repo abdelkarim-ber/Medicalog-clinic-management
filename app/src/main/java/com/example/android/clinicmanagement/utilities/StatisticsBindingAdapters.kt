@@ -50,8 +50,13 @@ fun View.showPlaceHolder(uiState: UiState?) {
 fun View.showContent(uiState: UiState?) {
 
     if (uiState is UiState.Success) {
-        if (visibility == View.GONE)
+        if (visibility == View.GONE || visibility == View.INVISIBLE)
             crossFadeIn()
+    } else if (uiState is UiState.Loading) {
+        //That way we prevent item change animations from showing
+        //in case for ex: when we change the order of a list.
+        if (visibility == View.VISIBLE)
+            visibility = View.INVISIBLE
     } else {
         if (visibility == View.VISIBLE)
             crossFadeOut()

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
@@ -118,7 +119,8 @@ class PatientProfileFragment : Fragment() {
             patientId?.let {
                 findNavController().navigate(
                     PatientProfileFragmentDirections.actionPatientProfileToPatientHistory(
-                        patientId
+                         patientKey =  patientId,
+                        isInvoiceGenerated = binding.fabAddSession.isInvisible
                     )
                 )
                 patientProfileViewModel.onPatientHistoryNavigated()

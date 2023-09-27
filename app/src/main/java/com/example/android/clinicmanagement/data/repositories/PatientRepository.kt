@@ -1,9 +1,7 @@
 package com.example.android.clinicmanagement.data.repositories
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
+import androidx.lifecycle.LiveData
+import androidx.paging.*
 import com.example.android.clinicmanagement.data.datasources.PatientDataSource
 import com.example.android.clinicmanagement.data.models.Patient
 import com.example.android.clinicmanagement.data.models.PatientDetails
@@ -32,7 +30,7 @@ class PatientRepository(private val patientDataSource: PatientDataSource) {
 
     fun loadPatientsStatusWithFilter(
         filterDataState:FilterDataState
-    ): Flow<PagingData<PatientStatus>> {
+    ): LiveData<PagingData<PatientStatus>> {
 
         val patientsPagingSourceFactory = {
             patientDataSource.loadPatientsStatusWithFilter(
@@ -56,7 +54,7 @@ class PatientRepository(private val patientDataSource: PatientDataSource) {
                 enablePlaceholders = false
             ),
             pagingSourceFactory = patientsPagingSourceFactory
-        ).flow
+        ).liveData
 
     }
 
