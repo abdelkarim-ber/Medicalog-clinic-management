@@ -31,8 +31,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:menu="@menu/expenditure_menu"
-                app:navigationIcon="@drawable/ic_arrow_back">
-
+              >
                 <ImageView
                     android:layout_width="@dimen/size_app_bar_logo_mark"
                     android:layout_height="@dimen/size_app_bar_logo_mark"

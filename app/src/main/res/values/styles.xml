@@ -83,11 +83,10 @@
         <item name="labelVisibilityMode">labeled</item>
         <item name="android:background">@color/bluish_white</item>
         <item name="elevation">0dp</item>
-        <item name="itemIconTint">@color/selector_item_nav_view</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.clinicManagement.Caption</item>
         <item name="itemTextColor">@color/selector_item_nav_view</item>
         <item name="itemRippleColor">@color/blue_sky</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.clinicManagement.BottomNavigationView</item>
-        <item name="itemTextAppearanceInactive">@style/TextAppearance.clinicManagement.Body2</item>
 
     </style>
 

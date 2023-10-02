@@ -42,7 +42,7 @@
             app:layout_constraintStart_toStartOf="@id/divider"
             app:layout_constraintTop_toTopOf="@id/card"
             app:layout_constraintBottom_toTopOf="@id/card"
-            app:tint="@color/blue_sky" />
+            app:tint="@color/dark_midnight" />
 
         <ImageView
             android:id="@+id/shape_circle_white"
@@ -63,7 +63,7 @@
             android:layout_marginTop="@dimen/margin_24dp"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:layout_marginBottom="@dimen/margin_24dp"
-            app:cardBackgroundColor="@color/grey_transparent_80"
+            app:cardBackgroundColor="@color/bluish_white"
             app:shapeAppearance="@style/ShapeAppearance.clinicManagement.historyCard"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +71,7 @@
             app:layout_constraintStart_toEndOf="@id/divider"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:strokeColor="@color/blue_sky"
+            app:strokeColor="@color/dark_midnight"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout

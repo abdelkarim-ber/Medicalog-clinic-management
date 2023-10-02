@@ -3,10 +3,14 @@
     <item
         android:id="@+id/statistics"
         android:title="@string/statistics"
-        android:icon="@drawable/ic_chart_filled"/>
+        />
 
     <item
         android:id="@+id/patients"
         android:title="@string/patients"
-        android:icon="@drawable/ic_user_filled"/>
+      />
+    <item
+        android:id="@+id/expenses"
+        android:title="@string/expenses"
+      />
 </menu>

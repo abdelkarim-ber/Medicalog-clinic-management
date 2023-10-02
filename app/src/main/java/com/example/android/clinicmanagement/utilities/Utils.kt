@@ -3,14 +3,21 @@ package com.example.android.clinicmanagement.utilities
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.content.Context
 import android.graphics.drawable.BitmapDrawable
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.annotation.DrawableRes
+import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.core.animation.doOnEnd
 import androidx.core.view.drawToBitmap
+import androidx.navigation.NavController
+import androidx.navigation.ui.NavigationUI
+import com.airbnb.lottie.LottieCompositionFactory
+import com.airbnb.lottie.LottieDrawable
 import com.example.android.clinicmanagement.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ibm.icu.text.RuleBasedNumberFormat
@@ -269,6 +276,40 @@ fun convertNumberToLetters(number: Int): String {
 fun getMonthYearFormat(dateInMillis: Long):String{
     return SimpleDateFormat("MMMM, yyyy", Locale.getDefault()).format(dateInMillis).replaceFirstChar { it.uppercase(Locale.ROOT) }
 }
+
+/**
+ * Builds the lottie drawable animation and makes it ready to use as an icon.
+ *@param context
+ * @param animationRes the animation resource file must be of type .json
+ */
+fun createAnimatedIcon(context: Context, @RawRes animationRes: Int): LottieDrawable {
+    return LottieDrawable().apply {
+        LottieCompositionFactory.fromRawRes(context, animationRes)
+            .addListener { comp ->
+                composition = comp
+                speed = 2.5f
+                progress = 1f
+            }
+    }
+}
+
+/**
+ * Plays the lottie drawable animation and navigates to the passed destination
+ * when the animation ends.
+*@param item - The selected MenuItem.
+*@param navController - The NavController that hosts the destination.
+ */
+fun LottieDrawable.playAndNavigate(item: MenuItem, navController: NavController){
+   playAnimation()
+   addAnimatorListener(object : AnimationEndListener {
+        override fun onAnimationEnd(p0: Animator) {
+            NavigationUI.onNavDestinationSelected(item, navController)
+        }
+    })
+}
+
+
+
 
 const val MALE_CHARACTER = 'M'
 const val FEMALE_CHARACTER = 'F'

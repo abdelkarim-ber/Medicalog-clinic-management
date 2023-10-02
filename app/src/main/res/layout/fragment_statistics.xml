@@ -116,16 +116,22 @@
 
                 <TextView
                     android:id="@+id/text_spending_percentage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_container_text_subtitle2"
+                    android:layout_marginBottom="@dimen/margin_8dp"
+                    android:layout_marginHorizontal="@dimen/margin_16dp"
                     android:textAppearance="?attr/textAppearanceSubtitle2"
                     android:textColor="@color/blue_sky"
+                    android:gravity="center"
+                    app:autoSizeMaxTextSize="15sp"
+                    app:autoSizeMinTextSize="13sp"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
                     app:expensesOperand="@{viewModel.expenses}"
                     app:incomeOperand="@{viewModel.income}"
                     app:layout_constraintBottom_toTopOf="@+id/card_net_income"
-                    app:layout_constraintEnd_toEndOf="@+id/text_income"
-                    app:layout_constraintStart_toStartOf="@+id/text_income"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_income"
                     tools:text="you spent 50% of your income" />
 
@@ -329,7 +335,6 @@
                             />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-                <!--                android:visibility="@{viewModel.expensesByCategoryList != null ? View.VISIBLE : View.INVISIBLE}"-->
 
                 <TextView
                     android:id="@+id/title_expenses_by_category"
@@ -340,7 +345,6 @@
                     android:text="@string/expenses_by_category"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     app:expensesListTitleVisibility="@{viewModel.expensesByCategoryList}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card_chart" />
@@ -350,6 +354,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@id/title_expenses_by_category"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:dividerColor="@color/black"
                     app:expensesListTitleVisibility="@{viewModel.expensesByCategoryList}"
                     android:layout_marginHorizontal="@dimen/margin_8dp"
                     app:layout_constraintStart_toEndOf="@id/title_expenses_by_category"

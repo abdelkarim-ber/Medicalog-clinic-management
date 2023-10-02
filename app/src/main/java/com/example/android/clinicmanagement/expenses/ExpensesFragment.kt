@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
@@ -16,8 +15,6 @@ import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentExpensesBinding
 import com.example.android.clinicmanagement.monthPicker.MonthPickerDialog
-import com.example.android.clinicmanagement.utilities.crossFadeIn
-import com.example.android.clinicmanagement.utilities.crossFadeOut
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
@@ -74,7 +71,7 @@ class ExpensesFragment : Fragment() {
             expensesViewModel.setSelectedMonthAndYear(dateInSeconds * 1000)
         }
 
-        binding.toolBar.setNavigationOnClickListener { findNavController().navigateUp() }
+
         binding.toolBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.calendar -> monthPicker.showMonthPicker(childFragmentManager, "tag")

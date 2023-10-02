@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding
@@ -57,6 +57,9 @@ class StatisticsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         val monthPicker = MonthPickerDialog()
         monthPicker.addOnPositiveButtonClickListener { dateInSeconds ->
             statisticsViewModel.loadStatsForMonth(dateInSeconds * 1000)
@@ -65,7 +68,6 @@ class StatisticsFragment : Fragment() {
         binding.toolBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.calendar -> monthPicker.showMonthPicker(childFragmentManager, "tag")
-                R.id.addExpenditure -> findNavController().navigate(StatisticsFragmentDirections.actionStatisticsToExpenses())
             }
             true
         }

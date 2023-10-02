@@ -30,8 +30,9 @@ fun ImageView.setAvatarImage(patientStatus: PatientStatus?) {
         val imageSource: Int
         with(patientStatus) {
             imageSource = when {
-                age in 0..17 && gender == MALE_CHARACTER -> R.drawable.avatar_patient_boy
-                age in 0..17 && gender == FEMALE_CHARACTER -> R.drawable.avatar_patient_girl
+                age in 1..3 -> R.drawable.avatar_patient_baby
+                age in 4..17 && gender == MALE_CHARACTER -> R.drawable.avatar_patient_boy
+                age in 4..17 && gender == FEMALE_CHARACTER -> R.drawable.avatar_patient_girl
                 age in 18..45 && gender == MALE_CHARACTER -> R.drawable.avatar_patient_young_man
                 age in 18..45 && gender == FEMALE_CHARACTER -> R.drawable.avatar_patient_young_woman
                 age >= 46 && gender == MALE_CHARACTER -> R.drawable.avatar_patient_old_man

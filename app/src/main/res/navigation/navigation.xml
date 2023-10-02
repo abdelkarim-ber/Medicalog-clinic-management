@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_expenses" >
         <action
             android:id="@+id/action_expenses_to_expensesHistoryFragment"
-            app:destination="@id/expensesHistoryFragment"
+            app:destination="@id/expensesHistory"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -106,15 +106,7 @@
         android:name="com.example.android.clinicmanagement.statistics.StatisticsFragment"
         android:label="StatisticsFragment"
         tools:layout="@layout/fragment_statistics"
-        >
-        <action
-            android:id="@+id/action_statistics_to_expenses"
-            app:destination="@id/expenses"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
+        />
     <dialog
         android:id="@+id/newSession"
         android:name="com.example.android.clinicmanagement.session.NewSessionFragment"
@@ -125,8 +117,8 @@
             app:argType="long" />
     </dialog>
     <fragment
-        android:id="@+id/expensesHistoryFragment"
+        android:id="@+id/expensesHistory"
         android:name="com.example.android.clinicmanagement.expensesHistory.ExpensesHistoryFragment"
-        android:label="fragment_expenses_history"
+        android:label="ExpensesHistoryFragment"
         tools:layout="@layout/fragment_expenses_history" />
 </navigation>
