@@ -34,7 +34,7 @@
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/margin_24dp"
                     android:layout_marginTop="@dimen/margin_16dp"
-                    android:text="Select month and year"
+                    android:text="@string/dialog_month_year_picker_title"
                     android:textAllCaps="true"
                     android:textAppearance="?attr/textAppearanceCaption"
                     android:textColor="@color/white" />
@@ -47,7 +47,7 @@
                     android:layout_marginStart="@dimen/margin_24dp"
                     android:layout_marginEnd="@dimen/margin_72dp"
                     android:layout_marginBottom="@dimen/margin_16dp"
-                    android:text="@{@string/month_year_dialog_title(month,year)}"
+                    android:text="@{@string/month_year_dialog_value(month,year)}"
                     tools:text="Feb, 2020"
                     android:textAppearance="?attr/textAppearanceHeadline4"
                     android:textColor="@color/white" />

@@ -107,7 +107,7 @@
                 android:layout_marginTop="@dimen/margin_8dp"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 app:suffixText="@string/moroccan_currency"
-                android:hint="@string/amount_payed"
+                android:hint="@string/amount_paid"
                 app:helperText="@string/helper_session_amount_payed"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

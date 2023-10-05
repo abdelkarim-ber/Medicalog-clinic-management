@@ -7,6 +7,7 @@ import com.example.android.clinicmanagement.data.repositories.SessionsRepository
 import com.example.android.clinicmanagement.domain.GetNetIncomeStatsUseCase
 import com.example.android.clinicmanagement.domain.GetNetIncomeUseCase
 import com.example.android.clinicmanagement.utilities.UiState
+import com.example.android.clinicmanagement.utilities.getCalendarWithPreviousMonth
 import com.example.android.clinicmanagement.utilities.getMonthYearFormat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -85,13 +86,7 @@ class StatisticsViewModel(
 
     init {
         //On launch we request the data of the previous month.
-
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.MONTH, -1)
-        //To avoid gaps for ex when it is the month of february
-        calendar.set(Calendar.DAY_OF_MONTH, 10)
-        loadStatsForMonth(calendar.timeInMillis)
-
+        loadStatsForMonth(getCalendarWithPreviousMonth().timeInMillis)
     }
 
 

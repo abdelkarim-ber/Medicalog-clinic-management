@@ -81,7 +81,7 @@ class ExpensesHistoryFragment : Fragment() {
                 requireContext(),
                 R.style.ThemeOverlay_ClinicManagement_MaterialDialog
             )
-                .setTitle(resources.getString(R.string.dialog_order_title))
+                .setTitle(resources.getString(R.string.dialog_sort_title))
                 .setPositiveButton(resources.getString(R.string.dialog_cancel)) { dialog, which ->
                     dialog.dismiss()
                 }

@@ -39,7 +39,6 @@
     <dimen name="size_selection_card">90dp</dimen>
     <dimen name="height_small_blue_container">316dp</dimen>
     <dimen name="size_profile_card">70dp</dimen>
-    <dimen name="size_image_20dp">20dp</dimen>
     <dimen name="size_image_25dp">25dp</dimen>
     <dimen name="size_button_circular_progress">25dp</dimen>
     <dimen name="height_receipt">500dp</dimen>

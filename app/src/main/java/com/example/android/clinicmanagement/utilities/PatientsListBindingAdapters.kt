@@ -1,7 +1,5 @@
 package com.example.android.clinicmanagement.utilities
 
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -9,12 +7,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.PatientStatus
-import com.example.android.clinicmanagement.data.models.TotalSpentByCategory
-import com.example.android.clinicmanagement.patientForm.PatientFormViewModel
-import com.example.android.clinicmanagement.patientForm.PatientRegistrationEvent
 import com.example.android.clinicmanagement.patientsList.FilterCriteriaChangeEvent
 import com.example.android.clinicmanagement.patientsList.PatientsViewModel
-import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textfield.TextInputEditText
@@ -57,10 +51,10 @@ fun TextView.setPatientFullName(patientStatus: PatientStatus?) {
 fun TextView.setCompletionStatus(patientStatus: PatientStatus?) {
     if (patientStatus != null) {
         if (patientStatus.invNumber != null) {
-            this.setText(R.string.sessions_completion_completed)
+            this.setText(R.string.treatment_status_completed)
             this.setTextColor(ContextCompat.getColor(context, R.color.cerulean))
         } else {
-            this.setText(R.string.sessions_completion_in_progress)
+            this.setText(R.string.treatment_status_in_progress)
             this.setTextColor(ContextCompat.getColor(context, R.color.sunrise_orange))
         }
     }else{
@@ -247,7 +241,7 @@ fun TextView.setResultsCountText(patientsCount:Int?){
                context.getString(R.string.patients_filter_no_criteria)
            }
            0 -> {
-               context.getString(R.string.patients_filter_no_results)
+               context.getString(R.string.patients_list_empty_state_tagline)
            }
            else -> {
                resources.getQuantityString(R.plurals.patients_filter_results_count, patientsCount, patientsCount)

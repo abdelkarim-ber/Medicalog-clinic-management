@@ -1,21 +1,13 @@
 package com.example.android.clinicmanagement.expenses
 
-import android.app.Application
-import android.util.Log
-import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
-import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.data.models.Expenditure
 import com.example.android.clinicmanagement.data.repositories.ExpenditureRepository
 import com.example.android.clinicmanagement.domain.ValidateTextUseCase
+import com.example.android.clinicmanagement.utilities.getCalendarWithPreviousMonth
 import com.example.android.clinicmanagement.utilities.getMonthYearFormat
-import com.github.mikephil.charting.utils.Utils.init
-import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ExpensesViewModel(
     private val expenditureRepository: ExpenditureRepository,
@@ -88,12 +80,8 @@ class ExpensesViewModel(
 
 
     init {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.MONTH, -1)
-        //To avoid gaps for ex when it is the month of february,
-        // also in this date/time in milliseconds we only consider the month and year.
-        calendar.set(Calendar.DAY_OF_MONTH, 10)
-        _selectedDateInMillis.value = calendar.timeInMillis
+        // In this date/time in milliseconds we care only for the month and year.
+        _selectedDateInMillis.value = getCalendarWithPreviousMonth().timeInMillis
     }
 
     /**

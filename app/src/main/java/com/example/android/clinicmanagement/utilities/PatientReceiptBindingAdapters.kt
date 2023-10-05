@@ -4,7 +4,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.android.clinicmanagement.R
-import com.example.android.clinicmanagement.data.models.PatientDetails
 import com.example.android.clinicmanagement.data.models.Receipt
 import com.example.android.clinicmanagement.patientReceipt.ReceiptType
 import java.util.*

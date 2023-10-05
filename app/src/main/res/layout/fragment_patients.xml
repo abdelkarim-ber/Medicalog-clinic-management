@@ -325,7 +325,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_8dp"
-                            android:text="@string/sessions_completion_in_progress"
+                            android:text="@string/treatment_status_in_progress"
                             app:chipIcon="@drawable/shape_circle"
                             app:chipIconSize="@dimen/size_icon_16dp"
                             app:chipIconTint="@color/sunrise_orange" />
@@ -334,7 +334,7 @@
                             android:id="@+id/chip_completed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/sessions_completion_completed"
+                            android:text="@string/treatment_status_completed"
                             app:chipIcon="@drawable/shape_circle"
                             app:chipIconSize="@dimen/size_icon_16dp"
                             app:chipIconTint="@color/cerulean" />

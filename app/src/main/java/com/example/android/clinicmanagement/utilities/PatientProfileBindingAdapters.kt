@@ -58,7 +58,7 @@ fun TextView.setProfileInfo(patientDetails: PatientDetails?) {
                     )
                 }
 
-                R.id.text_age -> context.getString(R.string.years_old_with_number,age)
+                R.id.text_age -> resources.getQuantityString(R.plurals.years_old_with_number,age,age)
 
                 R.id.text_treating_doctor -> context.getString(R.string.doctor_prefix_with_text,doctorFullName)
 

@@ -215,7 +215,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_consultation_date"
-                    app:prefixText="@string/doctor_short"
+                    app:prefixText="@string/doctor_prefix"
                     app:startIconDrawable="@drawable/ic_doctor_filled">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -300,7 +300,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_frequency"
-                    app:suffixText="@string/sessions">
+                    app:suffixText="@string/sessions_suffix">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_session_count"

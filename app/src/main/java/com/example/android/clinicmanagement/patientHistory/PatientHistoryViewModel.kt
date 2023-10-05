@@ -76,8 +76,8 @@ class PatientHistoryViewModel(patientId: Long, private val sessionsRepository: S
      */
     fun showEmptyScreen() {
         _patientHistoryUIState.value = UiState.Failure(
-            R.string.patient_session_empty_state_tagline,
-            R.string.patient_session_empty_state_message,
+            R.string.patient_history_empty_state_tagline,
+            R.string.patient_history_empty_state_message,
             R.drawable.img_placeholder_empty_data
         )
     }

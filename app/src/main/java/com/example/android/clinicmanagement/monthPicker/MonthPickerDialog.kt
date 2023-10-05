@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 
 import androidx.databinding.DataBindingUtil
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.DialogFragmentMonthPickerBinding
+import com.example.android.clinicmanagement.utilities.getCalendarWith
 
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,7 +23,14 @@ import java.util.*
 
 class MonthPickerDialog : DialogFragment() {
     lateinit var binding: DialogFragmentMonthPickerBinding
+
+    /**
+     * Year displayed in title section
+     */
     private val _selectedYear = MutableLiveData<String>()
+    /**
+     * Month displayed in title section
+     */
     private val _selectedMonth = MutableLiveData<String>()
     private var onPositiveButtonClick: ((Long) -> Unit)? = null
     private val years = mutableListOf<String>()
@@ -89,29 +98,40 @@ class MonthPickerDialog : DialogFragment() {
     }
 
     private fun setUpMonthPicker() {
-        val currentDate = Calendar.getInstance()
 
         val locale = Locale.getDefault()
         val monthFormatter = SimpleDateFormat("MMMM", locale)
-        val currentMonth = monthFormatter.format(currentDate.time).replaceFirstChar { it.uppercase(Locale.ROOT) }
-        _selectedMonth.value = currentMonth.take(3)
+        val monthFormatterShort = SimpleDateFormat("MMM", locale)
 
-        val months = mutableListOf<String>()
-        for (i in Calendar.JANUARY..Calendar.DECEMBER) {
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.MONTH, i)
-            months.add(monthFormatter.format(calendar.time).replaceFirstChar { it.uppercase(Locale.ROOT) })
-        }
-        binding.pickerMonth.displayedValues = months.toTypedArray()
-        binding.pickerMonth.maxValue = 11
-        binding.pickerMonth.minValue = 0
-        binding.pickerMonth.wrapSelectorWheel = false
-        binding.pickerMonth.value = months.indexOf(currentMonth)
+        val currentMonth = monthFormatter.format(System.currentTimeMillis()).replaceFirstChar { it.uppercase(locale) }
+        _selectedMonth.value = monthFormatterShort.format(System.currentTimeMillis()).replaceFirstChar { it.uppercase(locale) }
 
-        binding.pickerMonth.setOnValueChangedListener { picker, oldVal, newVal ->
-            val selectedMonthValue = binding.pickerMonth.value
-            _selectedMonth.value = months[selectedMonthValue].take(3)
+        val monthsList = mutableListOf<String>()
+
+        for (month in Calendar.JANUARY..Calendar.DECEMBER) {
+            monthsList.add(
+                monthFormatter.format(getCalendarWith(month).time)
+                    .replaceFirstChar { it.uppercase(locale) }
+            )
         }
+
+
+        binding.pickerMonth.apply {
+            displayedValues = monthsList.toTypedArray()
+            minValue = Calendar.JANUARY
+            maxValue = Calendar.DECEMBER
+            wrapSelectorWheel = false
+            value = monthsList.indexOf(currentMonth)
+
+            setOnValueChangedListener { picker, oldVal, newVal ->
+                val selectedMonthIndex = binding.pickerMonth.value
+                _selectedMonth.value =
+                    monthFormatterShort.format(getCalendarWith(selectedMonthIndex).time)
+                        .replaceFirstChar { it.uppercase(locale) }
+            }
+        }
+
+
 
     }
 
@@ -123,21 +143,23 @@ class MonthPickerDialog : DialogFragment() {
         _selectedYear.value = currentYear.toString()
 
 
-        for (i in 3 downTo 0) {
+        for (i in 2 downTo 0) {
             years.add(currentYear.minus(i).toString())
         }
 
-        binding.pickerYear.displayedValues = years.toTypedArray()
-        binding.pickerYear.maxValue = 3
-        binding.pickerYear.minValue = 0
-        binding.pickerYear.wrapSelectorWheel = false
-        binding.pickerYear.value = years.indexOf(currentYear.toString())
+        binding.pickerYear.apply {
 
-        binding.pickerYear.setOnValueChangedListener { picker, oldVal, newVal ->
-            val selectedYearValue = binding.pickerYear.value
-            _selectedYear.value = years[selectedYearValue]
+            displayedValues = years.toTypedArray()
+            minValue = 0
+            maxValue = 2
+            wrapSelectorWheel = false
+            value = years.indexOf(currentYear.toString())
+
+            setOnValueChangedListener { picker, oldVal, newVal ->
+                val selectedYearValue = binding.pickerYear.value
+                _selectedYear.value = years[selectedYearValue]
+            }
         }
-
     }
 
     fun addOnPositiveButtonClickListener(onPositiveButtonClick: (Long) -> Unit) {
@@ -145,12 +167,10 @@ class MonthPickerDialog : DialogFragment() {
     }
 
     private fun getSelectedDateInSeconds():Long {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.MONTH, binding.pickerMonth.value)
-        calendar.set(Calendar.YEAR, years[binding.pickerYear.value].toInt())
-        //To avoid gaps for ex when it is the month of february.
-        calendar.set(Calendar.DAY_OF_MONTH, 10)
-        return calendar.timeInMillis / 1000
+        return getCalendarWith(
+            month = binding.pickerMonth.value,
+            year = years[binding.pickerYear.value].toInt()
+        ).timeInMillis / 1000
     }
 }
 

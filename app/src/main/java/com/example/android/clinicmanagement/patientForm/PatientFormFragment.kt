@@ -1,21 +1,15 @@
 package com.example.android.clinicmanagement.patientForm
 
 import android.content.Context
-import android.icu.util.ULocale.getCountry
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.telephony.TelephonyManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -25,14 +19,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.Slide
-import com.airbnb.lottie.utils.Logger.error
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
-import com.example.android.clinicmanagement.data.models.Patient
 import com.example.android.clinicmanagement.databinding.FragmentPatientFormBinding
-import com.example.android.clinicmanagement.patientProfile.PatientProfileFragmentArgs
-import com.example.android.clinicmanagement.statistics.StatisticsViewModel
-import com.example.android.clinicmanagement.statistics.StatisticsViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -115,7 +104,7 @@ class PatientFormFragment : Fragment() {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
-                    getString(if (args.patientKey == -1L) R.string.form_patient_add else R.string.form_patient_update),
+                    getString(if (args.patientKey == -1L) R.string.form_patient_add else R.string.form_patient_modify),
                     Snackbar.LENGTH_LONG // How long to display the message.
                 ).show()
                 // Reset state to make sure the snackBar is only shown once, even if the device
@@ -193,8 +182,8 @@ class PatientFormFragment : Fragment() {
             findNavController().navigateUp()
         }
         if (args.patientKey != -1L) {
-            binding.toolBar.title = getString(R.string.update_info)
-            binding.buttonSave.text = getString(R.string.update)
+            binding.toolBar.title = getString(R.string.modification)
+            binding.buttonSave.text = getString(R.string.modify)
         }
         setTotalCalculation()
     }

@@ -38,8 +38,8 @@
 
             <ImageView
                 android:id="@+id/image_icon"
-                android:layout_width="@dimen/size_image_20dp"
-                android:layout_height="@dimen/size_image_20dp"
+                android:layout_width="@dimen/size_image_25dp"
+                android:layout_height="@dimen/size_image_25dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_expenditure_home_repair"
                 app:expensesCategoryIcon="@{totalSpentByCategory}"
@@ -62,7 +62,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_expenditure_amount"
                 app:layout_constraintStart_toEndOf="@+id/circle"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/tax" />
+                tools:text="@string/taxes" />
 
             <TextView
                 android:id="@+id/text_expenditure_amount"

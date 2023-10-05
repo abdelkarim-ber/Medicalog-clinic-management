@@ -308,6 +308,38 @@ fun LottieDrawable.playAndNavigate(item: MenuItem, navController: NavController)
     })
 }
 
+/**
+ * Called to get a Calendar object with the given month and year
+ * and with day set to 10 to avoid changes in month value
+ * for ex in february with day 30 .
+ * @param month must range between 0 and 11.
+ * @param year optional.
+ */
+fun getCalendarWith(month:Int,year:Int?=null):Calendar{
+    return Calendar.getInstance().apply {
+        //To avoid gaps for ex when it is the month of february.
+        set(Calendar.DAY_OF_MONTH, 10)
+
+        set(Calendar.MONTH, month)
+        year?.let { set(Calendar.YEAR, year) }
+
+    }
+}
+
+/**
+ * Called to get a Calendar object with the previous month set
+ * and day set to 10 to avoid changes in month value
+ * for ex in february with day 30 .
+ */
+fun getCalendarWithPreviousMonth():Calendar{
+    return Calendar.getInstance().apply {
+        //To avoid gaps for ex when it is the month of february.
+        set(Calendar.DAY_OF_MONTH, 10)
+
+        add(Calendar.MONTH, -1)
+    }
+}
+
 
 
 

@@ -8,6 +8,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.clinicmanagement.ClinicApplication
 import com.example.android.clinicmanagement.R
 import com.example.android.clinicmanagement.databinding.FragmentStatisticsBinding
@@ -59,6 +60,28 @@ class StatisticsFragment : Fragment() {
 
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
+
+
+        binding.listExpenditure.adapter = ExpenditureListAdapter()
+
+        val expenditureListAdapter = binding.listExpenditure.adapter
+
+        expenditureListAdapter?.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(
+                positionStart: Int,
+                itemCount: Int
+            ) {
+                binding.listExpenditure.scrollToPosition(0)
+            }
+
+            override fun onItemRangeRemoved(
+                positionStart: Int,
+                itemCount: Int
+            ) {
+                binding.listExpenditure.smoothScrollToPosition(0)
+            }
+        })
 
         val monthPicker = MonthPickerDialog()
         monthPicker.addOnPositiveButtonClickListener { dateInSeconds ->

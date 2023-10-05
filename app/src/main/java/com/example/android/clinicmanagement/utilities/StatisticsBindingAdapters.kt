@@ -233,14 +233,12 @@ fun RoundedBarChart.setChartData(
 
 @BindingAdapter("expensesByCategoryList")
 fun RecyclerView.setExpensesList(expensesByCategoryList: List<TotalSpentByCategory>?) {
-
-    if (expensesByCategoryList != null ) {
-        val adapter = ExpenditureListAdapter()
-        this.adapter = adapter
-        adapter.data = expensesByCategoryList
+    expensesByCategoryList?.let {
+        val adapter = this.adapter as ExpenditureListAdapter
+        adapter.submitList(expensesByCategoryList)
     }
-
 }
+
 @BindingAdapter("expensesListTitleVisibility")
 fun View.setExpensesListTitleVisibility(expensesByCategoryList: List<TotalSpentByCategory>?) {
     if (expensesByCategoryList != null && expensesByCategoryList.isNotEmpty()) {

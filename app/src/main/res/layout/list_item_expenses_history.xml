@@ -30,8 +30,8 @@
 
             <ImageView
                 android:id="@+id/image_icon"
-                android:layout_width="@dimen/size_image_20dp"
-                android:layout_height="@dimen/size_image_20dp"
+                android:layout_width="@dimen/size_image_25dp"
+                android:layout_height="@dimen/size_image_25dp"
                 android:scaleType="fitCenter"
                 app:expensesHistoryInfo="@{expenditure}"
                 app:layout_constraintBottom_toBottomOf="@+id/circle"
