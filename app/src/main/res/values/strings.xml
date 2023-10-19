@@ -78,7 +78,7 @@
 
     <string name="add_session">Add session</string>
 
-<!--    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>-->
+    <!--    <string name="long_text_test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>-->
     <string name="expenses_of">Expenses Of :</string>
     <string name="hint_expenditure_amount">Enter amount here</string>
 
@@ -171,4 +171,6 @@
         <item quantity="one">%1$d year old</item>
         <item quantity="other">%1$d years old</item>
     </plurals>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

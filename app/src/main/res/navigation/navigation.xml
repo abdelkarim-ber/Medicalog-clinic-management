@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/statistics">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/expenses"
@@ -121,4 +121,15 @@
         android:name="com.example.android.clinicmanagement.expensesHistory.ExpensesHistoryFragment"
         android:label="ExpensesHistoryFragment"
         tools:layout="@layout/fragment_expenses_history" />
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.android.clinicmanagement.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_statistics"
+            app:destination="@id/statistics"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
 </navigation>
