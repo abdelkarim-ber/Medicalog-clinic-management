@@ -37,7 +37,7 @@
                     android:layout_height="@dimen/size_app_bar_logo_mark"
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/img_logo_main" />
+                    app:srcCompat="@drawable/ic_launcher_foreground2" />
 
             </androidx.appcompat.widget.Toolbar>
 

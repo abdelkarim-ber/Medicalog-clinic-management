@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">ClinicManagement</string>
+    <string name="app_name" translatable="false">Medicalog</string>
     <string name="statistics">Statistics</string>
     <string name="net_income">Net Income</string>
     <string name="expenses">Expenses</string>
